@@ -1,5 +1,6 @@
 import { Footer } from "../../common/Footer/Footer";
 import { Navbar } from "../../common/Header/Navbar";
+import { FAQSection } from "../../common/Home/FAQSection";
 import { Home, InfoInicio } from "../../common/Home/Home";
 
 const bgStyle = {
@@ -14,9 +15,12 @@ export const HomePage = () => {
       <div style={bgStyle}>
         <Navbar />
       </div>
-      <Home />
-      <InfoInicio />
-      <Footer />
+      <div className="bg-gradient-to-b from-black via-gray-900 to-black text-white">
+        <Home />
+        <InfoInicio />
+        <FAQSection />
+        <Footer />
+      </div>  
     </div>
   );
 };
