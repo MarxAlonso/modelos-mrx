@@ -1,8 +1,6 @@
 import React from "react";
 import { FaDumbbell } from "react-icons/fa";
 import { MdMenu } from "react-icons/md";
-import { CiSearch } from "react-icons/ci";
-import { PiShoppingCartThin } from "react-icons/pi";
 import { motion } from "framer-motion";
 import { ResponsiveMenu } from "./ResponsiveMenu.tsx";
 const NavbarMenu = [
@@ -71,13 +69,11 @@ export const Navbar = () => {
           {/* Icons section */}
           <div className="flex items-center gap-4">
             <button className="text-2xl hover:bg-primary hover:text-white rounded-full p-2 duration-200">
-              <CiSearch />
             </button>
             <button className="text-2xl hover:bg-primary hover:text-white rounded-full p-2 duration-200">
-              <PiShoppingCartThin />
             </button>
             <button className="hover:bg-primary text-primary font-semibold hover:text-white rounded-md border-2 border-primary px-6 py-2 duration-200 hidden md:block">
-              Login
+              Contacto
             </button>
           </div>
           {/* Mobile hamburger Menu section */}
