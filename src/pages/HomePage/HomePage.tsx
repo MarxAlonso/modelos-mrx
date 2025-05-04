@@ -1,6 +1,6 @@
 import { Footer } from "../../common/Footer/Footer";
 import { Navbar } from "../../common/Header/Navbar";
-import { Home } from "../../common/Home/Home";
+import { Home, InfoInicio } from "../../common/Home/Home";
 
 const bgStyle = {
   backgroundRepeat: "no-repeat",
@@ -15,6 +15,7 @@ export const HomePage = () => {
         <Navbar />
       </div>
       <Home />
+      <InfoInicio />
       <Footer />
     </div>
   );
