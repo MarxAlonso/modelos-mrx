@@ -12,7 +12,7 @@ const NavbarMenu = [
   {
     id: 2,
     title: "Modulos Estaticos",
-    link: "#",
+    link: "/modulosestaticos",
   },
   {
     id: 3,
