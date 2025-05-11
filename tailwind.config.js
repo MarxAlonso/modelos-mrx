@@ -22,5 +22,11 @@ export default {
       },
     },
   },
+  keyframes: {
+    gradient: {
+      '0%, 100%': { transform: 'translate(0, 0)' },
+      '50%': { transform: 'translate(25%, 25%)' },
+    },
+  },
   plugins: [],
 };
