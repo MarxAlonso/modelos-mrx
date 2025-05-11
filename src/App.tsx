@@ -7,7 +7,10 @@ function App() {
     <>
       <Routes>
         <Route path="/" element={<HomePage />}></Route>
-        <Route path="/modulosestaticos" element={<ModelosEstaticosPage />}></Route>
+        <Route
+          path="/modulosestaticos"
+          element={<ModelosEstaticosPage />}
+        ></Route>
       </Routes>
     </>
   );

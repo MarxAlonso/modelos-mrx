@@ -1,90 +1,17 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-// Se define las categorías de diseños
-const categorias = [
-  "Todos",
-  "Landing Pages",
-  "Formularios",
-  "Navegación",
-  "Cards",
-  "Heroes",
-  "Footers",
-];
-interface Diseno {
-  id: number;
-  titulo: string;
-  categoria: string;
-  descripcion: string;
-  imagen: string;
-  dificultad: string;
-  codigo: {
-    html: string;
-    css: string;
-  };
-}
-const disenos = [
-  {
-    id: 1,
-    titulo: "Hero Section Arrendamiento",
-    categoria: "Heroes",
-    descripcion:
-      "Sección hero moderna con círculos decorativos y características destacadas",
-    imagen:
-      "https://server1.3rcore.com/wp-content/uploads/2025/05/imagen2-home.jpg",
-    dificultad: "Intermedio",
-    codigo: {
-      html: `<section class="hero-section-arrendamiento">
-          <div class="container-arrendamiento">
-            <!-- Círculos de fondo decorativos -->
-            <div class="background-circle circle1"></div>
-            <div class="background-circle circle2"></div>
-            <!-- Contenido aquí... -->
-          </div>
-        </section>`,
-      css: `.hero-section-arrendamiento {
-          position: relative;
-          overflow: hidden;
-          padding: 4rem 0;
-        }
-        /* Resto del CSS... */`,
-    },
-  },
-  {
-    id: 2,
-    titulo: "Formulario de Contacto Moderno",
-    categoria: "Formularios",
-    descripcion: "Formulario elegante con efectos de hover y validación visual",
-    imagen: "url_to_form_preview",
-    dificultad: "Básico",
-    codigo: {
-      html: `<!-- Código del formulario -->`,
-      css: `/* Estilos del formulario */`,
-    },
-  },
-  {
-    id: 3,
-    titulo: "Navbar Responsiva",
-    categoria: "Navegación",
-    descripcion:
-      "Barra de navegación con menú hamburguesa y animaciones suaves",
-    imagen: "url_to_navbar_preview",
-    dificultad: "Intermedio",
-    codigo: {
-      html: `<!-- Código de la navbar -->`,
-      css: `/* Estilos de la navbar */`,
-    },
-  },
-];
+import { categorias, disenos, Diseno } from "./data/disenos";
+
 
 // Componente Modal para mostrar el código
-const ModalCodigo = ({ 
-    diseno,
-    onClose 
-  }: { 
-    diseno: Diseno; 
-    onClose: () => void;
-  }) => {
-    const [tabActiva, setTabActiva] = useState("html");
+const ModalCodigo = ({
+  diseno,
+  onClose,
+}: {
+  diseno: Diseno;
+  onClose: () => void;
+}) => {
+  const [tabActiva, setTabActiva] = useState("html");
 
   return (
     <motion.div
@@ -138,7 +65,7 @@ const ModalCodigo = ({
             </code>
           </pre>
         </div>
-        <div className="p-6 border-t border-gray-700">
+        <div className="p-2 border-t border-gray-700">
           <button
             onClick={() => {
               navigator.clipboard.writeText(
