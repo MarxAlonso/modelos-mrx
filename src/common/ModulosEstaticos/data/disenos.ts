@@ -13,6 +13,7 @@ export interface Diseno {
   codigo: {
     html: string;
     css: string;
+    js: string;
   };
 }
 
@@ -294,6 +295,7 @@ export const disenos: Diseno[] = [
         font-size: 13px;
       }
     }`,
+    js: ``,
     },
   },
   {
@@ -306,6 +308,7 @@ export const disenos: Diseno[] = [
     codigo: {
       html: `<!-- Código del formulario -->`,
       css: `/* Estilos del formulario */`,
+      js: ``,
     },
   },
   {
@@ -319,6 +322,7 @@ export const disenos: Diseno[] = [
     codigo: {
       html: `<!-- Código de la navbar -->`,
       css: `/* Estilos de la navbar */`,
+      js: ``,
     },
   },
   {
@@ -424,6 +428,7 @@ export const disenos: Diseno[] = [
       font-size: 0.9rem;
     }
   }`,
+  js: ``,
     },
   },
   {
@@ -647,6 +652,7 @@ export const disenos: Diseno[] = [
                 left: -180px; 
             }
         }`,
+        js: ``,
     },
   },
 
@@ -740,8 +746,6 @@ export const disenos: Diseno[] = [
     z-index: -1;
     pointer-events: none;
 }
-
-
         .valor-clientes-arredamiento3 .container-arredamiento3 {
             max-width: 1200px;
             margin: 0 auto;
@@ -928,6 +932,7 @@ export const disenos: Diseno[] = [
     margin-bottom: 10px;
   }
 }`,
+js: ``,
     },
   },
   {
@@ -1071,6 +1076,21 @@ export const disenos: Diseno[] = [
       padding: 20px 15px;
     }
   }`,
+  js: ``,
+    },
+  },
+  {
+    id: 8,
+    titulo: "Navbar Responsiva",
+    categoria: "Navegación",
+    descripcion:
+      "Barra de navegación con menú hamburguesa y animaciones suaves",
+    imagen: "url_to_navbar_preview",
+    dificultad: "Intermedio",
+    codigo: {
+      html: `<!-- Código de la navbar -->`,
+      css: `/* Estilos de la navbar */`,
+      js: ``,
     },
   },
 ];

@@ -56,12 +56,26 @@ const ModalCodigo = ({
             >
               CSS
             </button>
+            <button
+              onClick={() => setTabActiva("js")}
+              className={`px-4 py-2 rounded-lg transition-colors ${
+                tabActiva === "js"
+                  ? "bg-purple-500 text-white"
+                  : "bg-gray-700 text-gray-300"
+              }`}
+            >
+              JavaScript
+            </button>
           </div>
         </div>
         <div className="p-6 overflow-auto max-h-[60vh]">
           <pre className="bg-gray-900 p-4 rounded-lg overflow-x-auto">
             <code className="text-sm">
-              {tabActiva === "html" ? diseno.codigo.html : diseno.codigo.css}
+              {tabActiva === "html" 
+                ? diseno.codigo.html 
+                : tabActiva === "css" 
+                ? diseno.codigo.css 
+                : diseno.codigo.js}
             </code>
           </pre>
         </div>
@@ -69,7 +83,11 @@ const ModalCodigo = ({
           <button
             onClick={() => {
               navigator.clipboard.writeText(
-                tabActiva === "html" ? diseno.codigo.html : diseno.codigo.css
+                tabActiva === "html" 
+                  ? diseno.codigo.html 
+                  : tabActiva === "css" 
+                  ? diseno.codigo.css 
+                  : diseno.codigo.js
               );
             }}
             className="px-4 py-2 bg-purple-500 hover:bg-purple-600 rounded-lg transition-colors"
