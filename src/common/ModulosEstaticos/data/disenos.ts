@@ -1,4 +1,5 @@
 import banner1Image from '../../../assets/images/banner1.png';
+import heroes3Image from '../../../assets/images/heoresarrendamiento1.png';
 import heroes2Image from '../../../assets/images/heroesswitches.png';
 export interface Diseno {
   id: number;
@@ -30,8 +31,7 @@ export const disenos: Diseno[] = [
     categoria: "Heroes",
     descripcion:
       "Sección hero moderna con círculos decorativos y características destacadas",
-    imagen:
-      "https://server1.3rcore.com/wp-content/uploads/2025/05/imagen2-home.jpg",
+    imagen: heroes3Image,
     dificultad: "Intermedio",
     codigo: {
       html: `<section class="hero-section-arrendamiento">
