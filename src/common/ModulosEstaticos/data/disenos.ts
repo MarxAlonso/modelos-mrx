@@ -1,3 +1,4 @@
+import banner1Image from '../../../assets/images/banner1.png';
 export interface Diseno {
   id: number;
   titulo: string;
@@ -297,7 +298,7 @@ export const disenos: Diseno[] = [
     titulo: "Formulario de Contacto Moderno",
     categoria: "Formularios",
     descripcion: "Formulario elegante con efectos de hover y validación visual",
-    imagen: "url_to_form_preview",
+    imagen: "url_to_navbar_preview",
     dificultad: "Básico",
     codigo: {
       html: `<!-- Código del formulario -->`,
@@ -315,6 +316,111 @@ export const disenos: Diseno[] = [
     codigo: {
       html: `<!-- Código de la navbar -->`,
       css: `/* Estilos de la navbar */`,
+    },
+  },
+  {
+    id: 4,
+    titulo: "Banner 1 Responsiva",
+    categoria: "Heroes",
+    descripcion:
+      "Banner para tu web responsiva con imágenes de fondo y texto destacado",
+    imagen: banner1Image,
+    dificultad: "Intermedio",
+    codigo: {
+      html: `<!-- Banner HTML -->
+<div class="banner-techo">
+  <div class="banner-content-techo">
+    <h1>SOLUCIONES DE CIBERSEGURIDAD
+</h1>
+    <p><strong>¿Cómo proteger su empresa ante amenazas digitales?</strong> En Capital Core IT brindamos soluciones integrales de ciberseguridad que combinan hardware avanzado y servicios especializados para una protección completa de su infraestructura.</p>
+    <button onclick="">Comenzamos</button>
+  </div>
+</div>`,
+      css: `.banner-techo {
+    position: relative;
+    width: 100%;
+    height: 700px;
+    background: url('https://server1.3rcore.com/wp-content/uploads/2025/05/banner-solucioninformatico2.png') center/cover no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; 
+    text-align: left; 
+    color: white;
+    font-family: 'Montserrat', sans-serif; 
+    padding-left: 9%;
+    padding-right: 9%;
+  }
+
+  .banner-techo::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(90deg, rgba(0, 234, 255, 0.6), rgba(0, 123, 255, 0.6), rgba(0, 46, 102, 0.6));
+  z-index: 1;
+}
+
+
+  .banner-content-techo {
+    position: relative;
+    z-index: 2;
+  }
+
+  .banner-techo h1 {
+    font-size: 3rem;
+    font-weight: bold;
+    color: white;
+    margin-bottom: 1rem;
+  }
+  .banner-techo p {
+    font-size: 1.5rem;
+    color: white;
+  line-height: 1.6rem;
+    margin-bottom: 1rem;
+  }
+
+  .banner-techo button {
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    border: none;
+    background-color: white;
+    color: black;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+  }
+
+  .banner-techo button:hover {
+    background-color: #ddd;
+  }
+
+  @media (max-width: 768px) {
+    .banner-techo {
+      justify-content: center;
+      text-align: center;
+      text-align: left;
+      padding-left: 35px;
+    height: 450px;
+    padding-right: 9%;
+    }
+
+    .banner-techo h1 {
+      font-size: 2rem;
+    }
+.banner-techo p {
+   font-size: 1rem;
+    color: white;
+  line-height: 1.6rem;
+    margin-bottom: 1rem;
+  }
+    
+    .banner-techo button {
+      padding: 0.5rem 1rem;
+      font-size: 0.9rem;
+    }
+  }`,
     },
   },
 ];
