@@ -2,6 +2,7 @@ import banner1Image from "../../../assets/images/banner1.png";
 import heroes3Image from "../../../assets/images/heoresarrendamiento1.png";
 import heroes2Image from "../../../assets/images/heroesswitches.png";
 import heroes4Image from "../../../assets/images/heroesciberseguridad.png";
+import cards1Image from "../../../assets/images/cardssoluciones.png";
 export interface Diseno {
   id: number;
   titulo: string;
@@ -927,6 +928,149 @@ export const disenos: Diseno[] = [
     margin-bottom: 10px;
   }
 }`,
+    },
+  },
+  {
+    id: 7,
+    titulo: "Cards Soluciones Software",
+    categoria: "Cards",
+    descripcion: "Cards para soluciones software responsive con html y estilos css",
+    imagen: cards1Image,
+    dificultad: "Facil",
+    codigo: {
+      html: `<section class="experience-section-soluciones5">
+  <div class="container-soluciones5">
+    <p class="pre-heading-soluciones5">Capital Core IT</p>
+    <h1>Soluciones de Software</h1>
+    <div class="features-row-soluciones5">
+      <div class="feature-item-soluciones5">
+        <br>
+        <p><strong>Migración de Base de Datos</strong><br>Actualizamos tus bases de datos a versiones modernas, garantizando mayor seguridad y rendimiento.</p>
+      </div>
+      <div class="feature-item-soluciones5">
+        <br>
+        <p><strong>Soluciones Integrales</strong><br>Modernizamos tu infraestructura virtual como parte de una renovación tecnológica eficiente.</p>
+      </div>
+      <div class="feature-item-soluciones5">
+        <br>
+        <p><strong>Transición a la Nube</strong><br>Lleva tus operaciones a la nube con proveedores líderes, optimizando costos y escalabilidad.</p>
+      </div>
+      <div class="feature-item-soluciones5">
+        <br>
+        <p><strong>Arquitecturas Modernas</strong><br>Implementamos microservicios para sistemas escalables, flexibles y fácilmente mantenibles.</p>
+      </div>
+    </div>
+  </div>
+</section>
+`,
+      css: `.experience-section-soluciones5 {
+    position: relative;
+    background: #f1f7fd;
+    padding: 60px 20px;
+    overflow: hidden;
+  }
+
+  .experience-section-soluciones5::before,
+  .experience-section-soluciones5::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.1;
+    z-index: 0;
+  }
+
+  .experience-section-soluciones5::before {
+    width: 300px;
+    height: 300px;
+    background: #284b85;
+    top: -100px;
+    left: -100px;
+  }
+
+  .experience-section-soluciones5::after {
+    width: 250px;
+    height: 250px;
+    background: #4371bf;
+    bottom: -80px;
+    right: -80px;
+  }
+
+  .container-soluciones5 {
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+    text-align: center;
+  }
+
+  .pre-heading-soluciones5 {
+    text-transform: uppercase;
+    font-weight: bold;
+    color: #284b85;
+    margin-bottom: 10px;
+  }
+
+  .container-soluciones5 h1 {
+    font-size: 32px;
+    color: #002e66;
+    margin-bottom: 40px;
+  }
+
+  .features-row-soluciones5 {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+  }
+
+  .feature-item-soluciones5 {
+    background: #ffffff;
+    border: 2px solid #e0e0e0;
+    border-radius: 12px;
+    padding: 30px 20px;
+    width: 250px;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  }
+
+  .feature-item-soluciones5:hover {
+    transform: scale(1.05);
+    border-color: #284b85;
+    box-shadow: 0 4px 12px rgba(40, 75, 133, 0.2);
+  }
+
+  .feature-item-migraciones5 img {
+    margin-bottom: 15px;
+    width: 60px;
+    height: 60px;
+  }
+
+  .feature-item-soluciones5 p {
+    font-size: 15px;
+    line-height: 1.6;
+    color: #333;
+  }
+
+  @media (max-width: 768px) {
+    .feature-item-soluciones5 {
+      width: 100%;
+      max-width: 300px;
+    }
+
+    .container-soluciones5 h1 {
+      font-size: 26px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .container-soluciones5 h1 {
+      font-size: 22px;
+    }
+
+    .feature-item-soluciones5 {
+      padding: 20px 15px;
+    }
+  }`,
     },
   },
 ];
