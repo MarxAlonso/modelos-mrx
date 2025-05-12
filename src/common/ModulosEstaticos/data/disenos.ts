@@ -1,6 +1,7 @@
-import banner1Image from '../../../assets/images/banner1.png';
-import heroes3Image from '../../../assets/images/heoresarrendamiento1.png';
-import heroes2Image from '../../../assets/images/heroesswitches.png';
+import banner1Image from "../../../assets/images/banner1.png";
+import heroes3Image from "../../../assets/images/heoresarrendamiento1.png";
+import heroes2Image from "../../../assets/images/heroesswitches.png";
+import heroes4Image from "../../../assets/images/heroesciberseguridad.png";
 export interface Diseno {
   id: number;
   titulo: string;
@@ -428,8 +429,7 @@ export const disenos: Diseno[] = [
     id: 5,
     titulo: "Heroes Switches",
     categoria: "Heroes",
-    descripcion:
-      "Heroes switches responsive con estilos css",
+    descripcion: "Heroes switches responsive con estilos css",
     imagen: heroes2Image,
     dificultad: "Intermedio",
     codigo: {
@@ -646,6 +646,287 @@ export const disenos: Diseno[] = [
                 left: -180px; 
             }
         }`,
+    },
+  },
+
+  {
+    id: 6,
+    titulo: "Heroes Ciberseguridad Ramas",
+    categoria: "Heroes",
+    descripcion: "Heroes Ciberseguridad Ramas responsive con estilos css",
+    imagen: heroes4Image,
+    dificultad: "Intermedio",
+    codigo: {
+      html: `<section class="valor-clientes-arredamiento3">
+  <div class="container-arredamiento3">
+    <div class="circle-middle-arredamiento3"></div>
+
+    <div class="image-column-arredamiento3">
+      <img src="https://server1.3rcore.com/wp-content/uploads/2025/05/Banner2_642x720.png" alt="Soluciones de Ciberseguridad">
+    </div>
+    <div class="text-column-arredamiento3">
+      <p class="pre-heading-arredamiento3">Capital Core IT</p>
+      <h1>Protege tu empresa con nuestras Soluciones de Ciberseguridad</h1>
+      <ul class="features-list-arredamiento3">
+        <li>
+          <div class="feature-icon-arredamiento3"></div>
+          <div class="feature-content-arredamiento3">
+            <h3>Protección Inteligente y Perimetral</h3>
+            <p>Defiende tu red con firewalls de nueva generación, sistemas de detección y prevención de intrusos, y una arquitectura diseñada para prevenir ataques antes de que ocurran.</p>
+          </div>
+        </li>
+        <li>
+          <div class="feature-icon-arredamiento3"></div>
+          <div class="feature-content-arredamiento3">
+            <h3>Monitoreo Activo 24/7</h3>
+            <p>Supervisión constante de eventos y amenazas con respuesta inmediata para mantener la continuidad operativa y reducir riesgos en tiempo real.</p>
+          </div>
+        </li>
+        <li>
+          <div class="feature-icon-arredamiento3"></div>
+          <div class="feature-content-arredamiento3">
+            <h3>Análisis y Prevención de Vulnerabilidades</h3>
+            <p>Detectamos puntos críticos antes de que sean explotados, aplicando medidas proactivas para reforzar tu seguridad digital.</p>
+          </div>
+        </li>
+        <li>
+          <div class="feature-icon-arredamiento3"></div>
+          <div class="feature-content-arredamiento3">
+            <h3>Seguridad que Genera Confianza</h3>
+            <p>Asegura la operación de tu empresa con soluciones confiables que te permiten enfocarte en tu crecimiento sin preocuparte por ciberataques.</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+`,
+      css: `.valor-clientes-arredamiento3::before,
+.valor-clientes-arredamiento3::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    z-index: 0; /* Detrás del contenido */
+    opacity: 0.2;
+    background: #3498db;
+    pointer-events: none;
+}
+
+.valor-clientes-arredamiento3::before {
+    width: 200px;
+    height: 200px;
+    top: -50px;
+    left: -50px;
+}
+
+.valor-clientes-arredamiento3::after {
+    width: 250px;
+    height: 250px;
+    bottom: -60px;
+    right: 60px;
+}
+
+.circle-middle-arredamiento3 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    height: 300px;
+    background: #3498db;
+    border-radius: 50%;
+    opacity: 0.2;
+    z-index: -1;
+    pointer-events: none;
+}
+
+
+        .valor-clientes-arredamiento3 .container-arredamiento3 {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .image-column-arredamiento3 {
+            flex: 1 1 45%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .image-column-arredamiento3 img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .text-column-arredamiento3 {
+            flex: 1 1 55%;
+        }
+
+        .pre-heading-arredamiento3 {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #000;
+        }
+
+        .text-column-arredamiento3 h1 {
+            font-size: 38px;
+            font-weight: bold;
+            margin-top: 0;
+          color: black;
+            margin-bottom: 35px;
+            line-height: 1.3;
+        }
+
+        .features-list-arredamiento3 {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .features-list-arredamiento3 li {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 25px;
+            position: relative;
+            padding-left: 35px;
+        }
+
+        .feature-icon-arredamiento3 {
+            width: 20px;
+            height: 20px;
+            background-color: transparent;
+            border: 3px solid #3498db;
+            border-radius: 50%;
+            position: absolute;
+            left: 0;
+            top: 5px;
+        }
+
+        .features-list-arredamiento3 li::before {
+            content: '';
+            position: absolute;
+            left: 10px;
+            top: 30px;
+            bottom: -15px;
+            width: 2px;
+            background-image: linear-gradient(to bottom, #3498db 40%, transparent 50%);
+            background-size: 2px 8px;
+            background-repeat: repeat-y;
+        }
+         .features-list-arredamiento3 li:last-child::before {
+            display: none;
+         }
+
+
+        .feature-content-arredamiento3 h3 {
+            font-size: 20px;
+            font-weight: bold;
+            margin-top: 0;
+            margin-bottom: 8px;
+            color: #000;
+        }
+
+        .feature-content-arredamiento3 p {
+            font-size: 15px;
+            line-height: 1.6;
+            margin: 0;
+            color: #000;
+        }
+
+        @media (max-width: 992px) {
+  .valor-clientes-arredamiento3 .container-arredamiento3 {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .image-column-arredamiento3,
+  .text-column-arredamiento3 {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .image-column-arredamiento3 {
+    margin-bottom: 40px;
+  }
+
+  .text-column-arredamiento3 h1 {
+    font-size: 32px;
+  }
+
+  .features-list-arredamiento3 li {
+    padding-left: 0;
+    justify-content: center;
+    text-align: left;
+    max-width: 500px;
+    margin: 0 auto 25px auto;
+  }
+
+  .features-list-arredamiento3 li::before {
+    left: -25px;
+  }
+
+  .feature-icon-arredamiento3 {
+    left: -35px;
+  }
+}
+
+@media (max-width: 768px) {
+  .text-column-arredamiento3 h1 {
+    font-size: 28px;
+  }
+
+  .feature-content-arredamiento3 h3 {
+    font-size: 18px;
+  }
+
+  .feature-content-arredamiento3 p {
+    font-size: 14px;
+  }
+
+  .features-list-arredamiento3 li::before {
+    left: -15px;
+  }
+
+  .feature-icon-arredamiento3 {
+    left: -25px;
+  }
+}
+
+@media (max-width: 480px) {
+  .valor-clientes-arredamiento3 {
+    padding: 40px 15px;
+  }
+
+  .text-column-arredamiento3 h1 {
+    font-size: 24px;
+  }
+
+  .pre-heading-arredamiento3 {
+    font-size: 15px;
+  }
+
+  .features-list-arredamiento3 li {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding-left: 0;
+    margin-left: 0;
+  }
+
+  .features-list-arredamiento3 li::before {
+    display: none;
+  }
+
+  .feature-icon-arredamiento3 {
+    position: static;
+    margin-bottom: 10px;
+  }
+}`,
     },
   },
 ];
