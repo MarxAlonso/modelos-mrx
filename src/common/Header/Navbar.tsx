@@ -3,7 +3,7 @@ import { FaDumbbell } from "react-icons/fa";
 import { MdMenu } from "react-icons/md";
 import { motion } from "framer-motion";
 import { ResponsiveMenu } from "./ResponsiveMenu.tsx";
-const NavbarMenu = [
+export const NavbarMenu = [
   {
     id: 1,
     title: "Inicio",
@@ -35,50 +35,62 @@ export const Navbar = () => {
   const [open, setOpen] = React.useState(false);
   return (
     <>
-      <nav>
+      <nav className="bg-gradient-to-r from-gray-900 via-purple-900 to-black shadow-lg">
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.5 }}
-          className="container flex justify-between items-center py-8"
+          className="container mx-auto flex justify-between items-center py-6 px-4"
         >
           {/* Logo section */}
-          <div className="text-2xl flex items-center gap-2 font-bold uppercase">
-            <FaDumbbell />
+          <motion.div 
+            whileHover={{ scale: 1.05 }}
+            className="text-2xl flex items-center gap-2 font-bold uppercase text-white"
+          >
+            <FaDumbbell className="text-purple-400" />
             <p>Coders</p>
-            <p className="text-secondary">MRX</p>
-          </div>
+            <p className="bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent">MRX</p>
+          </motion.div>
+
           {/* Menu section */}
           <div className="hidden md:block">
-            <ul className="flex items-center gap-6 text-gray-600">
-              {NavbarMenu.map((item) => {
-                return (
-                  <li key={item.id}>
-                    <a
-                      href={item.link}
-                      className="
-                    inline-block py-1 px-3 hover:text-primary font-semibold"
-                    >
-                      {item.title}
-                    </a>
-                  </li>
-                );
-              })}
+            <ul className="flex items-center gap-6">
+              {NavbarMenu.map((item) => (
+                <motion.li 
+                  key={item.id}
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <a
+                    href={item.link}
+                    className="inline-block py-2 px-4 text-gray-300 hover:text-white hover:bg-purple-800 rounded-lg transition-all duration-300 font-semibold"
+                  >
+                    {item.title}
+                  </a>
+                </motion.li>
+              ))}
             </ul>
           </div>
+
           {/* Icons section */}
           <div className="flex items-center gap-4">
-            <button className="text-2xl hover:bg-primary hover:text-white rounded-full p-2 duration-200">
-            </button>
-            <button className="text-2xl hover:bg-primary hover:text-white rounded-full p-2 duration-200">
-            </button>
-            <button className="hover:bg-primary text-primary font-semibold hover:text-white rounded-md border-2 border-primary px-6 py-2 duration-200 hidden md:block">
+            <motion.button 
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
+              className="hover:bg-purple-700 text-white rounded-full p-3 duration-300 border border-purple-500 hover:border-purple-400"
+            >
               Contacto
-            </button>
-          </div>
-          {/* Mobile hamburger Menu section */}
-          <div className="md:hidden" onClick={() => setOpen(!open)}>
-            <MdMenu className="text-4xl" />
+            </motion.button>
+
+            {/* Mobile hamburger Menu section */}
+            <motion.div 
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
+              className="md:hidden cursor-pointer text-white" 
+              onClick={() => setOpen(!open)}
+            >
+              <MdMenu className="text-4xl hover:text-purple-400 transition-colors" />
+            </motion.div>
           </div>
         </motion.div>
       </nav>
