@@ -1,4 +1,5 @@
 import banner1Image from '../../../assets/images/banner1.png';
+import heroes2Image from '../../../assets/images/heroesswitches.png';
 export interface Diseno {
   id: number;
   titulo: string;
@@ -421,6 +422,230 @@ export const disenos: Diseno[] = [
       font-size: 0.9rem;
     }
   }`,
+    },
+  },
+  {
+    id: 5,
+    titulo: "Heroes Switches",
+    categoria: "Heroes",
+    descripcion:
+      "Heroes switches responsive con estilos css",
+    imagen: heroes2Image,
+    dificultad: "Intermedio",
+    codigo: {
+      html: `<section class="hybrid-work-section">
+    <div class="background-circle"></div>
+    <div class="container">
+        <div class="image-column">
+            <img src="https://server1.3rcore.com/wp-content/uploads/2025/05/server-e1614758148604.png" alt="Ilustración de soluciones de networking">
+        </div>
+        <div class="text-content-column">
+            <p class="pre-heading">Soluciones de Networking: Switches y APs</p>
+            <h1>Impulsa tu empresa con conectividad de alto nivel</h1>
+            <p class="description">Implementar una red optimizada con Capital Core IT mejora la productividad, garantiza la seguridad de la información y permite escalar tu infraestructura tecnológica de forma eficiente.</p>
+            
+            <div class="features-grid">
+                <div class="feature-box">
+                    <img src="https://server1.3rcore.com/wp-content/uploads/2025/05/eficiencia.png" class="icon" alt="Icono eficiencia">
+                    <p><strong>Eficiencia operativa:</strong> Minimiza interrupciones y mejora el desempeño.</p>
+                </div>
+                <div class="feature-box">
+                    <img src="https://server1.3rcore.com/wp-content/uploads/2025/05/seguridad.png" class="icon" alt="Icono seguridad">
+                    <p><strong>Seguridad reforzada:</strong> Protege tu red con sistemas de acceso seguros.</p>
+                </div>
+                <div class="feature-box">
+                    <img src="https://server1.3rcore.com/wp-content/uploads/2025/05/escalabilidad.png" class="icon" alt="Icono escalabilidad">
+                    <p><strong>Escalabilidad:</strong> Nuestra infraestructura se adapta al crecimiento de tu empresa.</p>
+                </div>
+                <div class="feature-box">
+                    <img src="https://server1.3rcore.com/wp-content/uploads/2025/05/rendimiento.png" class="icon" alt="Icono rendimiento">
+                    <p><strong>Rendimiento asegurado:</strong> Conectividad veloz y estable con equipos de marcas.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+`,
+      css: `.hybrid-work-section {
+            position: relative;
+            padding: 60px 20px;
+            overflow: hidden; 
+        }
+
+        .background-circle {
+            position: absolute;
+            top: -150px; 
+            left: -250px;
+            width: 700px;
+            height: 700px;
+            background-color: rgba(220, 235, 255, 0.6);
+            border-radius: 50%;
+            z-index: 0;
+        }
+
+        .hybrid-work-section .container {
+            max-width: 1140px;
+            margin: 0 auto; 
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            position: relative; 
+            z-index: 1;
+        }
+
+        .image-column {
+            flex: 1 1 45%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .image-column img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        .text-content-column {
+            flex: 1 1 55%; 
+        }
+
+        .pre-heading {
+            font-size: 16px;
+            color: #007bff; 
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .text-content-column h1 {
+            font-size: 36px; 
+            color: #212529;
+            margin-top: 0;
+            margin-bottom: 20px;
+            font-weight: bold;
+            line-height: 1.2;
+        }
+
+        .description {
+            font-size: 16px;
+            color: #495057;
+            margin-bottom: 30px;
+            line-height: 1.7;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .feature-box {
+            background-color: #ffffff;
+            border: 1px solid #e9ecef;
+            border-radius: 8px; 
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+
+        .feature-box:hover {
+            transform: translateY(-3px); 
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+        }
+
+        .feature-box img.icon { 
+            width: 40px; 
+            height: 40px; 
+            flex-shrink: 0; 
+        }
+
+        .feature-box p {
+            margin: 0;
+            font-size: 15px;
+            color: #343a40;
+            font-weight: 500;
+        }
+
+        /* Diseño Responsivo */
+        @media (max-width: 992px) {
+            .hybrid-work-section .container {
+                flex-direction: column; 
+                text-align: center;
+            }
+
+            .image-column {
+                margin-bottom: 30px;
+                order: 1; 
+            }
+            .text-content-column {
+                order: 2; 
+            }
+
+            .background-circle {
+                width: 600px;
+                height: 600px;
+                top: -100px;
+                left: -200px;
+            }
+            .text-content-column h1 {
+                font-size: 32px;
+            }
+        }
+
+        @media (max-width: 768px) { 
+            .text-content-column h1 {
+                font-size: 28px;
+            }
+            .description {
+                font-size: 15px;
+            }
+            .background-circle {
+                width: 500px;
+                height: 500px;
+                top: -80px;
+                left: -150px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hybrid-work-section {
+                padding: 40px 15px;
+            }
+            .features-grid {
+                grid-template-columns: 1fr; 
+                gap: 15px;
+            }
+            .feature-box {
+                padding: 15px;
+                gap: 10px;
+                text-align: left; 
+            }
+            .feature-box img.icon {
+                width: 35px;
+                height: 35px;
+            }
+            .feature-box p {
+                font-size: 14px;
+            }
+            .text-content-column h1 {
+                font-size: 24px;
+            }
+            .description {
+                font-size: 14px;
+            }
+            .pre-heading {
+                font-size: 15px;
+            }
+            .background-circle {
+                width: 400px;
+                height: 400px;
+                top: -100px;
+                left: -180px; 
+            }
+        }`,
     },
   },
 ];
