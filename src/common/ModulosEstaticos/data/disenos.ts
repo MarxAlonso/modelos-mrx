@@ -1,4 +1,5 @@
 import banner1Image from "../../../assets/images/banner1.png";
+import banner2Image from "../../../assets/images/banner2.png";
 import heroes3Image from "../../../assets/images/heoresarrendamiento1.png";
 import heroes2Image from "../../../assets/images/heroesswitches.png";
 import heroes4Image from "../../../assets/images/heroesciberseguridad.png";
@@ -1081,16 +1082,193 @@ js: ``,
   },
   {
     id: 8,
-    titulo: "Navbar Responsiva",
-    categoria: "Navegación",
+    titulo: "Banner Responsiva Carrousel",
+    categoria: "Heroes",
     descripcion:
-      "Barra de navegación con menú hamburguesa y animaciones suaves",
-    imagen: "url_to_navbar_preview",
+      "Banner Responsiva tipo Carrousel con html, css y javascript",
+    imagen: banner2Image,
     dificultad: "Intermedio",
     codigo: {
-      html: `<!-- Código de la navbar -->`,
-      css: `/* Estilos de la navbar */`,
-      js: ``,
+      html: `<div class="slider-container2">
+  <div class="slide2 active">
+    <picture>
+      <source media="(max-width: 980px)" srcset="https://server1.3rcore.com/wp-content/uploads/2025/05/image-206.png">
+      <img src="https://server1.3rcore.com/wp-content/uploads/2025/05/image-205.png" alt="Slide 1">
+    </picture>
+        <div class="slide-overlay"></div>
+    <div class="slide-content2">
+      <h1>¡Somos Platinum Partner con HPE y ARUBA!</h1>
+      <p>Nos hemos posicionado como líderes en el sector para impulsar el crecimiento de tu empresa.</p>
+      <a href="#">¡Conoce más!</a>
+    </div>
+  </div>
+
+  <div class="slide2">
+    <picture>
+      <source media="(max-width: 980px)" srcset="https://server1.3rcore.com/wp-content/uploads/2025/05/Banner_642x720.png">
+      <img src="https://server1.3rcore.com/wp-content/uploads/2025/05/Banner_2100x767-1.png" alt="Slide 2">
+    </picture>
+      <div class="slide-overlay"></div>
+    <div class="slide-content2">
+      <h1>Soluciones en la Nube para tu Negocio</h1>
+      <p>Transforma tu empresa con tecnología cloud de última generación.</p>
+      <a href="#">Explora más</a>
+    </div>
+  </div>
+
+  <div class="slide2">
+    <picture>
+      <source media="(max-width: 980px)" srcset="https://server1.3rcore.com/wp-content/uploads/2025/05/Banner2_642x720.png">
+      <img src="https://server1.3rcore.com/wp-content/uploads/2025/05/Banner2_2100x767.png" alt="Slide 3">
+    </picture>
+      <div class="slide-overlay"></div>
+    <div class="slide-content2">
+      <h1>Infraestructura TI Moderna</h1>
+      <p>Conectividad segura, eficiente y escalable para tu organización.</p>
+      <a href="#">Ver servicios</a>
+    </div>
+  </div>
+
+  <div class="nav-arrows2">
+    <button onclick="prevSlide()">❮</button>
+    <button onclick="nextSlide()">❯</button>
+  </div>
+</div>
+`,
+      css: `.slider-container2 {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+  }
+  
+
+
+  .slide2 {
+    display: none;
+    width: 100%;
+    height: auto;
+    position: relative;
+    color: white;
+  }
+
+  .slide2.active {
+    display: block;
+    animation: fade 1s ease-in-out;
+  }
+
+  .slide2 picture,
+  .slide2 img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .slide-content2 {
+    position: absolute;
+    top: 50%;
+    left: 10%;
+    transform: translateY(-50%);
+    z-index: 2;
+    max-width: 600px;
+  }
+
+  .slide2 h1 {
+    font-size: 2.8rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+  }
+
+  .slide2 p {
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .slide2 a {
+    display: inline-block;
+    padding: 12px 24px;
+    background: #00a651;
+    color: white;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: bold;
+  }
+
+  .nav-arrows2 {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    transform: translateY(-50%);
+    padding: 0 1rem;
+    z-index: 3;
+  }
+
+  .nav-arrows2 button {
+    background: rgba(0, 0, 0, 0);
+    border: none;
+    color: #1bcdc8;
+    font-size: 1.3rem;
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    border-radius: 50%;
+  }
+
+  @keyframes fade {
+    from { opacity: 0.4; }
+    to { opacity: 1; }
+  }
+
+  @media (max-width: 980px) {
+   .slide-overlay {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4));
+  z-index: 1;
+}
+    .slide-content2 {
+      top: 60%;
+      left: 5%;
+      transform: translateY(-50%);
+      text-align: center;
+    }
+    .slide2 h1 {
+      font-size: 2rem;
+      line-height: 2.2rem;
+    }
+    .slide2 p {
+      font-size: 1rem;
+    }
+    .slide2 a {
+      font-size: 0.9rem;
+      padding: 10px 20px;
+    }
+  }`,
+      js: `let slides = document.querySelectorAll('.slide2');
+  let current = 0;
+
+  function showSlide(index) {
+    slides.forEach((slide, i) => {
+      slide.classList.remove('active');
+      if (i === index) slide.classList.add('active');
+    });
+  }
+
+  function nextSlide() {
+    current = (current + 1) % slides.length;
+    showSlide(current);
+  }
+
+  function prevSlide() {
+    current = (current - 1 + slides.length) % slides.length;
+    showSlide(current);
+  }
+
+  setInterval(nextSlide, 7000);`,
     },
   },
 ];
