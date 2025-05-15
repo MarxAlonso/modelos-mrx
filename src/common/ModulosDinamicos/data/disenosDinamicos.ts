@@ -1,4 +1,4 @@
-import banner1Image from '../../../assets/images/banner1.jpg';
+import banner1Image from "../../../assets/images/banner1.png";
 
 export interface ProyectoDinamico {
   id: number;
