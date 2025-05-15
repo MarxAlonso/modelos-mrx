@@ -17,7 +17,7 @@ export const NavbarMenu = [
   {
     id: 3,
     title: "Modulos Dinamicos",
-    link: "#",
+    link: "/modulosdinamicos",
   },
   {
     id: 4,

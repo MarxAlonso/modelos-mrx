@@ -370,7 +370,6 @@ export const disenos: Diseno[] = [
   z-index: 1;
 }
 
-
   .banner-content-techo {
     position: relative;
     z-index: 2;
@@ -423,7 +422,6 @@ export const disenos: Diseno[] = [
   line-height: 1.6rem;
     margin-bottom: 1rem;
   }
-    
     .banner-techo button {
       padding: 0.5rem 1rem;
       font-size: 0.9rem;
@@ -656,7 +654,6 @@ export const disenos: Diseno[] = [
         js: ``,
     },
   },
-
   {
     id: 6,
     titulo: "Heroes Ciberseguridad Ramas",
@@ -1140,9 +1137,6 @@ js: ``,
     width: 100%;
     overflow: hidden;
   }
-  
-
-
   .slide2 {
     display: none;
     width: 100%;
@@ -1250,19 +1244,16 @@ js: ``,
   }`,
       js: `let slides = document.querySelectorAll('.slide2');
   let current = 0;
-
   function showSlide(index) {
     slides.forEach((slide, i) => {
       slide.classList.remove('active');
       if (i === index) slide.classList.add('active');
     });
   }
-
   function nextSlide() {
     current = (current + 1) % slides.length;
     showSlide(current);
   }
-
   function prevSlide() {
     current = (current - 1 + slides.length) % slides.length;
     showSlide(current);
