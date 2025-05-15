@@ -1,46 +1,122 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaSearch } from "react-icons/fa";
+import {
+  categorias,
+  proyectos,
+  ProyectoDinamico,
+} from "./data/disenosDinamicos";
 
-// Tipos
-interface ProyectoDinamico {
-  id: number;
-  titulo: string;
-  categoria: string;
-  descripcion: string;
-  imagen: string;
-  dificultad: string;
-  codigo: {
-    html: string;
-    css: string;
-    js: string;
-  };
-}
+const ModalCodigo = ({
+  diseno,
+  onClose,
+}: {
+  diseno: ProyectoDinamico;
+  onClose: () => void;
+}) => {
+  const [tabActiva, setTabActiva] = useState("html");
 
-// Datos de ejemplo (puedes moverlos a un archivo separado después)
-const categorias = [
-  "Todos",
-  "Banners",
-  "Cards",
-  "Formularios",
-  "Sliders",
-  "Galerías",
-];
-
-const proyectos: ProyectoDinamico[] = [
-  // Aquí irán tus proyectos dinámicos
-];
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4"
+    >
+      <motion.div
+        initial={{ scale: 0.9, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        className="bg-gray-800 rounded-xl w-full max-w-4xl max-h-[80vh] overflow-hidden"
+      >
+        <div className="p-6 border-b border-gray-700">
+          <div className="flex justify-between items-center">
+            <h3 className="text-xl font-semibold">{diseno.titulo}</h3>
+            <button
+              onClick={onClose}
+              className="text-gray-400 hover:text-white transition-colors"
+            >
+              ✕
+            </button>
+          </div>
+          <div className="flex gap-4 mt-4">
+            <button
+              onClick={() => setTabActiva("html")}
+              className={`px-4 py-2 rounded-lg transition-colors ${
+                tabActiva === "html"
+                  ? "bg-purple-500 text-white"
+                  : "bg-gray-700 text-gray-300"
+              }`}
+            >
+              HTML
+            </button>
+            <button
+              onClick={() => setTabActiva("css")}
+              className={`px-4 py-2 rounded-lg transition-colors ${
+                tabActiva === "css"
+                  ? "bg-purple-500 text-white"
+                  : "bg-gray-700 text-gray-300"
+              }`}
+            >
+              CSS
+            </button>
+            <button
+              onClick={() => setTabActiva("js")}
+              className={`px-4 py-2 rounded-lg transition-colors ${
+                tabActiva === "js"
+                  ? "bg-purple-500 text-white"
+                  : "bg-gray-700 text-gray-300"
+              }`}
+            >
+              JavaScript
+            </button>
+          </div>
+        </div>
+        <div className="p-6 overflow-auto max-h-[60vh]">
+          <pre className="bg-gray-900 p-4 rounded-lg overflow-x-auto">
+            <code className="text-sm">
+              {tabActiva === "html"
+                ? diseno.codigo.html
+                : tabActiva === "css"
+                ? diseno.codigo.css
+                : diseno.codigo.js}
+            </code>
+          </pre>
+        </div>
+        <div className="p-2 border-t border-gray-700">
+          <button
+            onClick={() => {
+              navigator.clipboard.writeText(
+                tabActiva === "html"
+                  ? diseno.codigo.html
+                  : tabActiva === "css"
+                  ? diseno.codigo.css
+                  : diseno.codigo.js
+              );
+            }}
+            className="px-4 py-2 bg-purple-500 hover:bg-purple-600 rounded-lg transition-colors"
+          >
+            Copiar Código
+          </button>
+        </div>
+      </motion.div>
+    </motion.div>
+  );
+};
 
 export const ModulosDinamicos = () => {
   const [categoriaActiva, setCategoriaActiva] = useState("Todos");
   const [busqueda, setBusqueda] = useState("");
   const [modalAbierto, setModalAbierto] = useState(false);
-  const [proyectoSeleccionado, setProyectoSeleccionado] = useState<ProyectoDinamico | null>(null);
+  const [proyectoSeleccionado, setProyectoSeleccionado] =
+    useState<ProyectoDinamico | null>(null);
 
   // Filtrar proyectos por búsqueda y categoría
   const proyectosFiltrados = proyectos.filter((proyecto) => {
-    const coincideBusqueda = proyecto.titulo.toLowerCase().includes(busqueda.toLowerCase());
-    const coincideCategoria = categoriaActiva === "Todos" || proyecto.categoria === categoriaActiva;
+    const coincideBusqueda = proyecto.titulo
+      .toLowerCase()
+      .includes(busqueda.toLowerCase());
+    const coincideCategoria =
+      categoriaActiva === "Todos" || proyecto.categoria === categoriaActiva;
     return coincideBusqueda && coincideCategoria;
   });
 
@@ -157,7 +233,7 @@ export const ModulosDinamicos = () => {
       {/* Modal (puedes reutilizar el ModalCodigo de ModulosEstaticos) */}
       {modalAbierto && proyectoSeleccionado && (
         <ModalCodigo
-          proyecto={proyectoSeleccionado}
+          diseno={proyectoSeleccionado}
           onClose={() => {
             setModalAbierto(false);
             setProyectoSeleccionado(null);
