@@ -27,7 +27,7 @@ export const NavbarMenu = [
   {
     id: 5,
     title: "Blogs",
-    link: "#",
+    link: "https://blogmarxingsoftware.blogspot.com/",
   },
 ];
 
