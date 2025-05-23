@@ -43,20 +43,22 @@ export const Navbar = () => {
           className="container mx-auto flex justify-between items-center py-6 px-4"
         >
           {/* Logo section */}
-          <motion.div 
+          <motion.div
             whileHover={{ scale: 1.05 }}
             className="text-2xl flex items-center gap-2 font-bold uppercase text-white"
           >
             <FaDumbbell className="text-purple-400" />
             <p>Coders</p>
-            <p className="bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent">MRX</p>
+            <p className="bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent">
+              MRX
+            </p>
           </motion.div>
 
           {/* Menu section */}
           <div className="hidden md:block">
             <ul className="flex items-center gap-6">
               {NavbarMenu.map((item) => (
-                <motion.li 
+                <motion.li
                   key={item.id}
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
@@ -74,19 +76,26 @@ export const Navbar = () => {
 
           {/* Icons section */}
           <div className="flex items-center gap-4">
-            <motion.button 
+            <motion.button
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
               className="hover:bg-purple-700 text-white rounded-full p-3 duration-300 border border-purple-500 hover:border-purple-400"
             >
-              Contacto
+              <a
+                href="https://developer-marx.netlify.app/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white hover:text-white"
+              >
+                Contacto
+              </a>
             </motion.button>
 
             {/* Mobile hamburger Menu section */}
-            <motion.div 
+            <motion.div
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
-              className="md:hidden cursor-pointer text-white" 
+              className="md:hidden cursor-pointer text-white"
               onClick={() => setOpen(!open)}
             >
               <MdMenu className="text-4xl hover:text-purple-400 transition-colors" />
