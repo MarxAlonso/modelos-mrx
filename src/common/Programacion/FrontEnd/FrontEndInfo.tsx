@@ -1,5 +1,7 @@
+import React from 'react';
 import { motion } from "framer-motion";
-import { FaCode, FaReact, FaCss3Alt, FaHtml5, FaJs, FaBootstrap } from "react-icons/fa";
+import { FaCode, FaReact, FaCss3Alt, FaHtml5, FaJs, FaBootstrap, FaLightbulb, FaRocket, FaUsers } from "react-icons/fa";
+import { useState, useEffect } from "react";
 
 export const FrontEndInfo = () => {
     return (
@@ -121,6 +123,123 @@ export const FrontEndInfo = () => {
                     }}
                 />
             </motion.div>
+        </div>
+    );
+};
+
+
+export const FrontEndDescripcion = () => {
+    const [currentSlide, setCurrentSlide] = useState(0);
+
+    const slides = [
+        {
+            icon: FaLightbulb,
+            title: "¿Por qué Front-End?",
+            description: "El desarrollo front-end es la puerta de entrada al mundo del desarrollo web. Es donde la creatividad se encuentra con la tecnología, permitiéndote crear experiencias visuales impactantes que los usuarios pueden ver y sentir.",
+            color: "text-yellow-400"
+        },
+        {
+            icon: FaUsers,
+            title: "Para Principiantes",
+            description: "Como principiante, el front-end te ofrece resultados visibles desde el primer día. Cada línea de código que escribes se traduce en cambios que puedes ver, lo que hace que el aprendizaje sea más gratificante y motivador.",
+            color: "text-blue-400"
+        },
+        {
+            icon: FaRocket,
+            title: "Tu Camino al Éxito",
+            description: "El desarrollo front-end es una habilidad altamente demandada. Con dedicación y práctica, podrás construir interfaces modernas, sitios web responsivos y aplicaciones interactivas que impresionen a usuarios y empleadores por igual.",
+            color: "text-purple-400"
+        }
+    ];
+
+    useEffect(() => {
+        const timer = setInterval(() => {
+            setCurrentSlide((prev) => (prev + 1) % slides.length);
+        }, 5000);
+        return () => clearInterval(timer);
+    }, []);
+
+    return(
+        <div className="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-black py-20 px-4">
+            <div className="max-w-6xl mx-auto">
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8 }}
+                    className="text-center mb-16"
+                >
+                    <h2 className="text-4xl font-bold text-white mb-4">Tu Viaje en el Desarrollo Web</h2>
+                    <p className="text-gray-300 text-lg">Descubre por qué el desarrollo front-end es el punto de partida perfecto</p>
+                </motion.div>
+
+                <div className="relative overflow-hidden rounded-2xl bg-gray-800/50 backdrop-blur-lg p-8">
+                    <div className="flex justify-center gap-4 mb-8">
+                        {slides.map((_, index) => (
+                            <button
+                                key={index}
+                                onClick={() => setCurrentSlide(index)}
+                                className={`w-3 h-3 rounded-full transition-all duration-300 ${currentSlide === index ? 'bg-purple-500 w-8' : 'bg-gray-600'}`}
+                            />
+                        ))}
+                    </div>
+
+                    <motion.div
+                        key={currentSlide}
+                        initial={{ opacity: 0, x: 100 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        exit={{ opacity: 0, x: -100 }}
+                        transition={{ duration: 0.5 }}
+                        className="text-center"
+                    >
+                        {/* Corrección en la línea del icono */}
+                        <div className={`text-6xl ${slides[currentSlide].color} mx-auto mb-6`}>
+                            {React.createElement(slides[currentSlide].icon)}
+                        </div>
+                        <h3 className="text-3xl font-bold text-white mb-4">{slides[currentSlide].title}</h3>
+                        <p className="text-gray-300 text-lg leading-relaxed max-w-3xl mx-auto">
+                            {slides[currentSlide].description}
+                        </p>
+                    </motion.div>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16">
+                    {[
+                        {
+                            title: "Aprende Paso a Paso",
+                            description: "Comienza con HTML y CSS, luego avanza hacia JavaScript y frameworks modernos.",
+                            icon: FaCode,
+                            color: "bg-gradient-to-br from-pink-500 to-purple-600"
+                        },
+                        {
+                            title: "Construye tu Portfolio",
+                            description: "Crea proyectos reales que demuestren tus habilidades a futuros empleadores.",
+                            icon: FaReact,
+                            color: "bg-gradient-to-br from-blue-500 to-cyan-600"
+                        },
+                        {
+                            title: "Únete a la Comunidad",
+                            description: "Conecta con otros desarrolladores, comparte conocimientos y crece juntos.",
+                            icon: FaUsers,
+                            color: "bg-gradient-to-br from-green-500 to-teal-600"
+                        }
+                    ].map((item, index) => (
+                        <motion.div
+                            key={index}
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: index * 0.2 }}
+                            className="p-6 rounded-xl backdrop-blur-sm bg-gray-800/30 hover:bg-gray-700/30 transition-all duration-300"
+                            whileHover={{ scale: 1.05 }}
+                        >
+                            <div className={`w-14 h-14 ${item.color} rounded-lg flex items-center justify-center mb-4`}>
+                                <item.icon className="text-2xl text-white" />
+                            </div>
+                            <h4 className="text-xl font-bold text-white mb-2">{item.title}</h4>
+                            <p className="text-gray-300">{item.description}</p>
+                        </motion.div>
+                    ))}
+                </div>
+            </div>
         </div>
     );
 };

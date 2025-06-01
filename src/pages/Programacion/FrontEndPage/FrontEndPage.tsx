@@ -1,6 +1,6 @@
 import { Footer } from "../../../common/Footer/Footer";
 import { Navbar } from "../../../common/Header/Navbar";
-import { FrontEndInfo } from "../../../common/Programacion/FrontEnd/FrontEndInfo";
+import { FrontEndInfo, FrontEndDescripcion } from "../../../common/Programacion/FrontEnd/FrontEndInfo";
 
 const bgStyle = {
   backgroundRepeat: "no-repeat",
@@ -17,6 +17,7 @@ export const FrontEndPage = () => {
           </div>
           <div className="bg-gradient-to-b from-black via-gray-900 to-black text-white">
             <FrontEndInfo />
+            <FrontEndDescripcion />
             <Footer />
           </div>  
         </div>
