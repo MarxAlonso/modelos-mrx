@@ -6,7 +6,6 @@ import { useState, useEffect } from 'react';
 import { FaCode, FaReact, FaCss3Alt, FaHtml5, FaJs, FaBootstrap, FaLightbulb, FaRocket, FaStar, FaBrain, FaHeart } from 'react-icons/fa';
 import { useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
 
 const bgStyle = {
   backgroundRepeat: "no-repeat",
