@@ -1,7 +1,6 @@
 import { Footer } from "../../common/Footer/Footer";
 import { Navbar } from "../../common/Header/Navbar";
 import { ModulosDinamicos } from "../../common/ModulosDinamicos/ModulosDinamicos";
-
 const bgStyle = {
   backgroundRepeat: "no-repeat",
   backgroundSize: "cover",
