@@ -17,7 +17,7 @@ export const NavbarMenu = [
       id: 3,
       title: "Aprende a Programar",
       submenu: [
-        { title: "Front-end", link: "#" },
+        { title: "Front-end", link: "/frontend" },
         { title: "Spring Boot", link: "#" },
         { title: "Frameworks", link: "#" }
       ]
@@ -25,6 +25,6 @@ export const NavbarMenu = [
     {
       id: 4,
       title: "Blogs",
-      link: "#",
+      link: "https://blogmarxingsoftware.blogspot.com/",
     },
   ];
