@@ -4,7 +4,7 @@ import { FaLightbulb, FaTools, FaLaptopCode } from "react-icons/fa";
 
 export const Home = () => {
   return (
-    <div className="relative flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-black text-white px-4 overflow-hidden">
+    <div className="relative flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-black text-white px-4 overflow-hidden z-[1]">
       {/* Partículas de fondo animadas */}
       <div className="absolute inset-0">
         {[...Array(20)].map((_, i) => (
