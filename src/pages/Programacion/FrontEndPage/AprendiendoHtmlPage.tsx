@@ -1,6 +1,7 @@
 import { Footer } from "../../../common/Footer/Footer";
 import { Navbar } from "../../../common/Header/Navbar";
 import { AprendiendoHtml, AprendiendoHtmlIntermedio } from "../../../common/Programacion/FrontEnd/Html/AprendiendoHtml";
+import { EditorCodigo } from "../../../common/Programacion/FrontEnd/Html/EditorCodigo";
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState, useEffect } from 'react';
 import { FaLightbulb, FaRocket, FaStar, FaBrain, FaHeart } from 'react-icons/fa';
@@ -78,6 +79,7 @@ export const AprendiendoHtmlPage = () => {
             <div className="bg-gradient-to-b from-black via-gray-900 to-black text-white">
                 <AprendiendoHtml />
                 <AprendiendoHtmlIntermedio />
+                <EditorCodigo />
                 <Footer />
             </div>
 
