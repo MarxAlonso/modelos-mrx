@@ -1,11 +1,9 @@
 import { Footer } from "../../../common/Footer/Footer";
 import { Navbar } from "../../../common/Header/Navbar";
-import { FrontEndInfo, FrontEndDescripcion } from "../../../common/Programacion/FrontEnd/FrontEndInfo";
+import { AprendiendoHtml } from "../../../common/Programacion/FrontEnd/Html/AprendiendoHtml";
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState, useEffect } from 'react';
-import { FaCode, FaReact, FaCss3Alt, FaHtml5, FaJs, FaBootstrap, FaLightbulb, FaRocket, FaStar, FaBrain, FaHeart } from 'react-icons/fa';
-import { useScroll, useTransform } from 'framer-motion';
-import { useRef } from 'react';
+import { FaLightbulb, FaRocket, FaStar, FaBrain, FaHeart } from 'react-icons/fa';
 
 const bgStyle = {
   backgroundRepeat: "no-repeat",
@@ -13,43 +11,7 @@ const bgStyle = {
   backgroundPosition: "center",
   backgroundAttachment: "fixed",
 };
-const tecnologiasFrontEnd = [
-  {
-      nombre: "HTML5",
-      descripcion: "El lenguaje fundamental de la web",
-      icon: FaHtml5,
-      color: "from-orange-500 to-red-500",
-      ruta: "/aprendiendohtml"
-  },
-  {
-      nombre: "CSS3",
-      descripcion: "Estiliza y da vida a tus páginas",
-      icon: FaCss3Alt,
-      color: "from-blue-500 to-blue-600",
-      ruta: "/css"
-  },
-  {
-      nombre: "JavaScript",
-      descripcion: "Añade interactividad y dinamismo",
-      icon: FaJs,
-      color: "from-yellow-400 to-yellow-600",
-      ruta: "/javascript"
-  },
-  {
-      nombre: "Bootstrap",
-      descripcion: "Framework CSS responsive y moderno",
-      icon: FaBootstrap,
-      color: "from-purple-500 to-purple-700",
-      ruta: "/bootstrap"
-  },
-  {
-      nombre: "React",
-      descripcion: "Construye interfaces modernas",
-      icon: FaReact,
-      color: "from-cyan-400 to-blue-500",
-      ruta: "/react"
-  }
-];
+
 const mensajesMotivacionales = [
     {
         titulo: "¡Bienvenido al Desarrollo Front-End!",
@@ -83,19 +45,9 @@ const mensajesMotivacionales = [
     }
 ];
 
-export const FrontEndPage = () => {
-    const [isVisible, setIsVisible] = useState(true);
+export const AprendiendoHtmlPage = () => {
+    const [isVisible, setIsVisible] = useState(true); // Comienza visible
     const [currentMessage, setCurrentMessage] = useState(0);
-    const [menuOpen, setMenuOpen] = useState(false);
-    
-    const containerRef = useRef(null);
-    const { scrollY } = useScroll();
-    
-    // Animación del menú flotante basada en el scroll
-    const menuY = useTransform(scrollY, 
-        [0, 200], // Rango de scroll
-        ["0%", "20%"] // Rango de movimiento
-    );
 
     useEffect(() => {
         // Ocultar el mensaje inicial después de 10 segundos
@@ -119,66 +71,12 @@ export const FrontEndPage = () => {
     const Icon = mensaje.icon;
 
     return (
-      <div className="overflow-x-hidden" ref={containerRef}>
+        <div className="overflow-x-hidden">
             <div style={bgStyle}>
                 <Navbar />
             </div>
-            
-            {/* Menú flotante */}
-            <motion.div
-                style={{ y: menuY }}
-                className="fixed right-6 top-1/2 -translate-y-1/2 z-40"
-            >
-                <motion.button
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.95 }}
-                    onClick={() => setMenuOpen(!menuOpen)}
-                    className="bg-gradient-to-r from-purple-600 to-blue-600 p-4 rounded-full shadow-lg hover:shadow-xl transition-shadow"
-                >
-                    <FaCode className="text-2xl text-white" />
-                </motion.button>
-
-                <AnimatePresence>
-                    {menuOpen && (
-                        <motion.div
-                            initial={{ opacity: 0, x: 100, scale: 0.6 }}
-                            animate={{ opacity: 1, x: 0, scale: 1 }}
-                            exit={{ opacity: 0, x: 100, scale: 0.6 }}
-                            transition={{ type: "spring", damping: 20, stiffness: 300 }}
-                            className="absolute right-16 top-1/2 -translate-y-1/2 bg-gray-900/95 backdrop-blur-sm rounded-2xl p-4 w-72 shadow-xl border border-gray-700/50"
-                        >
-                            <h3 className="text-xl font-bold text-white mb-4 text-center">¿Por dónde empezar?</h3>
-                            <div className="space-y-3 max-h-96 overflow-y-auto pr-1">
-                              {tecnologiasFrontEnd.map((tech, index) => (
-                                <motion.a
-                                  key={tech.nombre}
-                                  href={tech.ruta}
-                                  initial={{ opacity: 0, x: 50 }}
-                                  animate={{ opacity: 1, x: 0 }}
-                                  transition={{ delay: index * 0.1 }}
-                                  className={`block cursor-pointer bg-gradient-to-r ${tech.color} p-3 rounded-xl hover:scale-105 transform transition-all duration-300 group`}
-                                >
-                                  <div className="flex items-center space-x-3">
-                                    <tech.icon className="text-2xl text-white" />
-                                    <div>
-                                      <h4 className="font-semibold text-white">{tech.nombre}</h4>
-                                      <p className="text-sm text-white/80 group-hover:text-white transition-colors">
-                                        {tech.descripcion}
-                                      </p>
-                                    </div>
-                                  </div>
-                                </motion.a>
-                              ))}
-                            </div>
-
-                        </motion.div>
-                    )}
-                </AnimatePresence>
-            </motion.div>
-
             <div className="bg-gradient-to-b from-black via-gray-900 to-black text-white">
-                <FrontEndInfo />
-                <FrontEndDescripcion />
+                <AprendiendoHtml />
                 <Footer />
             </div>
 
