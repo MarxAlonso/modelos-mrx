@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { FaHtml5, FaCode, FaEye, FaArrowRight } from "react-icons/fa";
+import { FaHtml5, FaCode, FaEye } from "react-icons/fa";
 import { useState } from "react";
 
 const StarryBackground = () => {
