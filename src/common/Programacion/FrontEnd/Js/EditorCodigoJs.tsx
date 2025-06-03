@@ -12,48 +12,40 @@ export const EditorCodigoJs = () => {
   const executeJavaScript = () => {
     try {
       // Crear un iframe aislado para ejecutar el código de forma segura
-      const iframe = document.createElement("iframe");
-      iframe.style.display = "none";
+      const iframe = document.createElement('iframe');
+      iframe.style.display = 'none';
       document.body.appendChild(iframe);
 
-      const contentWindow = iframe.contentWindow;
-      if (!contentWindow) {
-        throw new Error("No se pudo acceder al contentWindow del iframe");
+      // Asegurarnos de que el iframe tiene un contentWindow
+      const iframeWindow = iframe.contentWindow;
+      if (!iframeWindow) {
+        throw new Error('No se pudo inicializar el iframe');
+        return;
       }
 
       // Capturar la salida de console.log
       const logs: string[] = [];
-
-      // Reemplazar temporalmente console.log dentro del iframe
-      (contentWindow.console as Console).log = (...args: unknown[]) => {
-        logs.push(
-          args
-            .map((arg) =>
-              typeof arg === "object"
-                ? JSON.stringify(arg, null, 2)
-                : String(arg)
-            )
-            .join(" ")
-        );
+      const originalConsole = iframeWindow.console;
+      (iframeWindow as any).console = {
+        log: (...args: any[]) => {
+          originalConsole.log(...args);
+          logs.push(args.map(arg => 
+            typeof arg === 'object' ? JSON.stringify(arg, null, 2) : String(arg)
+          ).join(' '));
+        }
       };
 
-      // Ejecutar el código
-      const FunctionConstructor = contentWindow.Function as FunctionConstructor;
-const executeCode = new FunctionConstructor(javascript);
-
+      // Ejecutar el código de forma segura
+      const executeCode = new (iframeWindow as any).Function(javascript);
       executeCode();
 
       // Actualizar la salida
-      setOutput(logs.join("\n"));
+      setOutput(logs.join('\n'));
 
       // Limpiar
       document.body.removeChild(iframe);
-    } catch (error: unknown) {
-      if (error instanceof Error) {
-        setOutput(`Error: ${error.message}`);
-      } else {
-        setOutput("Error desconocido");
-      }
+    } catch (error) {
+      setOutput(`Error: ${error instanceof Error ? error.message : String(error)}`);
     }
   };
 
@@ -61,7 +53,7 @@ const executeCode = new FunctionConstructor(javascript);
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      className="grid grid-cols-1 md:grid-cols-2 gap-4 h-screen bg-gray-900 p-4"
+      className="grid grid-cols-2 gap-4 h-screen bg-gray-900 p-4"
     >
       {/* Panel del Editor */}
       <div className="bg-gray-800 rounded-lg p-4">
