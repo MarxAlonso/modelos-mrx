@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { FaHtml5, FaCode, FaEye, FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import { useState } from "react";
-import { ejemplosHTML } from './ejemplosHTML';
+import { ejemplosHTML } from './ejemplosHtml';
 import { ejemplosHTMLIntermedio } from './ejemplosHTMLIntermedio';
 
 export const AprendiendoHtml = () => {

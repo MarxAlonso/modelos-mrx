@@ -5,7 +5,6 @@ import { ejemplosCSS } from './ejemploCss';
 import { ejemplosCSSIntermedio } from './ejemplosCSSIntermedio';
 export const AprendiendoCss = () => {
   const [ejemploActual, setEjemploActual] = useState(0);
-
   return (
     <div className="relative min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-gray-900 p-8 overflow-hidden">
       <motion.div
