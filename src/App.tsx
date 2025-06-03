@@ -4,6 +4,7 @@ import { ModelosEstaticosPage } from "./pages/ModulosPage/ModelosEstaticosPage";
 import { ModelosDinamicosPage } from "./pages/ModulosPage/ModelosDinamicosPage";
 import { FrontEndPage } from "./pages/Programacion/FrontEndPage/FrontEndPage";
 import { AprendiendoHtmlPage } from "./pages/Programacion/FrontEndPage/AprendiendoHtmlPage";
+import { AprendiendoCssPage } from "./pages/Programacion/FrontEndPage/AprendiendoCssPage";
 function App() {
   return (
     <>
@@ -24,6 +25,10 @@ function App() {
         <Route
           path="/aprendiendohtml"
           element={<AprendiendoHtmlPage />}
+        ></Route>
+        <Route
+          path="/aprendiendocss"
+          element={<AprendiendoCssPage />}
         ></Route>
       </Routes>
     </>
