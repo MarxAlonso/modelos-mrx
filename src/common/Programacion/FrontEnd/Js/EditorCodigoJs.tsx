@@ -38,7 +38,9 @@ export const EditorCodigoJs = () => {
       };
 
       // Ejecutar el código
-      const executeCode = new contentWindow.Function(javascript);
+      const FunctionConstructor = contentWindow.Function as FunctionConstructor;
+const executeCode = new FunctionConstructor(javascript);
+
       executeCode();
 
       // Actualizar la salida
