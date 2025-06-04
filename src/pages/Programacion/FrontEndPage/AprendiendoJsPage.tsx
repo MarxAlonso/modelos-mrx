@@ -1,6 +1,6 @@
 import { Footer } from "../../../common/Footer/Footer";
 import { Navbar } from "../../../common/Header/Navbar";
-import { AprendiendoJs } from "../../../common/Programacion/FrontEnd/Js/AprendiendoJs";
+import { AprendiendoJs, AprendiendoJsIntermedio } from "../../../common/Programacion/FrontEnd/Js/AprendiendoJs";
 import { EditorCodigoJs } from "../../../common/Programacion/FrontEnd/Js/EditorCodigoJs";
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState, useEffect } from 'react';
@@ -78,6 +78,7 @@ export const AprendiendoJsPage = () => {
             </div>
             <div className="bg-gradient-to-b from-black via-gray-900 to-black text-white">
                 <AprendiendoJs />
+                <AprendiendoJsIntermedio />
                 <EditorCodigoJs />
                 <Footer />
             </div>
