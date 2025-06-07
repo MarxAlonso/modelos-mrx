@@ -4,47 +4,13 @@ import { AprendiendoCss, AprendiendoCssIntermedio } from "../../../common/Progra
 import { EditorCodigo } from "../../../common/Programacion/FrontEnd/Html/EditorCodigo";
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState, useEffect } from 'react';
-import { FaLightbulb, FaRocket, FaStar, FaBrain, FaHeart } from 'react-icons/fa';
-
+import {mensajesMotivacionalesCss} from './mensajesMotivacionales';
 const bgStyle = {
   backgroundRepeat: "no-repeat",
   backgroundSize: "cover",
   backgroundPosition: "center",
   backgroundAttachment: "fixed",
 };
-
-const mensajesMotivacionales = [
-    {
-        titulo: "¡Bienvenido al Desarrollo Front-End!",
-        mensaje: "Aquí comenzarás un viaje emocionante hacia la creación de interfaces web increíbles. ¡Tu creatividad no tiene límites!",
-        icon: FaRocket,
-        color: "from-purple-600 to-pink-600"
-    },
-    {
-        titulo: "El Poder del Front-End",
-        mensaje: "Cada línea de HTML, CSS y JavaScript te acerca más a convertirte en un desarrollador extraordinario. ¡Sigue adelante!",
-        icon: FaBrain,
-        color: "from-blue-600 to-cyan-600"
-    },
-    {
-        titulo: "¡Persiste y Triunfa!",
-        mensaje: "El camino del aprendizaje tiene desafíos, pero cada obstáculo superado te hace más fuerte. ¡Tú puedes lograrlo!",
-        icon: FaStar,
-        color: "from-yellow-600 to-red-600"
-    },
-    {
-        titulo: "Innovación sin Límites",
-        mensaje: "El front-end es donde la magia sucede. Tu código dará vida a ideas asombrosas que impactarán a usuarios en todo el mundo.",
-        icon: FaLightbulb,
-        color: "from-green-600 to-teal-600"
-    },
-    {
-        titulo: "¡Construye tu Futuro!",
-        mensaje: "Cada proyecto que construyas te acerca más a tus metas. La comunidad del desarrollo web te espera con los brazos abiertos.",
-        icon: FaHeart,
-        color: "from-red-600 to-orange-600"
-    }
-];
 
 export const AprendiendoCssPage = () => {
     const [isVisible, setIsVisible] = useState(true); // Comienza visible
@@ -56,10 +22,10 @@ export const AprendiendoCssPage = () => {
 
         // Mostrar nuevos mensajes cada 5 minutos
         const interval = setInterval(() => {
-            setCurrentMessage((prev) => (prev + 1) % mensajesMotivacionales.length);
+            setCurrentMessage((prev) => (prev + 1) % mensajesMotivacionalesCss.length);
             setIsVisible(true);
             // Ocultar después de 10 segundos
-            setTimeout(() => setIsVisible(false), 10000);
+            setTimeout(() => setIsVisible(false), 25000);
         }, 300000); // 5 minutos
 
         return () => {
@@ -68,7 +34,7 @@ export const AprendiendoCssPage = () => {
         };
     }, []);
 
-    const mensaje = mensajesMotivacionales[currentMessage];
+    const mensaje = mensajesMotivacionalesCss[currentMessage];
     const Icon = mensaje.icon;
 
     return (
