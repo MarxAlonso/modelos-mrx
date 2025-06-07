@@ -1,11 +1,11 @@
 import { motion } from "framer-motion";
 import {
   FaDumbbell,
-  FaFacebook,
-  FaInstagram,
-  FaLinkedin,
+  FaGithub,
+  FaGlobe,
+  FaWhatsapp
 } from "react-icons/fa";
-import { HiLocationMarker } from "react-icons/hi";
+import { Link } from "react-router-dom";
 
 export const Footer = () => {
   const fadeInUp = {
@@ -41,79 +41,92 @@ export const Footer = () => {
               Encuentra inspiración y mejora tus proyectos web.
             </p>
             <div className="flex items-center gap-6 !mt-8">
-              {[HiLocationMarker, FaInstagram, FaFacebook, FaLinkedin].map((Icon, index) => (
-                <motion.a
-                  key={index}
-                  href="#"
-                  whileHover={{ scale: 1.2, color: "#8B5CF6" }}
-                  whileTap={{ scale: 0.9 }}
-                  className="text-3xl text-gray-300 hover:text-purple-500 transition-colors"
-                >
-                  <Icon />
-                </motion.a>
-              ))}
+              <motion.a
+                href="https://github.com/MarxAlonso"
+                target="_blank"
+                rel="noopener noreferrer"
+                whileHover={{ scale: 1.2, color: "#8B5CF6" }}
+                whileTap={{ scale: 0.9 }}
+                className="text-3xl text-gray-300 hover:text-purple-500 transition-colors"
+              >
+                <FaGithub />
+              </motion.a>
+              <motion.a
+                href="https://developer-marx.netlify.app/"
+                target="_blank"
+                rel="noopener noreferrer"
+                whileHover={{ scale: 1.2, color: "#8B5CF6" }}
+                whileTap={{ scale: 0.9 }}
+                className="text-3xl text-gray-300 hover:text-purple-500 transition-colors"
+              >
+                <FaGlobe />
+              </motion.a>
+              <motion.a
+                href="https://wa.me/944603274"
+                target="_blank"
+                rel="noopener noreferrer"
+                whileHover={{ scale: 1.2, color: "#8B5CF6" }}
+                whileTap={{ scale: 0.9 }}
+                className="text-3xl text-gray-300 hover:text-purple-500 transition-colors"
+              >
+                <FaWhatsapp />
+              </motion.a>
             </div>
           </motion.div>
 
           {/* Links Grid */}
           <div className="grid grid-cols-1 md:grid-cols-3 md:col-span-3 gap-8">
-            {/* Important Links */}
+            {/* Enlaces Importantes */}
             <motion.div {...fadeInUp} className="py-8 px-4">
               <h2 className="text-xl font-bold mb-6 bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent">
                 Enlaces Importantes
               </h2>
               <ul className="flex flex-col gap-4">
-                {["Inicio", "Nosotros", "Servicios", "Login"].map((item, index) => (
-                  <motion.li
-                    key={index}
-                    whileHover={{ x: 5 }}
-                    className="transition-colors"
-                  >
-                    <a href="/" className="text-gray-300 hover:text-purple-400">
-                      {item}
-                    </a>
-                  </motion.li>
-                ))}
+                <motion.li whileHover={{ x: 5 }} className="transition-colors">
+                  <Link to="/" className="text-gray-300 hover:text-purple-400">Inicio</Link>
+                </motion.li>
+                <motion.li whileHover={{ x: 5 }} className="transition-colors">
+                  <Link to="/frontend" className="text-gray-300 hover:text-purple-400">Front-end</Link>
+                </motion.li>
+                <motion.li whileHover={{ x: 5 }} className="transition-colors">
+                  <Link to="/modulosestaticos" className="text-gray-300 hover:text-purple-400">Módulos Estáticos</Link>
+                </motion.li>
               </ul>
             </motion.div>
 
-            {/* Company Links */}
+            {/* Módulos */}
             <motion.div {...fadeInUp} className="py-8 px-4">
               <h2 className="text-xl font-bold mb-6 bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent">
-                Compañía
+                Módulos
               </h2>
               <ul className="flex flex-col gap-4">
-                {["Nuestros Servicios", "Contacto", "Política de Privacidad"].map((item, index) => (
-                  <motion.li
-                    key={index}
-                    whileHover={{ x: 5 }}
-                    className="transition-colors"
-                  >
-                    <a href="/" className="text-gray-300 hover:text-purple-400">
-                      {item}
-                    </a>
-                  </motion.li>
-                ))}
+                <motion.li whileHover={{ x: 5 }} className="transition-colors">
+                  <Link to="/modulosestaticos" className="text-gray-300 hover:text-purple-400">Módulos Estáticos</Link>
+                </motion.li>
+                <motion.li whileHover={{ x: 5 }} className="transition-colors">
+                  <Link to="/modulosdinamicos" className="text-gray-300 hover:text-purple-400">Módulos Dinámicos</Link>
+                </motion.li>
+                <motion.li whileHover={{ x: 5 }} className="transition-colors">
+                  <Link to="#" className="text-gray-300 hover:text-purple-400">Módulos Animados</Link>
+                </motion.li>
               </ul>
             </motion.div>
 
-            {/* Resources */}
+            {/* Programación */}
             <motion.div {...fadeInUp} className="py-8 px-4">
               <h2 className="text-xl font-bold mb-6 bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent">
-                Recursos
+                Programación
               </h2>
               <ul className="flex flex-col gap-4">
-                {["Modulos Estaticos", "Modulos Dinamicos", "Modulos Animados", "Blogs"].map((item, index) => (
-                  <motion.li
-                    key={index}
-                    whileHover={{ x: 5 }}
-                    className="transition-colors"
-                  >
-                    <a href="/" className="text-gray-300 hover:text-purple-400">
-                      {item}
-                    </a>
-                  </motion.li>
-                ))}
+                <motion.li whileHover={{ x: 5 }} className="transition-colors">
+                  <Link to="/frontend" className="text-gray-300 hover:text-purple-400">Front-end</Link>
+                </motion.li>
+                <motion.li whileHover={{ x: 5 }} className="transition-colors">
+                  <Link to="#" className="text-gray-300 hover:text-purple-400">Spring Boot</Link>
+                </motion.li>
+                <motion.li whileHover={{ x: 5 }} className="transition-colors">
+                  <Link to="#" className="text-gray-300 hover:text-purple-400">Frameworks</Link>
+                </motion.li>
               </ul>
             </motion.div>
           </div>
