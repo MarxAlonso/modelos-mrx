@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown } from "lucide-react";
-
+import { driver } from "driver.js";
+import "driver.js/dist/driver.css";
 const faqs = [
   {
     question: "¿Puedo usar los diseños en proyectos personales o comerciales?",
@@ -28,8 +29,66 @@ export const FAQSection = () => {
     setOpenIndex(openIndex === index ? null : index);
   };
 
+  const startFAQTour = () => {
+    const driverObj = driver({
+      showProgress: true,
+      animate: true,
+      overlayColor: '#1a1a1a',
+      overlayOpacity: 0.7,
+      popoverClass: 'custom-popover',
+      steps: [
+        {
+          element: '.faq-title',
+          popover: {
+            title: 'Preguntas Frecuentes',
+            description: 'Aquí encontrarás respuestas a las dudas más comunes sobre nuestros módulos y servicios.'
+          }
+        },
+        {
+          element: '.space-y-6 > div:first-child',
+          popover: {
+            title: 'Preguntas Interactivas',
+            description: 'Haz clic en cualquier pregunta para ver su respuesta. Cada pregunta se expande suavemente con una animación fluida.'
+          }
+        },
+        {
+          element: '.ChevronDown',
+          popover: {
+            title: 'Indicador de Expansión',
+            description: 'Este ícono gira para indicar si una pregunta está abierta o cerrada.'
+          }
+        }
+      ]
+    });
+
+    driverObj.drive();
+  };
+
   return (
     <section className="relative max-w-4xl mx-auto py-16 px-4 sm:px-6 lg:px-8">
+      {/* Botón para iniciar el tour */}
+      <motion.button
+        onClick={startFAQTour}
+        className="absolute top-4 right-4 bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded-full shadow-lg z-50 flex items-center gap-2 text-sm"
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
+      >
+        <svg
+          className="w-4 h-4"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+          />
+        </svg>
+        Ver Tour
+      </motion.button>
       {/* Efectos de fondo animados */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute -inset-[100%] bg-gradient-to-r from-purple-900/20 via-black/5 to-gray-900/20 animate-[gradient_15s_ease_infinite]" />
@@ -40,7 +99,7 @@ export const FAQSection = () => {
         initial={{ opacity: 0, y: -20 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
-        className="text-4xl font-bold text-center mb-12 text-white relative"
+        className="text-4xl font-bold text-center mb-12 text-white relative faq-title"
       >
         Preguntas Frecuentes
       </motion.h2>
