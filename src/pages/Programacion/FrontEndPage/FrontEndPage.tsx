@@ -40,7 +40,7 @@ const tecnologiasFrontEnd = [
       descripcion: "Framework CSS responsive y moderno",
       icon: FaBootstrap,
       color: "from-purple-500 to-purple-700",
-      ruta: "/bootstrap"
+      ruta: "/aprendiendobootstrap"
   },
   {
       nombre: "React",

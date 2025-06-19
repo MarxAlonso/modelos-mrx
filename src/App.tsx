@@ -6,6 +6,7 @@ import { FrontEndPage } from "./pages/Programacion/FrontEndPage/FrontEndPage";
 import { AprendiendoHtmlPage } from "./pages/Programacion/FrontEndPage/AprendiendoHtmlPage";
 import { AprendiendoCssPage } from "./pages/Programacion/FrontEndPage/AprendiendoCssPage";
 import { AprendiendoJsPage } from "./pages/Programacion/FrontEndPage/AprendiendoJsPage";
+import { AprendiendoBootstrapPage } from "./pages/Programacion/FrontEndPage/AprendiendoBootstrapPage";
 function App() {
   return (
     <>
@@ -34,6 +35,10 @@ function App() {
         <Route
           path="/aprendiendojs"
           element={<AprendiendoJsPage />}
+        ></Route>
+        <Route
+          path="/aprendiendobootstrap"
+          element={<AprendiendoBootstrapPage />}
         ></Route>
       </Routes>
     </>
