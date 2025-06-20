@@ -66,7 +66,7 @@ export const EditorCodigo = () => {
           srcDoc={getPreviewContent()}
           title="preview"
           className="w-full h-full border-none"
-          sandbox="allow-scripts"
+          sandbox="allow-scripts allow-forms allow-modals"
         />
       </motion.div>
     </motion.div>

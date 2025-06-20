@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useState, useEffect } from 'react';
 import {mensajesMotivacionalesCss} from './mensajesMotivacionales';
 import { AprendiendoBootstrap } from "../../../common/Programacion/FrontEnd/Bootstrap/AprendiendoBootstrap";
+import { AprendiendoBootstrapIntermedio } from "../../../common/Programacion/FrontEnd/Bootstrap/AprendiendoBootstrapIntermedio";
 const bgStyle = {
   backgroundRepeat: "no-repeat",
   backgroundSize: "cover",
@@ -44,6 +45,7 @@ export const AprendiendoBootstrapPage = () => {
             </div>
             <div className="bg-gradient-to-b from-black via-gray-900 to-black text-white">
                 <AprendiendoBootstrap />
+                <AprendiendoBootstrapIntermedio />
                 <EditorCodigo />
                 <Footer />
             </div>
