@@ -7,6 +7,7 @@ import { AprendiendoHtmlPage } from "./pages/Programacion/FrontEndPage/Aprendien
 import { AprendiendoCssPage } from "./pages/Programacion/FrontEndPage/AprendiendoCssPage";
 import { AprendiendoJsPage } from "./pages/Programacion/FrontEndPage/AprendiendoJsPage";
 import { AprendiendoBootstrapPage } from "./pages/Programacion/FrontEndPage/AprendiendoBootstrapPage";
+import { SpringBootInfoPage } from "./pages/Programacion/SpringBootPage/SpringBootInfoPage";SpringBootInfoPage
 function App() {
   return (
     <>
@@ -39,6 +40,10 @@ function App() {
         <Route
           path="/aprendiendobootstrap"
           element={<AprendiendoBootstrapPage />}
+        ></Route>
+        <Route
+          path="/springboot"
+          element={<SpringBootInfoPage />}
         ></Route>
       </Routes>
     </>
