@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
 import { FaJava, FaDatabase, FaServer, FaProjectDiagram, FaCodeBranch, FaCode } from "react-icons/fa";
-import { useState, useEffect } from "react";
 
 export const SpringBootInfo = () => {
     return (
