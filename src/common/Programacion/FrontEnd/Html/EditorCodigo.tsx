@@ -22,14 +22,14 @@ export const EditorCodigo = () => {
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      className="grid grid-cols-2 gap-4 h-screen bg-gray-900 p-4"
+      className="grid grid-cols-1 md:grid-cols-2 gap-4 h-screen bg-gray-900 p-4"
     >
       {/* Panel del Editor */}
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-4 h-full overflow-y-auto">
         <div className="bg-gray-800 rounded-lg p-4">
           <h3 className="text-white mb-2">HTML</h3>
           <Editor
-            height="200px"
+            height="300px"
             defaultLanguage="html"
             value={html}
             onChange={(value) => setHtml(value || "")}
@@ -43,7 +43,7 @@ export const EditorCodigo = () => {
         <div className="bg-gray-800 rounded-lg p-4">
           <h3 className="text-white mb-2">CSS</h3>
           <Editor
-            height="200px"
+            height="300px"
             defaultLanguage="css"
             value={css}
             onChange={(value) => setCss(value || "")}
@@ -58,7 +58,7 @@ export const EditorCodigo = () => {
 
       {/* Panel de Vista Previa */}
       <motion.div
-        className="bg-white rounded-lg overflow-hidden"
+        className="bg-white rounded-lg overflow-hidden h-full"
         initial={{ x: 100 }}
         animate={{ x: 0 }}
       >
