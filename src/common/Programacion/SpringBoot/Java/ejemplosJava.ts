@@ -79,6 +79,95 @@ export const ejemplosJava = [
       explicacion: `- saludar("Luis"): Llama al método y le pasa el argumento
   - public static void saludar(...): Define un método que recibe un parámetro
   - System.out.println(...): Muestra el saludo personalizado`
-    }
+    },
+    {
+        id: 6,
+        titulo: "Condicional if-else",
+        descripcion: "Uso de estructuras condicionales para tomar decisiones.",
+        codigo: `public class Comparacion {
+          public static void main(String[] args) {
+              int numero = 10;
+              if (numero > 5) {
+                  System.out.println("El número es mayor que 5");
+              } else {
+                  System.out.println("El número es menor o igual que 5");
+              }
+          }
+      }`,
+        resultado: "El número es mayor que 5",
+        explicacion: `- int numero = 10: Define una variable entera
+      - if (numero > 5): Evalúa si el número es mayor a 5
+      - System.out.println(...): Imprime el mensaje según la condición`
+      },
+      {
+        id: 7,
+        titulo: "Bucle for",
+        descripcion: "Repetir instrucciones usando un bucle for.",
+        codigo: `public class Conteo {
+          public static void main(String[] args) {
+              for (int i = 1; i <= 5; i++) {
+                  System.out.println("Número: " + i);
+              }
+          }
+      }`,
+        resultado: "Número: 1\nNúmero: 2\nNúmero: 3\nNúmero: 4\nNúmero: 5",
+        explicacion: `- for (...): Estructura de repetición que va de 1 a 5
+      - i++: Incrementa el valor de i en cada iteración
+      - System.out.println(...): Imprime el valor actual de i`
+      },
+      {
+        id: 8,
+        titulo: "Arreglos en Java",
+        descripcion: "Uso básico de arreglos para almacenar múltiples valores.",
+        codigo: `public class Arreglo {
+          public static void main(String[] args) {
+              String[] nombres = {"Ana", "Luis", "Pedro"};
+              System.out.println(nombres[1]);
+          }
+      }`,
+        resultado: "Luis",
+        explicacion: `- String[] nombres: Declara un arreglo de cadenas
+      - {"Ana", "Luis", "Pedro"}: Elementos del arreglo
+      - nombres[1]: Accede al segundo elemento (posición 1)`
+      },
+      {
+        id: 9,
+        titulo: "Switch Case",
+        descripcion: "Control de flujo con múltiples casos.",
+        codigo: `public class Dias {
+          public static void main(String[] args) {
+              int dia = 3;
+              switch (dia) {
+                  case 1: System.out.println("Lunes"); break;
+                  case 2: System.out.println("Martes"); break;
+                  case 3: System.out.println("Miércoles"); break;
+                  default: System.out.println("Otro día");
+              }
+          }
+      }`,
+        resultado: "Miércoles",
+        explicacion: `- switch (dia): Evalúa el valor de la variable
+      - case 3: Coincide y ejecuta "Miércoles"
+      - break: Finaliza el bloque para evitar ejecutar otros casos`
+      },
+      {
+        id: 10,
+        titulo: "Entrada con Scanner",
+        descripcion: "Leer datos desde consola usando Scanner.",
+        codigo: `import java.util.Scanner;
+      public class Entrada {
+          public static void main(String[] args) {
+              Scanner sc = new Scanner(System.in);
+              System.out.print("Escribe tu nombre: ");
+              String nombre = sc.nextLine();
+              System.out.println("Hola, " + nombre);
+          }
+      }`,
+        resultado: "Hola, Juan (si el usuario escribe Juan)",
+        explicacion: `- import java.util.Scanner: Importa la clase para leer entradas
+      - Scanner sc = new Scanner(...): Crea el lector
+      - nextLine(): Lee una línea completa del usuario
+      - System.out.println(...): Muestra el saludo con el nombre`
+      }      
   ];
   
