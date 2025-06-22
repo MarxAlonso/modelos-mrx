@@ -1,6 +1,7 @@
 import { Footer } from "../../../common/Footer/Footer";
 import { Navbar } from "../../../common/Header/Navbar";
 import { AprendiendoPOO } from "../../../common/Programacion/SpringBoot/POO/AprendiendoPOO";
+import { AprendiendoPOOIntermedio } from "../../../common/Programacion/SpringBoot/POO/AprendiendoPOOIntermedio";
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState, useEffect } from 'react';
 import {mensajesMotivacionalesJava} from './mensajesMotivacionales';
@@ -43,6 +44,7 @@ export const AprendiendoPOOPage = () => {
             </div>
             <div className="bg-gradient-to-b from-black via-gray-900 to-black text-white">
                 <AprendiendoPOO />
+                <AprendiendoPOOIntermedio />
                 <Footer />
             </div>
 

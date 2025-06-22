@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { FaJava, FaCode, FaEye } from "react-icons/fa";
 import { useState } from "react";
-import { ejemplosJava } from './ejemplosJava';
+import { ejemplosJava } from './data/ejemplosJava';
 
 export const AprendiendoJava = () => {
   const [ejemploActual, setEjemploActual] = useState(0);
