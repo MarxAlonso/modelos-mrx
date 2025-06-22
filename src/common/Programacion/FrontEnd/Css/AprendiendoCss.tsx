@@ -1,8 +1,8 @@
 import { motion } from "framer-motion";
 import { FaCss3Alt, FaCode, FaEye, FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import { useState } from "react";
-import { ejemplosCSS } from './ejemploCss';
-import { ejemplosCSSIntermedio } from './ejemplosCSSIntermedio';
+import { ejemplosCSS } from './data/ejemploCss';
+import { ejemplosCSSIntermedio } from './data/ejemplosCSSIntermedio';
 export const AprendiendoCss = () => {
   const [ejemploActual, setEjemploActual] = useState(0);
   return (

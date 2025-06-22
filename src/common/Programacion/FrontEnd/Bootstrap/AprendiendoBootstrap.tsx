@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { FaCss3Alt, FaCode, FaEye, FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import { useState } from "react";
-import { ejemplosBootstrap } from './ejemplosBootstrap';
+import { ejemplosBootstrap } from './data/ejemplosBootstrap';
 
 export const AprendiendoBootstrap = () => {
   const [ejemploActual, setEjemploActual] = useState(0);

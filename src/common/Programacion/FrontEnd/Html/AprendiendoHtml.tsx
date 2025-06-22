@@ -1,8 +1,8 @@
 import { motion } from "framer-motion";
 import { FaHtml5, FaCode, FaEye, FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import { useState } from "react";
-import { ejemplosHTML } from './ejemplosHtml';
-import { ejemplosHTMLIntermedio } from './ejemplosHTMLIntermedio';
+import { ejemplosHTML } from './data/ejemplosHtml';
+import { ejemplosHTMLIntermedio } from './data/ejemplosHTMLIntermedio';
 
 export const AprendiendoHtml = () => {
   const [ejemploActual, setEjemploActual] = useState(0);

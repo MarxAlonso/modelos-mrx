@@ -62,7 +62,7 @@ export const Footer = () => {
                 <FaGlobe />
               </motion.a>
               <motion.a
-                href="https://wa.me/944603274"
+                href="https://wa.me/922061911"
                 target="_blank"
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.2, color: "#8B5CF6" }}
@@ -122,7 +122,7 @@ export const Footer = () => {
                   <Link to="/frontend" className="text-gray-300 hover:text-purple-400">Front-end</Link>
                 </motion.li>
                 <motion.li whileHover={{ x: 5 }} className="transition-colors">
-                  <Link to="#" className="text-gray-300 hover:text-purple-400">Spring Boot</Link>
+                  <Link to="/springboot" className="text-gray-300 hover:text-purple-400">Spring Boot</Link>
                 </motion.li>
                 <motion.li whileHover={{ x: 5 }} className="transition-colors">
                   <Link to="#" className="text-gray-300 hover:text-purple-400">Frameworks</Link>

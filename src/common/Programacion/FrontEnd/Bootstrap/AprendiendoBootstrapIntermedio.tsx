@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { FaCss3Alt, FaCode, FaEye, FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import { useState } from "react";
-import { ejemplosBootstrapIntermedio } from './ejemplosBootstrapIntermedio';
+import { ejemplosBootstrapIntermedio } from './data/ejemplosBootstrapIntermedio';
 
 export const AprendiendoBootstrapIntermedio = () => {
   const [ejemploActual, setEjemploActual] = useState(0);
