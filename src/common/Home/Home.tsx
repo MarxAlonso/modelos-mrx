@@ -1,7 +1,6 @@
 import { motion } from "framer-motion";
 import { FaLightbulb, FaTools, FaLaptopCode } from "react-icons/fa";
 import {
-  FaCode,
   FaReact,
   FaCss3Alt,
   FaHtml5,
