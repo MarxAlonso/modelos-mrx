@@ -1,9 +1,9 @@
 import { motion } from "framer-motion";
 import { FaCodeBranch, FaCode, FaEye } from "react-icons/fa";
 import { useState } from "react";
-import { ejemplosPooIntermedio } from './data/ejemplosPooIntermedio';
+import { ejemplosPooAvanzado } from './data/ejemplosPooAvanzado';
 
-export const AprendiendoPOOIntermedio = () => {
+export const AprendiendoPOOAvanzado = () => {
   const [ejemploActual, setEjemploActual] = useState(0);
 
   return (
@@ -23,7 +23,7 @@ export const AprendiendoPOOIntermedio = () => {
         >
           <div className="flex items-center justify-center space-x-4 mb-4">
             <FaCodeBranch className="text-6xl text-green-600" />
-            <h1 className="text-5xl font-bold text-white">Aprendiendo POO Intermedio</h1>
+            <h1 className="text-5xl font-bold text-white">Aprendiendo POO Avanzado</h1>
           </div>
           <p className="text-gray-300 text-xl">Paso a paso hacia el desarrollo en Java implementado POO</p>
         </motion.div>
@@ -40,14 +40,14 @@ export const AprendiendoPOOIntermedio = () => {
             <div className="flex items-center space-x-3 mb-4">
               <FaCode className="text-2xl text-purple-400" />
               <h2 className="text-2xl font-semibold text-white">
-                {ejemplosPooIntermedio[ejemploActual].titulo}
+                {ejemplosPooAvanzado[ejemploActual].titulo}
               </h2>
             </div>
             <p className="text-gray-300 mb-4">
-              {ejemplosPooIntermedio[ejemploActual].descripcion}
+              {ejemplosPooAvanzado[ejemploActual].descripcion}
             </p>
             <pre className="bg-gray-900/80 p-6 rounded-lg overflow-x-auto text-sm text-white font-mono border border-purple-500/20">
-              {ejemplosPooIntermedio[ejemploActual].codigo}
+              {ejemplosPooAvanzado[ejemploActual].codigo}
             </pre>
           </motion.div>
 
@@ -64,14 +64,14 @@ export const AprendiendoPOOIntermedio = () => {
                 <h2 className="text-2xl font-semibold text-white">Resultado</h2>
               </div>
               <div className="bg-white/5 rounded-lg p-6 border border-purple-500/20">
-                <p className="text-white text-lg">{ejemplosPooIntermedio[ejemploActual].resultado}</p>
+                <p className="text-white text-lg">{ejemplosPooAvanzado[ejemploActual].resultado}</p>
               </div>
             </div>
 
             <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-purple-500/30">
               <h3 className="text-xl font-semibold text-white mb-4">Explicación</h3>
               <p className="text-gray-300 whitespace-pre-line">
-                {ejemplosPooIntermedio[ejemploActual].explicacion}
+                {ejemplosPooAvanzado[ejemploActual].explicacion}
               </p>
             </div>
           </motion.div>
@@ -98,11 +98,11 @@ export const AprendiendoPOOIntermedio = () => {
 
           <button
             onClick={() =>
-              setEjemploActual((prev) => Math.min(ejemplosPooIntermedio.length - 1, prev + 1))
+              setEjemploActual((prev) => Math.min(ejemplosPooAvanzado.length - 1, prev + 1))
             }
-            disabled={ejemploActual === ejemplosPooIntermedio.length - 1}
+            disabled={ejemploActual === ejemplosPooAvanzado.length - 1}
             className={`px-6 py-2 rounded-lg font-semibold transition ${
-              ejemploActual === ejemplosPooIntermedio.length - 1
+              ejemploActual === ejemplosPooAvanzado.length - 1
                 ? "bg-gray-600 cursor-not-allowed text-gray-300"
                 : "bg-purple-600 hover:bg-purple-700 text-white"
             }`}
