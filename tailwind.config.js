@@ -3,6 +3,12 @@ export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
+      keyframes: {
+        gradient: {
+          '0%, 100%': { transform: 'translate(0, 0)' },
+          '50%': { transform: 'translate(25%, 25%)' },
+        },
+      },
       fontFamily: {
         playfair: ["Playfair Display", "serif"],
       },
@@ -20,12 +26,6 @@ export default {
           "2xl": "6rem",
         },
       },
-    },
-  },
-  keyframes: {
-    gradient: {
-      '0%, 100%': { transform: 'translate(0, 0)' },
-      '50%': { transform: 'translate(25%, 25%)' },
     },
   },
   plugins: [],

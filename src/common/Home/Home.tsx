@@ -1,47 +1,129 @@
 import { motion } from "framer-motion";
-import { FaCode, FaReact, FaCss3Alt } from "react-icons/fa";
 import { FaLightbulb, FaTools, FaLaptopCode } from "react-icons/fa";
+import {
+  FaCode,
+  FaReact,
+  FaCss3Alt,
+  FaHtml5,
+  FaJsSquare,
+  FaBootstrap,
+  FaJava,
+  FaDatabase,
+  FaNodeJs,
+  FaGitAlt,
+  FaGithub,
+  FaServer,
+} from "react-icons/fa";
 import { driver } from "driver.js";
 import "driver.js/dist/driver.css";
+import { useState } from "react";
+
+// Lista de tecnologías
+const icons = [
+  {
+    Icon: FaHtml5,
+    color: "text-orange-400",
+    label: "HTML5",
+    descripcion: "Lenguaje de marcado que estructura el contenido web.",
+  },
+  {
+    Icon: FaCss3Alt,
+    color: "text-blue-400",
+    label: "CSS3",
+    descripcion: "Lenguaje de estilos que define el diseño visual de la web.",
+  },
+  {
+    Icon: FaJsSquare,
+    color: "text-yellow-400",
+    label: "JavaScript",
+    descripcion: "Lenguaje de programación para añadir interactividad en el frontend.",
+  },
+  {
+    Icon: FaBootstrap,
+    color: "text-purple-400",
+    label: "Bootstrap",
+    descripcion: "Framework CSS para diseño rápido y responsivo.",
+  },
+  {
+    Icon: FaReact,
+    color: "text-cyan-400",
+    label: "React",
+    descripcion: "Librería de JavaScript para construir interfaces de usuario modernas.",
+  },
+  {
+    Icon: FaJava,
+    color: "text-red-500",
+    label: "Java",
+    descripcion: "Lenguaje orientado a objetos muy utilizado en backend y aplicaciones empresariales.",
+  },
+  {
+    Icon: FaServer,
+    color: "text-teal-400",
+    label: "Spring Boot",
+    descripcion: "Framework que simplifica la creación de APIs y microservicios con Java.",
+  },
+  {
+    Icon: FaDatabase,
+    color: "text-purple-300",
+    label: "MySQL",
+    descripcion: "Sistema gestor de bases de datos relacional popular y robusto.",
+  },
+  {
+    Icon: FaNodeJs,
+    color: "text-green-500",
+    label: "Node.js",
+    descripcion: "Entorno de ejecución para JavaScript del lado del servidor.",
+  },
+  {
+    Icon: FaGitAlt,
+    color: "text-orange-500",
+    label: "Git",
+    descripcion: "Sistema de control de versiones para gestionar el historial de código.",
+  },
+  {
+    Icon: FaGithub,
+    color: "text-gray-300",
+    label: "GitHub",
+    descripcion: "Plataforma para alojar repositorios de código y colaborar en proyectos.",
+  },
+];
 
 export const Home = () => {
+  const [modalInfo, setModalInfo] = useState(null);
+
   const startTour = () => {
     const driverObj = driver({
       showProgress: true,
       animate: true,
-      overlayColor: '#1a1a1a',
+      overlayColor: "#1a1a1a",
       overlayOpacity: 0.7,
-      popoverClass: 'custom-popover',
+      popoverClass: "custom-popover",
       steps: [
         {
-          element: 'h1',
+          element: "h1",
           popover: {
-            title: '¡Bienvenido a CodeModules!',
-            description: 'Descubre una plataforma llena de componentes y módulos listos para usar en tus proyectos.'
-          }
+            title: "¡Bienvenido a CodeModules!",
+            description:
+              "Descubre una plataforma llena de componentes y módulos listos para usar en tus proyectos.",
+          },
         },
         {
-          element: '.text-xl.text-center.mb-10',
+          element: ".text-xl.text-center.mb-10",
           popover: {
-            title: 'Descripción General',
-            description: 'Aquí encontrarás una colección de módulos visuales para mejorar tus proyectos web.'
-          }
+            title: "Descripción General",
+            description:
+              "Aquí encontrarás una colección de módulos visuales para mejorar tus proyectos web.",
+          },
         },
         {
-          element: '.flex.gap-8.text-6xl',
+          element: ".grid.grid-cols-3",
           popover: {
-            title: 'Tecnologías Principales',
-            description: 'Trabajamos con las últimas tecnologías web: HTML, React y CSS.'
-          }
+            title: "Tecnologías",
+            description:
+              "Aprende y trabaja con tecnologías web: HTML, CSS, JS, React, Spring Boot, y más.",
+          },
         },
-        {
-          element: '.grid.grid-cols-1.md\\:grid-cols-3',
-          popover: {
-            title: 'Características Principales',
-            description: 'Explora las diferentes características y beneficios que ofrecemos.'
-          }
-        }
-      ]
+      ],
     });
 
     driverObj.drive();
@@ -49,7 +131,7 @@ export const Home = () => {
 
   return (
     <div className="relative flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-black text-white px-4 overflow-hidden z-[1]">
-      {/* Botón para iniciar el tour */}
+      {/* Botón Tour */}
       <motion.button
         onClick={startTour}
         className="fixed top-4 right-4 bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded-full shadow-lg z-50 flex items-center gap-2"
@@ -59,8 +141,9 @@ export const Home = () => {
         <FaLightbulb className="text-yellow-300" />
         Iniciar Tour
       </motion.button>
-      {/* Partículas de fondo animadas */}
-      <div className="absolute inset-0">
+
+      {/* Partículas */}
+      <div className="absolute inset-0 pointer-events-none">
         {[...Array(20)].map((_, i) => (
           <motion.div
             key={i}
@@ -82,7 +165,7 @@ export const Home = () => {
         ))}
       </div>
 
-      {/* Contenido principal con efectos mejorados */}
+      {/* Contenido principal */}
       <motion.div
         className="relative z-10 flex flex-col items-center"
         initial={{ opacity: 0 }}
@@ -112,55 +195,67 @@ export const Home = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.5, duration: 1 }}
-          className="text-xl text-center mb-10 max-w-2xl leading-relaxed backdrop-blur-sm bg-gray-900/30 p-6 rounded-xl"
+          className="text-xl text-center mb-10 max-w-3xl leading-relaxed backdrop-blur-sm bg-gray-900/30 p-6 rounded-xl"
         >
-          Encuentra módulos visuales listos para usar en tus proyectos web con HTML, CSS y Tailwind.
+          Aprende desde lo más básico de HTML, CSS, JS hasta desarrollar APIs con Spring Boot y
+          conectarlas con bases de datos. Visualiza módulos interactivos, edítalos en vivo y lleva tus
+          habilidades web al siguiente nivel.
         </motion.p>
 
+        {/* Iconos de tecnologías */}
         <motion.div
-          className="flex gap-8 text-6xl"
+          className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-6 text-4xl sm:text-5xl lg:text-6xl mb-12"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 1, duration: 1 }}
+          transition={{ delay: 1.2, duration: 1 }}
         >
-          {[
-            { Icon: FaCode, color: "text-blue-400" },
-            { Icon: FaReact, color: "text-cyan-400" },
-            { Icon: FaCss3Alt, color: "text-pink-400" },
-          ].map((item, index) => (
+          {icons.map(({ Icon, color, label, descripcion }) => (
             <motion.div
-              key={index}
+              key={label}
               whileHover={{
                 scale: 1.2,
-                rotate: 360,
                 filter: "drop-shadow(0 0 0.5rem currentColor)",
               }}
-              transition={{
-                type: "spring",
-                stiffness: 300,
-                damping: 15,
-              }}
-              className={`${item.color} cursor-pointer`}
+              transition={{ type: "spring", stiffness: 300, damping: 15 }}
+              className={`flex flex-col items-center ${color} cursor-pointer`}
+              onClick={() => setModalInfo({ label, descripcion })}
+              title={label}
             >
-              <item.Icon />
+              <Icon />
+              <span className="text-xs mt-1 text-white/70">{label}</span>
             </motion.div>
           ))}
         </motion.div>
 
-        {/* Efecto de resplandor en el fondo */}
+        {/* Fondo animado */}
         <motion.div
-          className="absolute -bottom-20 w-96 h-96 bg-purple-600/20 rounded-full filter blur-3xl"
-          animate={{
-            scale: [1, 1.2, 1],
-            opacity: [0.3, 0.5, 0.3],
-          }}
-          transition={{
-            duration: 5,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
+          className="absolute -bottom-20 w-96 h-96 bg-purple-600/20 rounded-full filter blur-3xl pointer-events-none"
+          animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.5, 0.3] }}
+          transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
         />
+
       </motion.div>
+
+      {/* Modal */}
+      {modalInfo && (
+        <div className="fixed inset-0 bg-black/70 z-50 flex items-center justify-center">
+          <motion.div
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            exit={{ scale: 0 }}
+            className="bg-gray-900 text-white p-6 rounded-xl max-w-md w-full border border-purple-500 shadow-lg relative"
+          >
+            <button
+              onClick={() => setModalInfo(null)}
+              className="absolute top-2 right-3 text-white text-lg hover:text-purple-400"
+            >
+              ✕
+            </button>
+            <h2 className="text-2xl font-bold mb-2 text-purple-300">{modalInfo.label}</h2>
+            <p className="text-gray-300">{modalInfo.descripcion}</p>
+          </motion.div>
+        </div>
+      )}
     </div>
   );
 };
