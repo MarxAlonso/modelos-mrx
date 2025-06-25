@@ -86,9 +86,13 @@ const icons = [
     descripcion: "Plataforma para alojar repositorios de código y colaborar en proyectos.",
   },
 ];
+type ModalInfo = {
+  label: string;
+  descripcion: string;
+};
 
 export const Home = () => {
-  const [modalInfo, setModalInfo] = useState(null);
+  const [modalInfo, setModalInfo] = useState<ModalInfo | null>(null);
 
   const startTour = () => {
     const driverObj = driver({
