@@ -11,6 +11,7 @@ import { SpringBootInfoPage } from "./pages/Programacion/SpringBootPage/SpringBo
 import { AprendiendoJavaPage } from "./pages/Programacion/SpringBootPage/AprendiendoJavaPage";
 import { AprendiendoPOOPage } from "./pages/Programacion/SpringBootPage/AprendiendoPOOPage";
 import { AprendiendoSpringCorePage } from "./pages/Programacion/SpringBootPage/AprendiendoSpringCorePage";
+import { SpringBootPage } from "./pages/Programacion/SpringBootPage/SpringBootPage";
 
 function App() {
   return (
@@ -46,7 +47,7 @@ function App() {
           element={<AprendiendoBootstrapPage />}
         ></Route>
         <Route
-          path="/springboot"
+          path="/springbootinfo"
           element={<SpringBootInfoPage />}
         ></Route>
         <Route
@@ -60,6 +61,10 @@ function App() {
         <Route
           path="/aprendiendospringcore"
           element={<AprendiendoSpringCorePage />}
+        ></Route>
+        <Route
+          path="/springboot"
+          element={<SpringBootPage />}
         ></Route>
       </Routes>
     </>

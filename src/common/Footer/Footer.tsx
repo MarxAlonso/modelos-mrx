@@ -122,7 +122,7 @@ export const Footer = () => {
                   <Link to="/frontend" className="text-gray-300 hover:text-purple-400">Front-end</Link>
                 </motion.li>
                 <motion.li whileHover={{ x: 5 }} className="transition-colors">
-                  <Link to="/springboot" className="text-gray-300 hover:text-purple-400">Spring Boot</Link>
+                  <Link to="/springbootinfo" className="text-gray-300 hover:text-purple-400">Spring Boot</Link>
                 </motion.li>
                 <motion.li whileHover={{ x: 5 }} className="transition-colors">
                   <Link to="#" className="text-gray-300 hover:text-purple-400">Frameworks</Link>

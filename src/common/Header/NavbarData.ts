@@ -18,7 +18,7 @@ export const NavbarMenu = [
       title: "Aprende a Programar",
       submenu: [
         { title: "Front-end", link: "/frontend" },
-        { title: "Spring Boot", link: "/springboot" },
+        { title: "Spring Boot", link: "/springbootinfo" },
         { title: "Frameworks", link: "#" }
       ]
     },
