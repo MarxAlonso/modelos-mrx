@@ -1,54 +1,63 @@
-# React + TypeScript + Vite
+# 🌐 modelos-web-mrx
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+> Herramienta educativa y visual para aprender diseño web y backend con tecnologías modernas. Incluye vistas previas en vivo, ejemplos de código, y proyectos prácticos.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🎯 ¿Qué es modelos-web-mrx?
 
-## Expanding the ESLint configuration
+`modelos-web-mrx` es una plataforma web desarrollada con **React + TypeScript + Vite** enfocada en:
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- 💻 **Diseño web responsive** con HTML, CSS, Bootstrap y JavaScript.
+- 🧠 **Aprendizaje progresivo** de tecnologías backend como Spring Core, Spring Boot y Java.
+- 🧪 **Editor de código interactivo** para HTML, CSS y JS con vista previa en tiempo real.
+- 💼 Ideal para desarrolladores, estudiantes o negocios que buscan crear o aprender a construir páginas web modernas.
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+---
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 🧰 Tecnologías Utilizadas
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+| Tecnología      | Descripción                                         |
+|----------------|-----------------------------------------------------|
+| ⚛️ React        | Biblioteca para construir interfaces interactivas  |
+| 🟨 TypeScript   | Superset de JavaScript con tipado estático         |
+| ⚡ Vite         | Bundler rápido con soporte HMR                     |
+| 🎨 TailwindCSS  | Framework CSS utility-first                        |
+| 📚 Spring Boot  | Framework backend para construir APIs REST         |
+| 🧩 Spring Core  | Gestión de dependencias con IoC y DI               |
+| 🐬 MySQL        | Base de datos relacional                           |
+| 📦 JPA          | Persistencia con Java                              |
+| 🌐 Bootstrap    | Estilos y estructura rápida para sitios responsive |
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+---
+
+## 🚀 ¿Qué incluye el proyecto?
+
+✅ **Secciones prácticas y visuales:**
+
+- ✨ Galería de ejemplos de código con navegación intuitiva.
+- 📄 Explicaciones paso a paso de cada archivo y estructura de proyecto.
+- 🧩 Comparación entre diferentes enfoques (REST API, MVC, validaciones, etc.)
+- 🖥️ Editor de código HTML, CSS y JS con live preview (en desarrollo).
+- 📘 Guía visual para aprender diseño responsive.
+
+✅ **Contenido educativo:**
+
+- `HTML` / `CSS` / `JS` desde lo básico hasta componentes avanzados.
+- Proyectos con `Spring Boot`, `Spring Core`, y validaciones con `@NotNull`, `@Email`, etc.
+- Ejercicios CRUD, conexión a base de datos y estructura profesional de proyectos Java.
+
+---
+
+## 🛠️ Instalación y ejecución
+
+```bash
+# Clonar el repositorio
+git clone https://github.com/tuusuario/modelos-web-mrx.git
+
+# Instalar dependencias
+cd modelos-web-mrx
+npm install
+
+# Ejecutar en modo desarrollo
+npm run dev
