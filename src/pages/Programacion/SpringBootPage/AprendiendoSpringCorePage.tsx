@@ -1,6 +1,7 @@
 import { Footer } from "../../../common/Footer/Footer";
 import { Navbar } from "../../../common/Header/Navbar";
 import { AprendiendoSpringCore } from "../../../common/Programacion/SpringBoot/SpringCore/AprendiendoSpringCore";
+import { AprendiendoSpringCoreIntermedio } from "../../../common/Programacion/SpringBoot/SpringCore/AprendiendoSpringCoreIntermedio";
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState, useEffect } from 'react';
 import {mensajesMotivacionalesJava} from './mensajesMotivacionales';
@@ -43,6 +44,7 @@ export const AprendiendoSpringCorePage = () => {
             </div>
             <div className="bg-gradient-to-b from-black via-gray-900 to-black text-white">
                 <AprendiendoSpringCore />
+                <AprendiendoSpringCoreIntermedio />
                 <Footer />
             </div>
 
