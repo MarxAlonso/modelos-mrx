@@ -37,7 +37,7 @@ const tecnologiasSpringBoot = [
       descripcion: "Inversión de control y contenedor de dependencias",
       icon: FaProjectDiagram,
       color: "from-cyan-500 to-blue-600",
-      ruta: "/springcore"
+      ruta: "/aprendiendospringcore"
     },
     {
       nombre: "Spring Boot",

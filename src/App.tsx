@@ -10,6 +10,8 @@ import { AprendiendoBootstrapPage } from "./pages/Programacion/FrontEndPage/Apre
 import { SpringBootInfoPage } from "./pages/Programacion/SpringBootPage/SpringBootInfoPage";AprendiendoJavaPage
 import { AprendiendoJavaPage } from "./pages/Programacion/SpringBootPage/AprendiendoJavaPage";
 import { AprendiendoPOOPage } from "./pages/Programacion/SpringBootPage/AprendiendoPOOPage";
+import { AprendiendoSpringCorePage } from "./pages/Programacion/SpringBootPage/AprendiendoSpringCorePage";
+
 function App() {
   return (
     <>
@@ -54,6 +56,10 @@ function App() {
         <Route
           path="/aprendiendopoo"
           element={<AprendiendoPOOPage />}
+        ></Route>
+        <Route
+          path="/aprendiendospringcore"
+          element={<AprendiendoSpringCorePage />}
         ></Route>
       </Routes>
     </>
