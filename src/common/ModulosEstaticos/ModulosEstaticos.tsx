@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { categorias, disenos, Diseno } from "./data/disenos";
-
+import { disenos, Diseno } from "./data/disenos";
+import { categorias } from "./data/categorias"
 
 // Componente Modal para mostrar el código
 const ModalCodigo = ({

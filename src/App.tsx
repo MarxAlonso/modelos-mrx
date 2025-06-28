@@ -7,7 +7,7 @@ import { AprendiendoHtmlPage } from "./pages/Programacion/FrontEndPage/Aprendien
 import { AprendiendoCssPage } from "./pages/Programacion/FrontEndPage/AprendiendoCssPage";
 import { AprendiendoJsPage } from "./pages/Programacion/FrontEndPage/AprendiendoJsPage";
 import { AprendiendoBootstrapPage } from "./pages/Programacion/FrontEndPage/AprendiendoBootstrapPage";
-import { SpringBootInfoPage } from "./pages/Programacion/SpringBootPage/SpringBootInfoPage";AprendiendoJavaPage
+import { SpringBootInfoPage } from "./pages/Programacion/SpringBootPage/SpringBootInfoPage";
 import { AprendiendoJavaPage } from "./pages/Programacion/SpringBootPage/AprendiendoJavaPage";
 import { AprendiendoPOOPage } from "./pages/Programacion/SpringBootPage/AprendiendoPOOPage";
 import { AprendiendoSpringCorePage } from "./pages/Programacion/SpringBootPage/AprendiendoSpringCorePage";

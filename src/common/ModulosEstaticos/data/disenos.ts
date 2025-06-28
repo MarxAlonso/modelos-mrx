@@ -4,6 +4,7 @@ import heroes3Image from "../../../assets/images/heoresarrendamiento1.png";
 import heroes2Image from "../../../assets/images/heroesswitches.png";
 import heroes4Image from "../../../assets/images/heroesciberseguridad.png";
 import cards1Image from "../../../assets/images/cardssoluciones.png";
+import estadisticaproyecto1 from "../../../assets/images/estadisticaproyecto1.png";
 export interface Diseno {
   id: number;
   titulo: string;
@@ -17,16 +18,6 @@ export interface Diseno {
     js: string;
   };
 }
-
-export const categorias = [
-  "Todos",
-  "Landing Pages",
-  "Formularios",
-  "Navegación",
-  "Cards",
-  "Heroes",
-  "Footers",
-];
 
 export const disenos: Diseno[] = [
   {
@@ -1262,4 +1253,216 @@ js: ``,
   setInterval(nextSlide, 7000);`,
     },
   },
+  {
+    id: 9,
+    titulo: "Simulador de VAN y TIR",
+    categoria: "Estadistico - Finanzas",
+    descripcion:
+      "Simulador de VAN y TIR con html, css y javascript, datos editables para los calculos",
+    imagen: estadisticaproyecto1,
+    dificultad: "Intermedio",
+    codigo: {
+      html: `<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Simulador Financiero: VAN y TIR</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+<div class="container">
+  <h1>Simulador de VAN y TIR</h1>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Mes</th>
+        <th>Ingresos (USD)</th>
+        <th>Egresos (USD)</th>
+        <th>Flujo Neto</th>
+      </tr>
+    </thead>
+    <tbody id="cash-table"></tbody>
+  </table>
+
+  <button class="btn" onclick="calcular()">Calcular VAN y TIR</button>
+
+  <div class="result">
+    <p><strong>VAN (0.8% mensual):</strong> <span id="van" class="van"></span></p>
+    <p><strong>TIR:</strong> <span id="tir" class="tir"></span></p>
+  </div>
+
+  <canvas id="chart" height="300"></canvas>
+</div>
+
+</body>
+</html>
+`,
+      css: `body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f9f9f9;
+      padding: 2rem;
+    }
+
+    h1, h2 {
+      text-align: center;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: auto;
+      background: #fff;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 0 8px rgba(0,0,0,0.1);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 2rem;
+    }
+
+    th, td {
+      padding: 0.7rem;
+      border-bottom: 1px solid #ddd;
+      text-align: center;
+    }
+
+    th {
+      background-color: #2c3e50;
+      color: white;
+    }
+
+    input[type="number"] {
+      width: 80px;
+      padding: 0.3rem;
+      text-align: right;
+    }
+
+    .btn {
+      display: block;
+      margin: 1rem auto;
+      background: #3498db;
+      color: white;
+      border: none;
+      padding: 0.8rem 1.5rem;
+      font-size: 1rem;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background: #2980b9;
+    }
+
+    .result {
+      text-align: center;
+      font-size: 1.2rem;
+      margin-top: 1.5rem;
+    }
+
+    .van { color: green; }
+    .tir { color: blue; }
+
+    canvas {
+      margin-top: 2rem;
+    }`,
+      js: `const meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Setiembre", "Octubre", "Noviembre", "Diciembre"];
+const egresosBase = 3542;
+const ingresosBase = [0, 0, 0, 5000, 5000, 5000, 5000, 10000, 10000, 10000, 15000, 15000];
+
+const tbody = document.getElementById("cash-table");
+
+// Crear tabla editable
+meses.forEach((mes, i) => {
+  const row = document.createElement("tr");
+  row.innerHTML =
+    '<td>' + mes + '</td>' +
+    '<td><input type="number" value="' + ingresosBase[i] + '" id="ingreso-' + i + '" /></td>' +
+    '<td><input type="number" value="' + egresosBase + '" id="egreso-' + i + '" /></td>' +
+    '<td id="neto-' + i + '">0</td>';
+  tbody.appendChild(row);
+});
+
+// Cálculo VAN
+function calcularVAN(flujos, tasa) {
+  return flujos.reduce((acc, flujo, i) => acc + flujo / Math.pow(1 + tasa, i + 1), 0);
+}
+
+// Cálculo TIR
+function calcularTIR(flujos, guess = 0.1) {
+  const maxIter = 100;
+  const precision = 1e-6;
+  let tasa = guess;
+
+  for (let i = 0; i < maxIter; i++) {
+    let f = 0, fPrime = 0;
+    for (let t = 0; t < flujos.length; t++) {
+      f += flujos[t] / Math.pow(1 + tasa, t + 1);
+      fPrime += - (t + 1) * flujos[t] / Math.pow(1 + tasa, t + 2);
+    }
+    const nuevaTasa = tasa - f / fPrime;
+    if (Math.abs(nuevaTasa - tasa) < precision) return nuevaTasa;
+    tasa = nuevaTasa;
+  }
+
+  return tasa;
+}
+
+let chart;
+
+function calcular() {
+  const ingresos = [], egresos = [], netos = [];
+
+  for (let i = 0; i < 12; i++) {
+    const ing = parseFloat(document.getElementById("ingreso-" + i).value) || 0;
+    const eg = parseFloat(document.getElementById("egreso-" + i).value) || 0;
+    const neto = ing - eg;
+
+    ingresos.push(ing);
+    egresos.push(eg);
+    netos.push(neto);
+
+    const netoCell = document.getElementById("neto-" + i);
+    netoCell.textContent = "$" + neto.toFixed(2);
+    netoCell.style.color = neto >= 0 ? "green" : "red";
+  }
+
+  const tasa = 0.008;
+  const van = calcularVAN(netos, tasa);
+  const tir = calcularTIR(netos);
+
+  document.getElementById("van").textContent = "$" + van.toFixed(2);
+  document.getElementById("tir").textContent = (tir * 100).toFixed(2) + "% mensual ≈ " + (tir * 12 * 100).toFixed(2) + "% anual";
+
+  const ctx = document.getElementById("chart").getContext("2d");
+  if (chart) chart.destroy();
+  chart = new Chart(ctx, {
+    type: "line",
+    data: {
+      labels: meses,
+      datasets: [
+        { label: "Ingresos", data: ingresos, borderColor: "green", fill: false },
+        { label: "Egresos", data: egresos, borderColor: "red", fill: false },
+        { label: "Flujo Neto", data: netos, borderColor: "blue", fill: false }
+      ]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: { position: "top" },
+        title: { display: true, text: "Flujo de Caja Interactivo" }
+      }
+    }
+  });
+}
+
+// Inicializar
+calcular();`
+    },
+  },
+  
 ];

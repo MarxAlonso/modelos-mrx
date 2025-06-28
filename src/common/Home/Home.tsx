@@ -13,8 +13,6 @@ import {
   FaGithub,
   FaServer,
 } from "react-icons/fa";
-import { driver } from "driver.js";
-import "driver.js/dist/driver.css";
 import { useState } from "react";
 
 // Lista de tecnologías
@@ -94,56 +92,8 @@ type ModalInfo = {
 export const Home = () => {
   const [modalInfo, setModalInfo] = useState<ModalInfo | null>(null);
 
-  const startTour = () => {
-    const driverObj = driver({
-      showProgress: true,
-      animate: true,
-      overlayColor: "#1a1a1a",
-      overlayOpacity: 0.7,
-      popoverClass: "custom-popover",
-      steps: [
-        {
-          element: "h1",
-          popover: {
-            title: "¡Bienvenido a CodeModules!",
-            description:
-              "Descubre una plataforma llena de componentes y módulos listos para usar en tus proyectos.",
-          },
-        },
-        {
-          element: ".text-xl.text-center.mb-10",
-          popover: {
-            title: "Descripción General",
-            description:
-              "Aquí encontrarás una colección de módulos visuales para mejorar tus proyectos web.",
-          },
-        },
-        {
-          element: ".grid.grid-cols-3",
-          popover: {
-            title: "Tecnologías",
-            description:
-              "Aprende y trabaja con tecnologías web: HTML, CSS, JS, React, Spring Boot, y más.",
-          },
-        },
-      ],
-    });
-
-    driverObj.drive();
-  };
-
   return (
     <div className="relative flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-black text-white px-4 overflow-hidden z-[1]">
-      {/* Botón Tour */}
-      <motion.button
-        onClick={startTour}
-        className="fixed top-4 right-4 bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded-full shadow-lg z-50 flex items-center gap-2"
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.95 }}
-      >
-        <FaLightbulb className="text-yellow-300" />
-        Iniciar Tour
-      </motion.button>
 
       {/* Partículas */}
       <div className="absolute inset-0 pointer-events-none">
@@ -181,17 +131,8 @@ export const Home = () => {
           transition={{ duration: 1 }}
           className="text-6xl font-extrabold text-center mb-6 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-400"
         >
-          ¡Bienvenido a{" "}
-          <motion.span
-            className="inline-block"
-            whileHover={{
-              scale: 1.1,
-              textShadow: "0 0 8px rgb(168, 85, 247, 0.5)",
-            }}
-          >
-            CodeModules
-          </motion.span>
-          !
+          ¡Bienvenido a CODERS MRX!
+      {/* CodeModules */}
         </motion.h1>
 
         <motion.p
@@ -281,62 +222,10 @@ export const InfoInicio = () => {
         description: "Ahorra tiempo reutilizando secciones de interfaz visualmente atractivas y bien estructuradas."
       }
     ];
-    const startInfoTour = () => {
-      const driverObj = driver({
-        showProgress: true,
-        animate: true,
-        overlayColor: '#1a1a1a',
-        overlayOpacity: 0.7,
-        popoverClass: 'custom-popover',
-        steps: [
-          {
-            element: 'h2',
-            popover: {
-              title: 'Descubre Nuestra Plataforma',
-              description: 'Conoce todo lo que CodeModules tiene para ofrecer a tu desarrollo web.'
-            }
-          },
-          {
-            element: '.grid.grid-cols-1.md\\:grid-cols-3 > div:nth-child(1)',
-            popover: {
-              title: 'Inspiración en Diseño',
-              description: 'Explora una colección de módulos creativos y modernos que puedes adaptar a tus necesidades específicas.'
-            }
-          },
-          {
-            element: '.grid.grid-cols-1.md\\:grid-cols-3 > div:nth-child(2)',
-            popover: {
-              title: 'Componentes Listos para Usar',
-              description: 'Accede a una biblioteca de componentes pre-diseñados con HTML, TailwindCSS y React para una implementación inmediata.'
-            }
-          },
-          {
-            element: '.grid.grid-cols-1.md\\:grid-cols-3 > div:nth-child(3)',
-            popover: {
-              title: 'Optimización del Desarrollo',
-              description: 'Mejora tu flujo de trabajo con secciones de interfaz pre-construidas y bien estructuradas.'
-            }
-          }
-        ]
-      });
-  
-      driverObj.drive();
-    };
-  
+
     return (
       <div className="py-16 bg-gradient-to-b from-black via-gray-900 to-black text-white">
         <div className="max-w-6xl mx-auto px-6">
-          {/* Botón para iniciar el tour de InfoInicio */}
-          <motion.button
-            onClick={startInfoTour}
-            className="mb-8 bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded-full shadow-lg flex items-center gap-2 mx-auto"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <FaLightbulb className="text-yellow-300" />
-            Explorar Características
-          </motion.button>
-  
           <h2 className="text-4xl font-bold text-center mb-12">¿Qué ofrece esta plataforma?</h2>
   
           <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
