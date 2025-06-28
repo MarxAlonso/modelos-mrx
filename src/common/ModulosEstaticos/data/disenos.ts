@@ -1,11 +1,12 @@
 import banner1Image from "../../../assets/images/banner1.png";
 import banner2Image from "../../../assets/images/banner2.png";
-import heroes3Image from "../../../assets/images/heoresarrendamiento1.png";
-import heroes2Image from "../../../assets/images/heroesswitches.png";
-import heroes4Image from "../../../assets/images/heroesciberseguridad.png";
+import heroes3Image from "../../../assets/images/modulosestaticos/heroes/heoresarrendamiento1.png";
+import heroes2Image from "../../../assets/images/modulosestaticos/heroes/heroesswitches.png";
+import heroes4Image from "../../../assets/images/modulosestaticos/heroes/heroesciberseguridad.png";
 import cards1Image from "../../../assets/images/cardssoluciones.png";
-import estadisticaproyecto1 from "../../../assets/images/estadisticaproyecto1.png";
-import estadisticaproyecto2 from "../../../assets/images/estadisticaproyecto2.png";
+import estadisticaproyecto1 from "../../../assets/images/modulosestaticos/estadistica/estadisticaproyecto1.png";
+import estadisticaproyecto2 from "../../../assets/images/modulosestaticos/estadistica/estadisticaproyecto2.png";
+import estadisticaproyecto3 from "../../../assets/images/modulosestaticos/estadistica/estadisticaproyecto3.png";
 export interface Diseno {
   id: number;
   titulo: string;
@@ -1628,6 +1629,161 @@ function calcularAhorro() {
 
 // Inicializar con datos en cero
 calcularAhorro();`
+    },
+  },
+  {
+    id: 11,
+    titulo: "Análisis de Datos Financieros - Media, Mediana y Dv.Est",
+    categoria: "Estadistico - Finanzas",
+    descripcion:
+      "Análisis y calculo de Datos Financieros - Media, Mediana y Desviacion Estandar con html, css y javascript, datos editables para los calculos",
+    imagen: estadisticaproyecto3,
+    dificultad: "Intermedio",
+    codigo: {
+      html: `<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Análisis Financiero</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <div class="container">
+    <h1>Análisis de Datos Financieros</h1>
+    <p>Ingresa una lista de valores separados por coma (ej. 50,60,75,80)</p>
+    <input type="text" id="input-datos" placeholder="Ej: 50,60,70,80" />
+    <button onclick="calcularEstadisticas()">Calcular</button>
+
+    <div id="resultados"></div>
+    <canvas id="grafico" class="grafico"></canvas>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
+`,
+      css: `body {
+  font-family: 'Segoe UI', sans-serif;
+  background: #e0e7ff;
+  padding: 40px;
+}
+
+.container {
+  max-width: 600px;
+  margin: auto;
+  background: white;
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.1);
+}
+
+h1 {
+  text-align: center;
+  color: #2c3e50;
+  margin-bottom: 10px;
+}
+
+p {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #555;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  font-size: 1rem;
+  margin: 10px 0 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+button {
+  background-color: #6366f1;
+  color: white;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  width: 100%;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+button:hover {
+  background-color: #4f46e5;
+}
+
+#resultados {
+  margin-top: 20px;
+  font-size: 1rem;
+  background: #f8fafc;
+  padding: 15px;
+  border-radius: 10px;
+  border-left: 4px solid #6366f1;
+}
+
+.grafico {
+  margin-top: 30px;
+}
+`,
+      js: `let chart = null;
+
+function calcularEstadisticas() {
+  const input = document.getElementById("input-datos").value;
+  const valores = input.split(",").map(n => parseFloat(n.trim())).filter(n => !isNaN(n));
+
+  if (valores.length === 0) {
+    document.getElementById("resultados").innerText = "Por favor, ingresa números válidos.";
+    return;
+  }
+
+  const media = (valores.reduce((a, b) => a + b, 0) / valores.length).toFixed(2);
+
+  const ordenados = [...valores].sort((a, b) => a - b);
+  const mitad = Math.floor(ordenados.length / 2);
+  const mediana = ordenados.length % 2 === 0
+    ? ((ordenados[mitad - 1] + ordenados[mitad]) / 2).toFixed(2)
+    : ordenados[mitad].toFixed(2);
+
+  const desviacion = Math.sqrt(
+    valores.reduce((acc, val) => acc + Math.pow(val - media, 2), 0) / valores.length
+  ).toFixed(2);
+
+  document.getElementById("resultados").innerHTML = \`
+    <strong>Resultados:</strong><br />
+    Media: \${media} <br />
+    Mediana: \${mediana} <br />
+    Desviación Estándar: \${desviacion}
+  \`;
+
+  const ctx = document.getElementById("grafico").getContext("2d");
+  if (chart) chart.destroy();
+  chart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: valores.map((_, i) => \`Dato \${i + 1}\`),
+      datasets: [{
+        label: 'Valor',
+        data: valores,
+        backgroundColor: '#3498db'
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: { display: false },
+        title: { display: true, text: 'Distribución de Valores Ingresados' }
+      },
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+}`
     },
   },
 ];

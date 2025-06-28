@@ -208,31 +208,33 @@ export const ModulosEstaticos = () => {
         />
       )}
       {imagenVista && (
-      <div
-        className="fixed inset-0 z-50 bg-black bg-opacity-80 flex items-center justify-center"
-        onClick={() => setImagenVista(null)} // Detecta clic fuera
-      >
         <div
-          className="relative"
-          onClick={(e) => e.stopPropagation()} // Previene cerrar al hacer clic en la imagen
+          className="fixed inset-0 z-50 bg-black bg-opacity-80 flex items-center justify-center"
+          onClick={() => setImagenVista(null)} // Cierre al hacer clic fuera
         >
-          {/* Botón cerrar mejorado */}
-          <button
-            className="absolute top-3 right-3 bg-black bg-opacity-70 text-white rounded-full w-8 h-8 flex items-center justify-center text-lg hover:bg-opacity-90 transition"
-            onClick={() => setImagenVista(null)}
+          <div
+            className="relative group overflow-hidden"
+            onClick={(e) => e.stopPropagation()} // Evita cierre al hacer clic sobre la imagen
           >
-            ✕
-          </button>
+            {/* Botón "X" visible siempre */}
+            <button
+              onClick={() => setImagenVista(null)}
+              className="absolute top-3 right-3 z-10 bg-black bg-opacity-70 text-white rounded-full w-8 h-8 flex items-center justify-center text-lg hover:bg-opacity-90 transition"
+            >
+              ✕
+            </button>
 
-          {/* Imagen ampliada */}
-          <img
-            src={imagenVista}
-            alt="Vista ampliada"
-            className="max-w-[90vw] max-h-[90vh] rounded-lg shadow-xl"
-          />
+            {/* Imagen con zoom en hover */}
+            <img
+              src={imagenVista}
+              alt="Vista ampliada"
+              className="max-w-[90vw] max-h-[90vh] rounded-lg shadow-xl transition-transform duration-300 group-hover:scale-110"
+              style={{ touchAction: 'manipulation' }}
+            />
+          </div>
         </div>
-      </div>
-    )}
+      )}
+
 
     </div>
   );

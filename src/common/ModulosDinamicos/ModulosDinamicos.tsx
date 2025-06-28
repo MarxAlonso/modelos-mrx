@@ -2,11 +2,10 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaSearch } from "react-icons/fa";
 import {
-  categorias,
   proyectos,
   ProyectoDinamico,
 } from "./data/disenosDinamicos";
-
+import { categorias } from "./data/categorias"
 const ModalCodigo = ({
   diseno,
   onClose,
@@ -105,6 +104,7 @@ const ModalCodigo = ({
 
 export const ModulosDinamicos = () => {
   const [categoriaActiva, setCategoriaActiva] = useState("Todos");
+  const [imagenVista, setImagenVista] = useState<string | null>(null);
   const [busqueda, setBusqueda] = useState("");
   const [modalAbierto, setModalAbierto] = useState(false);
   const [proyectoSeleccionado, setProyectoSeleccionado] =
@@ -194,14 +194,17 @@ export const ModulosDinamicos = () => {
                 className="group bg-gray-800/50 backdrop-blur-sm rounded-xl overflow-hidden hover:shadow-xl hover:shadow-purple-500/20 transition-all duration-300"
               >
                 <div className="relative h-48 overflow-hidden">
+                  {/* Imagen debe ir después del overlay */}
                   <motion.img
                     whileHover={{ scale: 1.1 }}
                     src={proyecto.imagen}
                     alt={proyecto.titulo}
-                    className="w-full h-full object-cover transition-transform duration-300"
+                    className="w-full h-full object-cover transition-transform duration-300 cursor-pointer relative z-10"
+                    onClick={() => setImagenVista(proyecto.imagen)}
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-gray-900/75 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-gray-900/75 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
                 </div>
+
                 <div className="p-6">
                   <h3 className="text-xl font-semibold mb-2 group-hover:text-purple-400 transition-colors">
                     {proyecto.titulo}
@@ -240,6 +243,32 @@ export const ModulosDinamicos = () => {
           }}
         />
       )}
+      {imagenVista && (
+        <div
+          className="fixed inset-0 z-50 bg-black bg-opacity-80 flex items-center justify-center"
+          onClick={() => setImagenVista(null)}
+        >
+          <div
+            className="relative"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              onClick={() => setImagenVista(null)}
+              className="absolute top-3 right-3 z-10 bg-black bg-opacity-70 text-white rounded-full w-8 h-8 flex items-center justify-center text-lg hover:bg-opacity-90 transition"
+            >
+              ✕
+            </button>
+
+            <img
+              src={imagenVista}
+              alt="Vista ampliada"
+              className="max-w-[90vw] max-h-[90vh] rounded-lg shadow-xl transition-transform duration-300 hover:scale-105 cursor-zoom-out"
+              style={{ touchAction: 'manipulation' }}
+            />
+          </div>
+        </div>
+      )}
+
     </div>
   );
 };
