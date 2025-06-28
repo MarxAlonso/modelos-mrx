@@ -102,7 +102,7 @@ const ModalCodigo = ({
 
 export const ModulosEstaticos = () => {
   const [categoriaActiva, setCategoriaActiva] = useState("Todos");
-
+  const [imagenVista, setImagenVista] = useState<string | null>(null);
   // Estado para el modal de código
   const [modalAbierto, setModalAbierto] = useState(false);
   const [disenoSeleccionado, setDisenoSeleccionado] = useState<Diseno | null>(null);
@@ -168,7 +168,8 @@ export const ModulosEstaticos = () => {
                   <img
                     src={diseno.imagen}
                     alt={diseno.titulo}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover cursor-pointer"
+                    onClick={() => setImagenVista(diseno.imagen)}
                   />
                 </div>
                 <div className="p-6">
@@ -206,6 +207,33 @@ export const ModulosEstaticos = () => {
           }}
         />
       )}
+      {imagenVista && (
+      <div
+        className="fixed inset-0 z-50 bg-black bg-opacity-80 flex items-center justify-center"
+        onClick={() => setImagenVista(null)} // Detecta clic fuera
+      >
+        <div
+          className="relative"
+          onClick={(e) => e.stopPropagation()} // Previene cerrar al hacer clic en la imagen
+        >
+          {/* Botón cerrar mejorado */}
+          <button
+            className="absolute top-3 right-3 bg-black bg-opacity-70 text-white rounded-full w-8 h-8 flex items-center justify-center text-lg hover:bg-opacity-90 transition"
+            onClick={() => setImagenVista(null)}
+          >
+            ✕
+          </button>
+
+          {/* Imagen ampliada */}
+          <img
+            src={imagenVista}
+            alt="Vista ampliada"
+            className="max-w-[90vw] max-h-[90vh] rounded-lg shadow-xl"
+          />
+        </div>
+      </div>
+    )}
+
     </div>
   );
 };

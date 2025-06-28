@@ -5,6 +5,7 @@ import heroes2Image from "../../../assets/images/heroesswitches.png";
 import heroes4Image from "../../../assets/images/heroesciberseguridad.png";
 import cards1Image from "../../../assets/images/cardssoluciones.png";
 import estadisticaproyecto1 from "../../../assets/images/estadisticaproyecto1.png";
+import estadisticaproyecto2 from "../../../assets/images/estadisticaproyecto2.png";
 export interface Diseno {
   id: number;
   titulo: string;
@@ -1464,5 +1465,169 @@ function calcular() {
 calcular();`
     },
   },
-  
+  {
+    id: 10,
+    titulo: "Simulador de Ahorro Semanal",
+    categoria: "Estadistico - Finanzas",
+    descripcion:
+      "Simulador de Ahorro Semanal con html, css y javascript, datos editables para los calculos",
+    imagen: estadisticaproyecto2,
+    dificultad: "Intermedio",
+    codigo: {
+      html: `<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ahorro Semanal</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+<div class="container">
+  <h1>Simulador de Ahorro Semanal</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Día</th>
+        <th>Ahorro (S/)</th>
+      </tr>
+    </thead>
+    <tbody id="ahorro-table">
+      <!-- filas generadas por JS -->
+    </tbody>
+  </table>
+  <button class="btn" onclick="calcularAhorro()">Calcular Ahorro</button>
+  <div class="total" id="total-ahorrado"></div>
+  <canvas id="grafico" height="250"></canvas>
+</div>
+</body>
+</html>
+`,
+      css: `body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f4f4f4;
+      padding: 2rem;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: auto;
+      background: white;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 1rem;
+    }
+
+    th, td {
+      padding: 0.7rem;
+      border: 1px solid #ddd;
+      text-align: center;
+    }
+
+    th {
+      background-color: #2c3e50;
+      color: white;
+    }
+
+    input[type="number"] {
+      width: 80px;
+      padding: 0.3rem;
+      text-align: right;
+    }
+
+    .btn {
+      display: block;
+      margin: 1rem auto;
+      background: #27ae60;
+      color: white;
+      padding: 0.8rem 1.2rem;
+      font-size: 1rem;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background: #219150;
+    }
+
+    .total {
+      text-align: center;
+      font-size: 1.2rem;
+      margin-top: 1rem;
+    }
+
+    canvas {
+      margin-top: 2rem;
+    }`,
+      js: `const dias = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"];
+const tbody = document.getElementById("ahorro-table");
+
+// Crear inputs
+dias.forEach(function(dia, i) {
+  const row = document.createElement("tr");
+  row.innerHTML =
+    '<td>' + dia + '</td>' +
+    '<td><input type="number" id="ahorro-' + i + '" min="0" value="0" /></td>';
+  tbody.appendChild(row);
+});
+
+let chart;
+
+function calcularAhorro() {
+  const datos = [];
+  let total = 0;
+
+  for (let i = 0; i < dias.length; i++) {
+    const valor = parseFloat(document.getElementById("ahorro-" + i).value) || 0;
+    datos.push(valor);
+    total += valor;
+  }
+
+  document.getElementById("total-ahorrado").textContent =
+    "Total Ahorrado en la Semana: S/ " + total.toFixed(2);
+
+  const ctx = document.getElementById("grafico").getContext("2d");
+  if (chart) chart.destroy();
+  chart = new Chart(ctx, {
+    type: "bar",
+    data: {
+      labels: dias,
+      datasets: [{
+        label: "Ahorro por día (S/)",
+        data: datos,
+        backgroundColor: "#3498db"
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: { display: false },
+        title: { display: true, text: "Ahorro Diario" }
+      },
+      scales: {
+        y: {
+          beginAtZero: true,
+          ticks: { stepSize: 10 }
+        }
+      }
+    }
+  });
+}
+
+// Inicializar con datos en cero
+calcularAhorro();`
+    },
+  },
 ];
