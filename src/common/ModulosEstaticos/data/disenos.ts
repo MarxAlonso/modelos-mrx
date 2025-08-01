@@ -9,6 +9,8 @@ import estadisticaproyecto2 from "../../../assets/images/modulosestaticos/estadi
 import estadisticaproyecto3 from "../../../assets/images/modulosestaticos/estadistica/estadisticaproyecto3.png";
 import sectionmisionvision from "../../../assets/images/modulosestaticos/section/sectionmisionvision.webp";
 import valoresmetalux from "../../../assets/images/modulosestaticos/section/valoresmetalux.webp";
+import quienessomosmetalux from "../../../assets/images/modulosestaticos/section/quienessomosmetalux.webp";
+import bannermetalux1 from "../../../assets/images/modulosestaticos/heroes/bannermetalux1webp.webp";
 export interface Diseno {
   id: number;
   titulo: string;
@@ -2208,6 +2210,519 @@ cada proceso.
 }
 `,
       js: ``
+    },
+  },
+  {
+    id: 14,
+    titulo: "Seccion de Quienes Somos - Metalux",
+    categoria: "Section",
+    descripcion:
+      "Seccion de quienes somos de la empresa Metalux para tu web y destacar con buen diseño",
+    imagen: quienessomosmetalux,
+    dificultad: "Intermedio",
+    codigo: {
+      html: `<section class="about-us-section">
+        <div class="about-us-content">
+            <p class="about-us-subtitle">Quienes somos</p>
+            <div class="about-us-logo">
+                <img src="https://metalux.com.pe/wp-content/uploads/2025/07/Group.webp" alt="Metalux Soluciones Metálicas">
+                </div>
+            <h1 class="about-us-title">Diseño metálico funcional para tu empresa</h1>
+            <p class="about-us-paragraph">
+                Fabricamos lockers, estantes, armarios, archivadores, góndolas y racks
+                industriales con estructura en <strong>acero LAF</strong>, adaptados a tus medidas,
+                diseño y color.<br>
+                Calidad, resistencia y atención técnica especializada para empresas
+                que valoran seguridad y eficiencia.
+            </p>
+            <div class="about-us-features">
+                <div class="feature-item">
+                    <img src="https://metalux.com.pe/wp-content/uploads/2025/08/Group-18784.webp" alt="Icono Personal">
+                    <p>Personal altamente capacitado</p>
+                </div>
+                <div class="feature-item">
+                    <img src="https://metalux.com.pe/wp-content/uploads/2025/08/Group-18782.webp">
+                    <p class="espaciado2">Materiales de primera</p>
+                </div>
+                <div class="feature-item">
+                    <img src="https://metalux.com.pe/wp-content/uploads/2025/08/Group-18783.webp" alt="Icono Diseños">
+                    <p class="espaciado">Diseños personalizado</p>
+                </div>
+            </div>
+        </div>
+        <div class="about-us-image-col">
+            <img src="https://metalux.com.pe/wp-content/uploads/2025/07/Group-18774.webp" alt="Hombre de Metalux">
+            <a href="#" class="view-store-button">Ver Tienda</a>
+        </div>
+    </section>
+`,
+      css: `.about-us-section {
+    display: flex;
+    flex-direction: column; 
+    padding: 30px 20px; 
+    align-items: center;
+    max-width: 1500px; 
+    margin: 0 auto; 
+    box-sizing: border-box;
+}
+
+.about-us-content {
+    flex: 1;
+    margin-bottom: 30px;
+    text-align: left; 
+}
+
+.about-us-subtitle {
+    font-size: 24px;
+  	font-family: poppins;
+    font-weight: 600;
+    color: #000000;
+    margin-bottom: 10px;
+}
+
+.about-us-logo img {
+    max-width: 500px; 
+    height: auto;
+    margin-bottom: 20px;
+}
+
+ .logo-text {
+    font-size: 2.5em;
+    font-weight: 700;
+    margin: 0;
+    line-height: 1;
+    color: #333;
+}
+.logo-slogan {
+    font-size: 0.8em;
+    font-weight: 400;
+    margin: 0;
+    color: #666;
+    letter-spacing: 1px;
+} 
+
+
+.about-us-title {
+    font-size: 40px !important;
+    font-weight: bold;
+    color: #000000;
+    line-height: 1.2;
+}
+
+.about-us-paragraph {
+    font-size: 20px; 
+    font-family: poppins;
+  	font-weight: 400;
+    margin-bottom: 15px;
+    line-height: 1.8;
+    color: #000000;
+}
+
+.about-us-features {
+    display: flex;
+    flex-wrap: wrap; 
+    justify-content: center;
+    gap: 30px;
+    margin-top: 80px;
+}
+
+.feature-item {
+    text-align: center;
+    flex-basis: 30%;
+    max-width: 120px;
+}
+
+.feature-item img {
+    width: 80px;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+.feature-item p {
+    font-size: 18px;
+    font-weight: 500;
+    color: #000000;
+    margin: 0;
+}
+
+.about-us-image-col {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 0;
+}
+
+.about-us-image-col img {
+    max-width: 80%;
+    height: auto;
+    border-radius: 8px;
+    /*box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);*/ 
+    margin-bottom: 20px; 
+}
+
+/* View Store Button */
+.view-store-button {
+    display: inline-block;
+    padding: 12px 25px;
+    background-color: #3D6EF3;
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: 500;
+  	font-size: 20px;
+    transition: background-color 0.3s ease;
+    text-align: center;
+    width: 80%; 
+    max-width: 200px; 
+}
+
+.view-store-button:hover {
+    background-color: #3b5093;
+}
+
+@media (min-width: 1025px) {
+  .about-us-section {
+        flex-direction: row;
+        align-items: flex-start;
+        padding: 50px 40px; 
+    }
+
+    .about-us-content {
+        margin-bottom: 0; 
+        padding-right: 40px;
+    }
+
+    .about-us-title {
+        font-size: 36px;
+    }
+
+    .about-us-paragraph {
+        font-size: 20px;
+    }
+
+    .about-us-features {
+    	justify-content: center;
+    	margin-top: 60px;
+  	}
+
+    .feature-item {
+        flex-basis: auto; 
+        max-width: none;
+    }
+
+    .about-us-image-col {
+        margin-left: 40px;
+        flex-basis: 40%;
+        max-width: 400px;
+    }
+
+    .view-store-button {
+        width: auto; 
+    }
+    .about-us-section {
+        padding: 80px 60px; 
+    }
+
+    .about-us-title {
+        font-size: 3.5em; 
+    }
+
+    .about-us-paragraph {
+        font-size: 20px; 
+    }
+
+    .about-us-content {
+        flex-basis: 60%; 
+    }
+
+    .about-us-image-col {
+        flex-basis: 40%; 
+    }
+}
+  /* Responsive - Para dispositivos móviles y tablets pequeños */
+@media (max-width: 1000px) {
+  .about-us-section {
+    flex-direction: column;
+    padding: 40px 20px;
+    align-items: center;
+  }
+
+  .about-us-content,
+  .about-us-image-col {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+  }
+
+  .about-us-logo img {
+    max-width: 70%;
+    margin-bottom: 20px;
+  }
+
+  .about-us-title {
+    font-size: 2.1em;
+    text-align: center;
+  }
+
+  .about-us-paragraph {
+    font-size: 1.5em;
+    text-align: justify;
+  }
+
+  .about-us-features {
+    flex-direction: column;
+    gap: 25px;
+    margin-top: 25px;
+    align-items: center;
+  }
+
+  .feature-item {
+    flex-basis: 100%;
+    max-width: 200px;
+  }
+
+  .feature-item img {
+    width: 50px;
+  }
+
+  .feature-item p {
+    font-size: 1.5em;
+    text-align: center;
+  }
+
+  .about-us-image-col img {
+    max-width: 50%;
+    margin: 30px 0 20px;
+  }
+
+  .view-store-button {
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+    font-size: 1em;
+    padding: 14px 20px;
+  }
+}
+`,
+      js: ``
+    },
+  },
+  {
+    id: 15,
+    titulo: "Banner Slider Inicio - Metalux",
+    categoria: "Heroes",
+    descripcion:
+      "Banner slider con buen diseño, responsive para diferentes moviles.",
+    imagen: bannermetalux1,
+    dificultad: "Intermedio",
+    codigo: {
+      html: `<div class="inicio-slider-container2">
+  <div class="inicio-slide2 active">
+    <picture>
+      <source media="(max-width: 980px)" srcset="https://metalux.com.pe/wp-content/uploads/2025/08/3G-MOBILE-copia.webp">
+      <img src="https://metalux.com.pe/wp-content/uploads/2025/08/BANNER-FINAL-2.webp" alt="Slide 1">
+    </picture>
+    <div class="inicio-slide-content2">
+      <h1>FABRICACIÓN<br> METÁLICA<br> DURADERA</h1>
+      <p>Lockers, Estantes y Más</p>
+      <a href="#">¡Conoce más!</a>
+    </div>
+  </div>
+
+  <div class="inicio-slide2">
+    <picture>
+      <source media="(max-width: 980px)" srcset="https://metalux.com.pe/wp-content/uploads/2025/08/2G-MOBILE-copia.webp">
+      <img src="https://metalux.com.pe/wp-content/uploads/2025/08/BANNER-FINAL-1.webp" alt="Slide 2">
+    </picture>
+    <div class="inicio-slide-content2">
+      <h1>FABRICACIÓN<br> METÁLICA<br> DURADERA</h1>
+      <p>Lockers, Estantes y Más</p>
+      <a href="#">¡Conoce más!</a>
+    </div>
+  </div>
+
+  <div class="inicio-slide2">
+    <picture>
+      <source media="(max-width: 980px)" srcset="https://metalux.com.pe/wp-content/uploads/2025/08/1G-MOBILE-copia.webp">
+      <img src="https://metalux.com.pe/wp-content/uploads/2025/08/BANNER-FINAL-3.webp" alt="Slide 3">
+    </picture>
+    <div class="inicio-slide-content2">
+      <h1>FABRICACIÓN<br> METÁLICA<br> DURADERA</h1>
+      <p>Lockers, Estantes y Más</p>
+      <a href="#">¡Conoce más!</a>
+    </div>
+  </div>
+
+  <div class="inicio-nav-arrows2">
+    <button onclick="prevSlide()">❮</button>
+    <button onclick="nextSlide()">❯</button>
+  </div>
+</div>
+`,
+      css: `.inicio-slider-container2 {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+  }
+  .inicio-slide2 {
+    display: none;
+    width: 100%;
+    height: auto;
+    position: relative;
+    color: white;
+  }
+
+  .inicio-slide2.active {
+    display: block;
+    animation: fade 1s ease-in-out;
+  }
+
+  .inicio-slide2 picture,
+  .inicio-slide2 img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .inicio-slide-content2 {
+    position: absolute;
+    top: 50%;
+    left: 10%;
+    transform: translateY(-50%);
+    z-index: 2;
+    max-width: 600px;
+  }
+
+  .inicio-slide2 h1 {
+    font-size: 5.3rem;
+    font-weight: 900;
+    margin-bottom: 1rem;
+  line-height: 1.1;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+  }
+
+  .inicio-slide2 p {
+    font-size: 2rem;
+    margin-bottom: 1.8rem;
+  }
+
+  .inicio-slide2 a {
+    display: inline-block;
+    padding: 12px 24px;
+    background: #fff;
+    color: black;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: bold;
+  }
+
+  .inicio-nav-arrows2 {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    transform: translateY(-50%);
+    padding: 0 1rem;
+    z-index: 3;
+  }
+
+  .inicio-nav-arrows2 button {
+    background: rgba(0, 0, 0, 0);
+    border: none;
+    color: #1bcdc8;
+    font-size: 1.3rem;
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    border-radius: 50%;
+  }
+
+  @keyframes fade {
+    from { opacity: 0.4; }
+    to { opacity: 1; }
+  }
+
+  @media (max-width: 980px) {
+    .inicio-lide-content2 {
+      top: 60%;
+      left: 5%;
+      transform: translateY(-50%);
+      text-align: center;
+    }
+    .inicio-slide2 h1 {
+      font-size: 3.8rem;
+      line-height: 1.1;
+    }
+    .inicio-slide2 p {
+      font-size: 1.5rem;
+    }
+    .inicio-slide2 a {
+      font-size: 0.9rem;
+      padding: 10px 20px;
+    }
+  }
+   @media (max-width: 720px) {
+    .sinicio-lide-content2 {
+      top: 60%;
+      left: 5%;
+      transform: translateY(-50%);
+      text-align: center;
+    }
+    .inicio-slide2 h1 {
+      font-size: 3.8rem;
+      line-height: 1.1;
+  text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.75);
+    }
+    .inicio-slide2 p {
+      font-size: 1.5rem;
+    }
+    .inicio-slide2 a {
+      font-size: 0.9rem;
+      padding: 10px 20px;
+    }
+  }
+    @media (max-width: 596px) {
+    .sinicio-lide-content2 {
+      top: 60%;
+      left: 5%;
+      transform: translateY(-50%);
+      text-align: center;
+    }
+      .inicio-slide2 h1 {
+  font-size: 2.8rem;
+  line-height: 1.1;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.75);
+}
+    .inicio-slide2 p {
+      font-size: 1.5rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.75);
+    }
+    .inicio-slide2 a {
+      font-size: 0.9rem;
+      padding: 10px 20px;
+    }
+  }
+`,
+      js: `let slides = document.querySelectorAll('.inicio-slide2');
+  let current = 0;
+  function showSlide(index) {
+    slides.forEach((slide, i) => {
+      slide.classList.remove('active');
+      if (i === index) slide.classList.add('active');
+    });
+  }
+  function nextSlide() {
+    current = (current + 1) % slides.length;
+    showSlide(current);
+  }
+  function prevSlide() {
+    current = (current - 1 + slides.length) % slides.length;
+    showSlide(current);
+  }
+
+  setInterval(nextSlide, 7000);`
     },
   },
 ];
