@@ -7,6 +7,8 @@ import cards1Image from "../../../assets/images/cardssoluciones.png";
 import estadisticaproyecto1 from "../../../assets/images/modulosestaticos/estadistica/estadisticaproyecto1.png";
 import estadisticaproyecto2 from "../../../assets/images/modulosestaticos/estadistica/estadisticaproyecto2.png";
 import estadisticaproyecto3 from "../../../assets/images/modulosestaticos/estadistica/estadisticaproyecto3.png";
+import sectionmisionvision from "../../../assets/images/modulosestaticos/section/sectionmisionvision.webp";
+import valoresmetalux from "../../../assets/images/modulosestaticos/section/valoresmetalux.webp";
 export interface Diseno {
   id: number;
   titulo: string;
@@ -1784,6 +1786,428 @@ function calcularEstadisticas() {
     }
   });
 }`
+    },
+  },
+  {
+    id: 12,
+    titulo: "Seccion de mision y vision con imagen",
+    categoria: "Section",
+    descripcion:
+      "Seccion de mision y vision para tu web y destacar con buen diseño",
+    imagen: sectionmisionvision,
+    dificultad: "Facil",
+    codigo: {
+      html: `<section class="mision-vision-section">
+        <div class="mision-vision-grid-container">
+            <div class="mision-vision-image mision-vision-image-top-left"></div>
+
+            <div class="mision-vision-box mision-vision-box-top-right">
+                <h3 class="mision-vision-heading">VISIÓN</h3>
+                <p class="mision-vision-paragraph">
+                    Ser una empresa peruana líder en soluciones metálicas,
+                    reconocida por brindar productos de alta calidad con valor
+                    agregado, atención personalizada y compromiso constante
+                    con cada cliente.
+                </p>
+            </div>
+
+            <div class="mision-vision-box mision-vision-box-bottom-left">
+                <h3 class="mision-vision-heading">MISIÓN</h3>
+                <p class="mision-vision-paragraph">
+                    Nuestra misión es crear productos metálicos resistentes,
+                    funcionales y hechos a medida que acompañen el
+                    crecimiento de empresas e instituciones. En cada diseño
+                    hay esfuerzo, en cada entrega hay compromiso, y en cada
+                    cliente, una relación que valoramos.
+                </p>
+            </div>
+
+            <div class="mision-vision-image mision-vision-image-bottom-right"></div>
+        </div>
+</section>
+`,
+      css: `/* Estilos de la sección principal Misión/Visión */
+.mision-vision-section {
+    padding: 0;
+    background-color: #333333;
+    box-sizing: border-box;
+    width: 100%;
+    overflow-x: hidden;
+}
+
+/* Contenedor Grid para los 4 cuadrantes */
+.mision-vision-grid-container {
+    display: grid;
+    grid-template-columns: 1fr; 
+    grid-auto-rows: minmax(200px, auto);
+    gap: 0;
+    width: 100%;
+    overflow: hidden;
+}
+
+/* Estilos generales para las cajas de texto (Misión/Visión) */
+.mision-vision-box {
+    padding: 1.5rem;
+    background-color: #333333;
+    color: #ffffff;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-sizing: border-box;
+}
+
+/* Estilos para los títulos de Misión y Visión */
+.mision-vision-heading {
+    font-size: 16px !important;
+  	font-family: poppins !important;
+    font-weight: 600;
+    color: #1BCCEC;
+    margin-bottom: 0.5rem;
+    line-height: 1.2;
+}
+
+/* Estilos para los párrafos de Misión y Visión */
+.mision-vision-paragraph {
+    font-size: 16px !important;
+  	font-family: poppins !important;
+    font-weight: 400;
+    color: #ffffff;
+    margin: 0;
+}
+
+  .mision-vision-heading {
+  transition: all 0.3s ease-in-out;
+}
+
+.mision-vision-heading:hover {
+  text-shadow: 0 0 8px #1BCCEC, 0 0 12px #1BCCEC;
+}
+/* Estilos generales para los divs de imagen */
+.mision-vision-image {
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    min-height: 400px; 
+    box-sizing: border-box;
+}
+
+.mision-vision-image-top-left {
+    background-image: url('https://metalux.com.pe/wp-content/uploads/2025/07/mision-metalux-2.webp');
+}
+
+.mision-vision-image-bottom-right {
+    background-image: url('https://metalux.com.pe/wp-content/uploads/2025/07/el-pasillo-de-la-escuela-con-armarios-de-colores-2.webp');
+}
+
+.mision-vision-box-top-right {
+    order: 1;
+}
+
+.mision-vision-image-top-left {
+    order: 2; 
+}
+
+.mision-vision-box-bottom-left {
+    order: 3; 
+}
+
+.mision-vision-image-bottom-right {
+    order: 4; 
+}
+
+/* Para pantallas medianas (tablets, 768px a 1024px) */
+@media (min-width: 768px) {
+    .mision-vision-grid-container {
+        grid-template-columns: 1fr 1fr; 
+        grid-auto-rows: minmax(250px, auto);
+        gap: 0;
+    }
+
+    .mision-vision-image-top-left {
+        order: unset;
+        grid-column: 1 / 2;
+        grid-row: 1 / 2;
+    }
+
+    .mision-vision-box-top-right {
+        order: unset;
+        grid-column: 2 / 3;
+        grid-row: 1 / 2;
+    }
+
+    .mision-vision-box-bottom-left {
+        order: unset;
+        grid-column: 1 / 2;
+        grid-row: 2 / 3;
+    }
+
+    .mision-vision-image-bottom-right {
+        order: unset;
+        grid-column: 2 / 3;
+        grid-row: 2 / 3;
+    }
+
+    .mision-vision-image {
+        min-height: 200px; 
+    }
+
+    .mision-vision-heading {
+        font-size: 1.6em;
+    }
+
+    .mision-vision-paragraph {
+        font-size: 1em;
+    }
+}
+@media (max-width: 460px) {
+    .mision-vision-image {
+        min-height: 250px;
+    }
+  .mision-vision-paragraph {
+        font-size: 14px;
+    }
+}
+/* Para pantallas grandes (desktops, 1025px en adelante) */
+@media (min-width: 1025px) {
+    .mision-vision-box {
+        padding: 5rem;
+    }
+
+    .mision-vision-heading {
+        font-size: 22px;
+    }
+
+    .mision-vision-paragraph {
+        font-size: 21px;
+    		line-height: 1.4;
+    }
+
+    .mision-vision-image {
+        min-height: 350px;
+    }
+}
+`,
+      js: ``
+    },
+  },
+  {
+    id: 13,
+    titulo: "Seccion de Valores - Metalux",
+    categoria: "Section",
+    descripcion:
+      "Seccion de valores de la empresa Metalux para tu web y destacar con buen diseño",
+    imagen: valoresmetalux,
+    dificultad: "Facil",
+    codigo: {
+      html: `<section class="nosotros4-section">
+<h2 class="nosotros4-title">Valores</h2>
+<div class="nosotros4-cards-container">
+<div class="nosotros4-card-item">
+ <img class="nosotros4-card-icon" src="https://metalux.com.pe/wp-content/uploads/2025/07/Vector.webp" alt="Icono Responsabilidad" />
+<h3 class="nosotros4-card-heading">Responsabilidad</h3>
+<p class="nosotros4-card-paragraph">
+ Cumplimos lo que
+prometemos, porque
+respetamos tu tiempo y
+tus metas.
+</p>
+</div>
+<div class="nosotros4-card-item">
+ <img class="nosotros4-card-icon" src="https://metalux.com.pe/wp-content/uploads/2025/07/handshake-solid-2.png" alt="Icono Calidad" />
+<h3 class="nosotros4-card-heading">Cercanía</h3>
+<p class="nosotros4-card-paragraph">
+ Escuchamos y
+acompañamos cada
+paso de tu necesidad.
+</p>
+</div>
+<div class="nosotros4-card-item">
+ <img class="nosotros4-card-icon" src="https://metalux.com.pe/wp-content/uploads/2025/07/shield-halved-solid-2.png" alt="Icono Calidad" />
+<h3 class="nosotros4-card-heading">Calidad que se
+siente</h3>
+<p class="nosotros4-card-paragraph">
+ Usamos materiales
+resistentes, porque
+creemos que lo bueno
+debe durar.
+</p>
+</div>
+<div class="nosotros4-card-item">
+ <img class="nosotros4-card-icon" src="https://metalux.com.pe/wp-content/uploads/2025/07/heart-pulse-solid-2.png" alt="Icono Pasión" />
+<h3 class="nosotros4-card-heading">Pasión por lo que
+hacemos</h3>
+<p class="nosotros4-card-paragraph">
+ Disfrutamos transformar
+el metal en confianza
+</p>
+</div>
+<div class="nosotros4-card-item">
+ <img class="nosotros4-card-icon" src="https://metalux.com.pe/wp-content/uploads/2025/07/seedling-solid-2.png" alt="Icono Ecoamigables" />
+<h3 class="nosotros4-card-heading">Ecoamigables</h3>
+<p class="nosotros4-card-paragraph">
+ Nos esforzamos por
+cuidar el entorno en
+cada proceso.
+</p>
+</div>
+</div>
+</section>
+`,
+      css: `.nosotros4-section {
+    padding: 50px 20px;
+    text-align: center;
+    max-width: 1400px;
+    color: #2C3D6B;
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+
+.nosotros4-title {
+    font-size: 2.2em;
+    font-weight: 700;
+    color: #2C3D6B;
+    margin-bottom: 50px;
+    line-height: 1.2;
+}
+
+.nosotros4-cards-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 30px;
+    justify-content: center;
+}
+
+.nosotros4-card-item {
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 30px 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    text-align: center;
+    min-height: 220px;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.nosotros4-card-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.12);
+}
+
+.nosotros4-card-icon {
+    width: 50px;
+    height: auto;
+    margin-bottom: 20px;
+}
+
+.nosotros4-card-heading {
+    font-size: 20px;
+    font-family: poppins;
+    font-weight: 600;
+    color: #2C3D6B;
+    margin-bottom: 10px;
+    line-height: 1.2;
+}
+
+.nosotros4-card-paragraph {
+    font-size: 15px;
+    font-family: poppins;
+    font-weight: 400;
+  
+    color: #2C3D6B;
+    margin: 0;
+    line-height: 1.4;
+}
+
+.nosotros4-card-item:hover {
+    background-color: #2C3D6B;
+    color: #ffffff;
+}
+
+.nosotros4-card-item:hover .nosotros4-card-heading,
+.nosotros4-card-item:hover .nosotros4-card-paragraph {
+    color: #ffffff;
+}
+
+.nosotros4-card-item:hover .nosotros4-card-icon {
+    filter: brightness(0) invert(1);
+}
+
+
+@media (max-width: 767px) {
+    .nosotros4-section {
+        padding: 30px 15px;
+    }
+
+    .nosotros4-title {
+        font-size: 1.8em;
+        margin-bottom: 30px;
+    }
+
+    .nosotros4-cards-container {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .nosotros4-card-item {
+        padding: 25px 15px;
+        min-height: 200px;
+    }
+
+    .nosotros4-card-icon {
+        width: 45px;
+    }
+
+    .nosotros4-card-heading {
+        font-size: 1em;
+    }
+
+    .nosotros4-card-paragraph {
+        font-size: 0.85em;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    .nosotros4-section {
+        padding: 40px 30px;
+    }
+
+    .nosotros4-title {
+        font-size: 2em;
+    }
+
+    .nosotros4-cards-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .nosotros4-card-item {
+        min-height: 230px;
+    }
+}
+
+@media (min-width: 1025px) {
+    .nosotros4-section {
+        padding: 60px 50px;
+    }
+
+    .nosotros4-title {
+        font-size: 2.5em;
+    }
+
+    .nosotros4-cards-container {
+        grid-template-columns: repeat(5, 1fr);
+        gap: 25px;
+    }
+
+    .nosotros4-card-item {
+        min-height: 250px;
+    }
+}
+`,
+      js: ``
     },
   },
 ];

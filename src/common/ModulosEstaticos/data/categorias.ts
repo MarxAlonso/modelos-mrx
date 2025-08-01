@@ -4,6 +4,7 @@ export const categorias = [
   "Formularios",
   "Navegación",
   "Cards",
+  "Section",
   "Heroes",
   "Footers",
   "Estadistico - Finanzas",
