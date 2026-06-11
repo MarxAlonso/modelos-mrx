@@ -15,7 +15,7 @@ const bgStyle = {
   backgroundRepeat: "no-repeat",
   backgroundSize: "cover",
   backgroundPosition: "center",
-  backgroundAttachment: "fixed",
+
 };
 const tecnologiasSpringBoot = [
     {

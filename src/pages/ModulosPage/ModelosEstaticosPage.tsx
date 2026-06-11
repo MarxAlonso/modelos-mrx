@@ -6,7 +6,7 @@ const bgStyle = {
   backgroundRepeat: "no-repeat",
   backgroundSize: "cover",
   backgroundPosition: "center",
-  backgroundAttachment: "fixed",
+
 };
 export const ModelosEstaticosPage = () => {
   return (
