@@ -1,6 +1,6 @@
-import banner1Image from "../../../assets/images/banner1.png";
-import heores2Image from "../../../assets/images/heroesarqdinamico.png";
-import cards1Image from "../../../assets/images/cardsarqdinamicos.png";
+import banner1Image from "../../../assets/images/banner1.webp";
+import heores2Image from "../../../assets/images/heroesarqdinamico.webp";
+import cards1Image from "../../../assets/images/cardsarqdinamicos.webp";
 export interface ProyectoDinamico {
   id: number;
   titulo: string;

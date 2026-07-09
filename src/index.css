@@ -14,3 +14,26 @@
         filter: drop-shadow(-6px 8px 15px rgba(250, 187, 187, 0.2));
     }
 }
+
+@layer base {
+    ::selection {
+        @apply bg-purple-900 text-white;
+    }
+
+    ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+        @apply bg-black rounded-full;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        @apply bg-purple-900/90 rounded-full border-2 border-black bg-clip-padding;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        @apply bg-purple-900;
+    }
+}

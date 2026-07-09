@@ -57,7 +57,7 @@ git clone https://github.com/tuusuario/modelos-web-mrx.git
 
 # Instalar dependencias
 cd modelos-web-mrx
-npm install
+pnpm install
 
 # Ejecutar en modo desarrollo
-npm run dev
+pnpm dev
