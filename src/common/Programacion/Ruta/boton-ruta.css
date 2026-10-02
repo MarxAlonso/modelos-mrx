@@ -1,0 +1,154 @@
+/* ============================================================
+   Botón flotante: una celda hexagonal con su anillo
+   ============================================================ */
+.mrx-fab {
+  position: fixed;
+  right: clamp(14px, 2.4vw, 32px);
+  bottom: clamp(14px, 2.4vw, 32px);
+  z-index: 40;
+  display: grid;
+  justify-items: center;
+  gap: 6px;
+}
+.mrx-fab__boton {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 72px;
+  height: 80px;
+  cursor: pointer;
+  filter: drop-shadow(0 0 18px rgba(124, 58, 237, 0.75));
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), filter 0.3s;
+}
+.mrx-fab__boton:hover { transform: scale(1.06); filter: drop-shadow(0 0 26px rgba(167, 139, 250, 0.95)); }
+.mrx-fab__boton:active { transform: scale(0.96); }
+.mrx-fab__boton:focus-visible { outline: 2px solid var(--lila); outline-offset: 4px; }
+
+.mrx-fab__anillo { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.mrx-fab__anillo path { fill: none; stroke-linejoin: round; }
+/* la celda tenue de base y, encima, dos trazos que la recorren sin parar */
+.mrx-fab__anillo path:first-child { stroke: rgba(167, 139, 250, 0.28); stroke-width: 1; }
+.mrx-fab__anillo path:last-child {
+  stroke: var(--lila);
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-dasharray: 34 89;
+  animation: mrx-fab-recorrer 3.2s linear infinite;
+}
+@keyframes mrx-fab-recorrer { to { stroke-dashoffset: -246; } }
+
+.mrx-fab__celda {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 54px;
+  height: 60px;
+  clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
+  background: linear-gradient(160deg, var(--morado-claro), var(--lila));
+}
+.mrx-fab__celda::before {
+  content: '';
+  position: absolute;
+  inset: 1.5px;
+  clip-path: inherit;
+  background:
+    var(--hex) 50% 50% / 14px auto,
+    linear-gradient(160deg, #1a0f33, var(--fondo));
+  background-blend-mode: soft-light, normal;
+}
+.mrx-fab__glifo {
+  position: relative;
+  font-family: var(--mono);
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: -0.06em;
+  color: var(--lila);
+  text-shadow: 0 0 10px rgba(167, 139, 250, 0.9);
+}
+.mrx-fab[data-abierto] .mrx-fab__glifo { font-size: 24px; font-weight: 400; color: #fff; }
+/* un barrido de luz, como el haz que suelda el rail */
+.mrx-fab__barrido {
+  position: absolute;
+  inset-inline: 0;
+  top: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #fff, transparent);
+  opacity: 0.8;
+  animation: mrx-fab-barrido 2.8s ease-in-out infinite;
+}
+@keyframes mrx-fab-barrido {
+  0%, 15% { transform: translateY(-4px); opacity: 0; }
+  30% { opacity: 0.8; }
+  70% { opacity: 0.8; }
+  85%, 100% { transform: translateY(62px); opacity: 0; }
+}
+.mrx-fab__rotulo { font-size: 9px; letter-spacing: 0.22em; text-shadow: 0 0 8px var(--fondo), 0 0 8px var(--fondo); }
+@media (max-width: 759px) {
+  .mrx-fab__boton { width: 62px; height: 69px; }
+  .mrx-fab__celda { width: 46px; height: 52px; }
+  .mrx-fab__rotulo { display: none; }
+}
+
+.mrx-fab__panel {
+  position: absolute;
+  right: 0;
+  bottom: calc(100% + 12px);
+  width: min(340px, calc(100vw - var(--rail) - 28px));
+  transform-origin: bottom right;
+}
+.mrx-fab__panel .mrx-term {
+  border-color: var(--line-fuerte);
+  background: rgba(10, 6, 20, 0.97);
+  backdrop-filter: blur(10px);
+}
+.mrx-fab__panel .mrx-term__cuerpo {
+  max-height: min(430px, calc(100svh - var(--topbar) - 170px));
+  padding: 12px 10px 10px;
+  overflow-y: auto;
+}
+.mrx-fab__comando { padding: 0 6px 8px; }
+.mrx-fab__lista { display: grid; gap: 4px; }
+.mrx-fab__enlace {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 9px 10px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  color: var(--texto);
+  transition: border-color 0.25s, background-color 0.25s;
+}
+a.mrx-fab__enlace:hover,
+a.mrx-fab__enlace:focus-visible {
+  border-color: color-mix(in srgb, var(--tinte) 55%, transparent);
+  background: color-mix(in srgb, var(--tinte) 10%, transparent);
+  outline: 0;
+}
+.mrx-fab__indice { font-size: 10px; letter-spacing: 0.16em; color: var(--mute); }
+.mrx-fab__icono { flex: 0 0 auto; width: 22px; height: 22px; color: var(--tinte); }
+.mrx-fab__texto { display: grid; flex: 1; min-width: 0; line-height: 1.35; }
+.mrx-fab__texto b { font-family: var(--sans); font-size: 14.5px; font-weight: 600; }
+.mrx-fab__texto small { font-family: var(--sans); font-size: 12px; color: var(--mute); }
+.mrx-fab__ir { flex: 0 0 auto; color: var(--tinte); transition: transform 0.25s; }
+a.mrx-fab__enlace:hover .mrx-fab__ir { transform: translateX(4px); }
+.mrx-fab__enlace--pronto { opacity: 0.6; }
+.mrx-fab__enlace--pronto .mrx-fab__ir {
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--acento);
+}
+.mrx-fab__enlace[aria-current] {
+  border-color: color-mix(in srgb, var(--tinte) 55%, transparent);
+  background: color-mix(in srgb, var(--tinte) 10%, transparent);
+}
+.mrx-fab__enlace[aria-current] .mrx-fab__ir {
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mrx-fab__anillo path:last-child { animation: none; }
+  .mrx-fab__barrido { display: none; }
+}

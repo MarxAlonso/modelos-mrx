@@ -1,0 +1,408 @@
+/* ---------- rail ---------- */
+.mrx-rail {
+  --nano: 150%;
+  position: fixed;
+  inset-block: 0;
+  left: 0;
+  z-index: 80;
+  display: none;
+  width: var(--rail);
+  overflow: hidden;
+  transition: --nano 1.1s cubic-bezier(0.65, 0, 0.35, 1), visibility 0s;
+}
+@media (min-width: 760px) {
+  .mrx-rail { display: block; }
+}
+.mrx-rail[data-estado='oculto'] {
+  --nano: -6%;
+  visibility: hidden;
+  pointer-events: none;
+  /* se vuelve invisible solo cuando termina de desmontarse */
+  transition: --nano 0.8s cubic-bezier(0.65, 0, 0.35, 1), visibility 0s 0.8s;
+}
+
+.mrx-rail__cuerpo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  padding-block: 22px;
+  border-right: 1px solid var(--line);
+  background:
+    linear-gradient(180deg, rgba(76, 29, 149, 0.28), transparent 38%),
+    var(--fondo);
+  /* lo ya ensamblado queda por encima del frente; lo demás aún no existe */
+  -webkit-mask-image: linear-gradient(to bottom, #000 calc(var(--nano) - 14%), transparent var(--nano));
+  mask-image: linear-gradient(to bottom, #000 calc(var(--nano) - 14%), transparent var(--nano));
+}
+
+/* las celdas: una franja de hexágonos que viaja con el frente */
+.mrx-rail__nano {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: var(--hex) 0 0 / 22px auto;
+  -webkit-mask-image: linear-gradient(to bottom, transparent calc(var(--nano) - 34%), #000 calc(var(--nano) - 4%), #000 var(--nano), transparent calc(var(--nano) + 3%));
+  mask-image: linear-gradient(to bottom, transparent calc(var(--nano) - 34%), #000 calc(var(--nano) - 4%), #000 var(--nano), transparent calc(var(--nano) + 3%));
+  animation: mrx-nano-chispa 0.14s steps(2) infinite;
+}
+
+/* el haz que va soldando las celdas */
+.mrx-rail__haz {
+  position: absolute;
+  inset-inline: 0;
+  top: var(--nano);
+  height: 2px;
+  pointer-events: none;
+  background: linear-gradient(90deg, transparent, #ddd6fe 30%, #fff 50%, #ddd6fe 70%, transparent);
+  box-shadow: 0 0 14px 2px rgba(167, 139, 250, 0.85);
+}
+
+.mrx-rail__ocultar {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  margin-top: 6px;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: none;
+  color: var(--mute);
+  cursor: pointer;
+  transition: color 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
+}
+.mrx-rail__ocultar:hover { color: var(--acento); border-color: var(--acento); transform: translateX(-3px); }
+.mrx-rail__ocultar svg {
+  width: 16px;
+  height: 16px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* ---------- botón que vuelve a ensamblar el rail ---------- */
+.mrx-nano-boton {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 79;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  width: 48px;
+  height: 54px;
+  border: 0;
+  /* hexágono: la celda de la que nace el rail */
+  clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
+  background: linear-gradient(160deg, var(--morado-claro), var(--lila));
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(0.4) rotate(-90deg);
+  transition: opacity 0.35s ease, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.35s;
+}
+.mrx-nano-boton::before {
+  content: '';
+  position: absolute;
+  inset: 1.5px;
+  clip-path: inherit;
+  background: var(--fondo);
+}
+.mrx-nano-boton i {
+  position: relative;
+  display: block;
+  width: 20px;
+  height: 2px;
+  background: var(--texto);
+  transition: background-color 0.25s ease, width 0.25s ease;
+}
+.mrx-nano-boton:hover i { background: var(--acento); }
+.mrx-nano-boton:hover i:nth-child(2) { width: 12px; }
+@media (min-width: 760px) {
+  .mrx-nano-boton { display: flex; }
+}
+.mrx-rail[data-estado='oculto'] ~ .mrx-nano-boton {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+  transition-delay: 0.45s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mrx-rail,
+  .mrx-rail[data-estado='oculto'],
+  .mrx-nano-boton { transition: none; }
+  .mrx-rail__nano { animation: none; }
+}
+
+.mrx-rail__marca img,
+.mrx-topbar__marca img {
+  border-radius: 50%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+.mrx-rail__marca:hover img { transform: scale(1.1); }
+
+.mrx-rail__centro {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+/* `vertical-rl` deja el texto leyéndose de arriba abajo; el giro de media
+   vuelta lo pone de abajo arriba, que es como se lee un rail a la izquierda */
+.mrx-rail__texto {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  color: var(--texto);
+}
+
+.mrx-rail__cta {
+  padding-block: 16px;
+  /* al girar la caja, el filo de arriba queda abajo: se declara al revés
+     para que la línea siga separando el bloque por su parte superior */
+  border-bottom: 1px solid var(--line);
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  font-family: var(--mono);
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--acento);
+  transition: color 0.25s ease;
+}
+.mrx-rail__cta:hover { color: var(--texto); }
+
+/* ---------- topbar ---------- */
+.mrx-topbar {
+  position: fixed;
+  inset-inline: 0;
+  top: 0;
+  z-index: 80;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 60px;
+  padding-inline: 16px;
+  border-bottom: 1px solid var(--line);
+  background: color-mix(in srgb, var(--fondo) 92%, transparent);
+  backdrop-filter: blur(8px);
+}
+@media (min-width: 760px) {
+  .mrx-topbar { display: none; }
+}
+.mrx-topbar__marca {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  color: var(--texto);
+}
+.mrx-topbar__marca em { font-style: normal; color: var(--acento); }
+.mrx-topbar__acciones { display: flex; align-items: center; gap: 6px; }
+.mrx-topbar__contacto { padding: 9px 12px; border: 1px solid var(--line); }
+@media (max-width: 359px) {
+  .mrx-topbar__contacto { display: none; }
+}
+
+/* ---------- botón del menú ---------- */
+.mrx-burger {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  width: 42px;
+  height: 42px;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+.mrx-burger i {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--texto);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s ease, background-color 0.25s ease;
+}
+.mrx-burger:hover i { background: var(--acento); }
+.mrx-burger[data-abierto='true'] i:nth-child(2) { transform: translateY(7px) rotate(45deg); }
+.mrx-burger[data-abierto='true'] i:nth-child(3) { opacity: 0; }
+.mrx-burger[data-abierto='true'] i:nth-child(4) { transform: translateY(-7px) rotate(-45deg); }
+
+.mrx-solo-lector {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* ---------- menú a pantalla completa ---------- */
+.mrx-menu {
+  position: fixed;
+  inset: 0 0 0 var(--rail);
+  z-index: 70;
+  display: flex;
+  align-items: center;
+  background:
+    radial-gradient(50% 60% at 88% 12%, rgba(76, 29, 149, 0.5), transparent 70%),
+    var(--fondo);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-2%);
+  transition: opacity 0.4s ease, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.4s;
+  overflow-y: auto;
+}
+.mrx-menu[data-abierto='true'] {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+}
+@media (max-width: 759px) {
+  .mrx-menu { inset: 60px 0 0 0; align-items: flex-start; padding-block: 12px 28px; }
+}
+
+/* trama de celdas en la esquina, como material a medio ensamblar */
+.mrx-menu__trama {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background: var(--hex) 0 0 / 28px auto;
+  opacity: 0.16;
+  -webkit-mask-image: radial-gradient(46% 56% at 92% 8%, #000, transparent 72%);
+  mask-image: radial-gradient(46% 56% at 92% 8%, #000, transparent 72%);
+}
+
+.mrx-menu__nav {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1.25fr 0.75fr;
+  gap: clamp(32px, 6vw, 96px);
+  width: 100%;
+  align-items: start;
+  padding: clamp(24px, 4vw, 56px) var(--pad);
+}
+@media (max-width: 900px) {
+  .mrx-menu__nav { grid-template-columns: 1fr; gap: 32px; }
+}
+
+/* `fixed` y no `absolute`: el menú desplaza su contenido en pantallas
+   pequeñas y el aspa debe quedarse donde está */
+.mrx-menu__cerrar {
+  position: fixed;
+  top: clamp(14px, 2vw, 26px);
+  right: clamp(16px, 4vw, 64px);
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border: 1px solid var(--line);
+  background: none;
+  color: var(--texto);
+  cursor: pointer;
+  transition: color 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
+}
+.mrx-menu__cerrar:hover {
+  color: var(--acento);
+  border-color: var(--line-fuerte);
+  transform: rotate(90deg);
+}
+.mrx-menu__cerrar svg { width: 20px; height: 20px; fill: currentColor; }
+@media (max-width: 759px) {
+  /* en móvil cierra la hamburguesa de la barra superior, que sigue a la vista */
+  .mrx-menu__cerrar { display: none; }
+}
+
+.mrx-menu__lista { margin: 0; padding: 0; list-style: none; }
+.mrx-menu__item { border-bottom: 1px solid var(--line); }
+.mrx-menu__enlace {
+  display: flex;
+  align-items: baseline;
+  gap: 18px;
+  width: 100%;
+  padding-block: clamp(11px, 1.4vw, 18px);
+  color: var(--texto);
+  transition: color 0.25s ease, padding-left 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+a.mrx-menu__enlace:hover { color: var(--acento); padding-left: 12px; }
+.mrx-menu__enlace[data-activo='true'] { color: var(--acento); }
+/* un grupo no navega: su título encabeza los enlaces de debajo */
+.mrx-menu__enlace--grupo { padding-bottom: 6px; }
+.mrx-menu__indice { flex: 0 0 auto; }
+.mrx-menu__texto { font-size: clamp(26px, 4vw, 52px); }
+.mrx-menu__fuera { font-family: var(--mono); font-size: 16px; color: var(--mute); }
+
+.mrx-menu__sub {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0;
+  /* alineado con el texto del grupo, a la derecha del índice */
+  padding: 0 0 clamp(12px, 1.4vw, 18px) 36px;
+  list-style: none;
+}
+.mrx-menu__subenlace {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border: 1px solid var(--line);
+  font-family: var(--mono);
+  font-size: 11.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--texto);
+  transition: color 0.25s ease, border-color 0.25s ease, background-color 0.25s ease;
+}
+a.mrx-menu__subenlace:hover,
+.mrx-menu__subenlace[data-activo='true'] {
+  border-color: var(--acento);
+  background: rgba(167, 139, 250, 0.1);
+  color: var(--acento);
+}
+.mrx-menu__subenlace--pronto { border-style: dashed; color: var(--mute); }
+.mrx-menu__subenlace small { font-size: 9px; letter-spacing: 0.2em; color: var(--acento); }
+
+/* ---------- columna lateral ---------- */
+.mrx-menu__lado { display: flex; flex-direction: column; gap: 24px; }
+.mrx-menu__bloque { display: flex; flex-direction: column; gap: 14px; }
+
+.mrx-menu__redes { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 4px; }
+.mrx-menu__redes a {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--texto);
+  transition: color 0.2s ease;
+}
+.mrx-menu__redes a:hover { color: var(--acento); }
+
+.mrx-menu__cta { align-self: flex-start; }
+
+.mrx-menu__claim {
+  max-width: 44ch;
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--mute);
+}

@@ -1,0 +1,283 @@
+/* ============================================================
+   Rutas de aprendizaje (Front-end, Spring Boot): portada con
+   editor y la lista de pasos. Comparte tokens con el inicio.
+   ============================================================ */
+.mrx-fe-marco {
+  position: relative;
+  display: grid;
+  gap: 14px;
+  max-width: 1280px;
+  margin-inline: auto;
+}
+
+/* ---------- portada ---------- */
+.mrx-fe-hero {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  align-items: center;
+  min-height: calc(100svh - var(--topbar));
+  padding: clamp(40px, 6vw, 80px) var(--pad);
+  overflow: hidden;
+}
+/* el tono de la portada es el de su capa en la pila del inicio */
+.mrx-fe-hero[data-tono='frontend'] {
+  --halo: rgba(112, 26, 117, 0.55);
+  --trazo: rgba(232, 121, 249, 0.85);
+  --relleno: linear-gradient(115deg, #a21caf 0%, #e879f9 55%, #c4b5fd 100%);
+}
+.mrx-fe-hero[data-tono='backend'] {
+  --halo: rgba(49, 46, 129, 0.75);
+  --trazo: rgba(129, 140, 248, 0.85);
+  --relleno: linear-gradient(115deg, #4f46e5 0%, #818cf8 55%, #c4b5fd 100%);
+}
+/* la ruta de IA tira a melocotón y cian, los colores de la terminal de OpenCode */
+.mrx-fe-hero[data-tono='ia'] {
+  --halo: rgba(14, 116, 144, 0.5);
+  --trazo: rgba(250, 178, 131, 0.85);
+  --relleno: linear-gradient(115deg, #fab283 0%, #f472b6 50%, #22d3ee 100%);
+}
+.mrx-fe-hero__fondo {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background:
+    radial-gradient(46% 54% at 76% 46%, var(--halo), transparent 70%),
+    radial-gradient(40% 40% at 12% 10%, rgba(76, 29, 149, 0.45), transparent 70%),
+    var(--fondo);
+}
+.mrx-fe-hero__trama {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: var(--hex) 0 0 / 28px auto;
+  opacity: 0.2;
+  -webkit-mask-image: radial-gradient(55% 70% at 76% 46%, #000, transparent 75%);
+  mask-image: radial-gradient(55% 70% at 76% 46%, #000, transparent 75%);
+}
+.mrx-fe-hero .mrx-panal { z-index: -1; }
+.mrx-fe-panal--a { top: 4%; left: 40%; opacity: 0.45; }
+.mrx-fe-panal--b { right: -3%; bottom: 4%; rotate: 180deg; opacity: 0.55; }
+@media (max-width: 900px) {
+  .mrx-fe-panal--a { top: 1%; left: auto; right: -10%; }
+  .mrx-fe-panal--b { right: auto; left: -12%; }
+}
+
+.mrx-fe-hero__marco {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+  gap: clamp(32px, 5vw, 80px);
+  align-items: center;
+  width: 100%;
+  max-width: 1280px;
+  margin-inline: auto;
+}
+@media (max-width: 900px) {
+  .mrx-fe-hero__marco { grid-template-columns: minmax(0, 1fr); }
+}
+
+.mrx-fe-hero__titulo {
+  margin-top: 22px;
+  font-size: clamp(38px, 5.6vw, 84px);
+  line-height: 0.88;
+  white-space: nowrap;
+}
+.mrx-fe-hero__titulo .mrx-mask { width: max-content; }
+.mrx-fe-hero__titulo em { font-style: normal; color: var(--acento); }
+/* en la portada de front-end el relleno tira a fucsia, como su capa en el inicio */
+.mrx-fe-hero .mrx-fill { -webkit-text-stroke-color: var(--trazo); }
+.mrx-fe-hero .mrx-fill::after { background-image: var(--relleno); }
+
+.mrx-fe-hero__bajada {
+  margin-top: 24px;
+  max-width: 48ch;
+  font-size: clamp(14px, 1.25vw, 17px);
+  line-height: 1.6;
+  color: var(--mute);
+}
+.mrx-fe-hero__acciones { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+@media (max-width: 760px) {
+  .mrx-fe-hero__acciones { gap: 8px; }
+  .mrx-fe-hero__acciones .mrx-cta { padding: 14px 16px; font-size: 10.5px; letter-spacing: 0.14em; }
+}
+
+/* ---------- editor ---------- */
+.mrx-fe-editor { position: relative; padding-bottom: 56px; }
+.mrx-fe-editor .mrx-term__cuerpo { padding: 0; }
+.mrx-fe-editor__pestanas {
+  display: flex;
+  border-bottom: 1px solid var(--line);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.mrx-fe-editor__pestanas button {
+  flex: 0 0 auto;
+  padding: 9px 16px;
+  border-right: 1px solid var(--line);
+  font-size: 11.5px;
+  color: var(--mute);
+  cursor: pointer;
+  transition: color 0.25s, background-color 0.25s, box-shadow 0.25s;
+}
+.mrx-fe-editor__pestanas button:hover { color: var(--texto); }
+.mrx-fe-editor__pestanas button[aria-selected='true'] {
+  background: rgba(167, 139, 250, 0.1);
+  box-shadow: inset 0 -2px var(--acento);
+  color: var(--texto);
+}
+.mrx-fe-editor__codigo {
+  /* alto fijo: la ventana no salta al cambiar de archivo */
+  height: 226px;
+  padding: 16px 16px 16px 0;
+  font-size: clamp(11px, 1.05vw, 13.5px);
+  line-height: 1.9;
+  overflow: hidden;
+}
+.mrx-fe-editor__codigo p {
+  white-space: pre;
+  opacity: 0;
+  animation: mrx-fade-in 0.4s forwards;
+}
+.mrx-fe-editor__num {
+  display: inline-block;
+  width: 40px;
+  padding-right: 14px;
+  text-align: right;
+  color: rgba(145, 137, 168, 0.5);
+  user-select: none;
+}
+
+/* la vista previa asoma por la esquina, como otra ventana encima */
+.mrx-fe-vista {
+  position: absolute;
+  right: clamp(12px, 3vw, 36px);
+  bottom: 0;
+  width: min(250px, 62%);
+  border: 1px solid var(--line-fuerte);
+  border-radius: 10px;
+  background: var(--superficie-2);
+  box-shadow: 0 24px 60px -20px rgba(124, 58, 237, 0.8);
+  overflow: hidden;
+}
+.mrx-fe-vista__barra {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 7px 10px;
+  border-bottom: 1px solid var(--line);
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--mute);
+}
+.mrx-fe-vista__barra i { width: 7px; height: 7px; border-radius: 50%; background: var(--line-fuerte); }
+.mrx-fe-vista__barra span { margin-left: 6px; }
+.mrx-fe-vista__pagina { display: grid; gap: 10px; justify-items: start; padding: 16px; }
+.mrx-fe-vista__pagina b { font-size: 20px; letter-spacing: -0.03em; color: var(--acento); }
+.mrx-fe-vista__pagina span {
+  padding: 6px 16px;
+  border-radius: 6px;
+  background: var(--morado-claro);
+  font-size: 12px;
+  font-weight: 600;
+  color: #fff;
+}
+
+/* ---------- la ruta ---------- */
+.mrx-fe-ruta {
+  position: relative;
+  padding: clamp(56px, 8vw, 110px) var(--pad);
+  border-top: 1px solid var(--line);
+  background: var(--fondo);
+  scroll-margin-top: var(--topbar);
+}
+.mrx-fe-ruta__pasos {
+  display: grid;
+  /* seis pasos: tres por fila, dos en tableta y uno en móvil */
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(14px, 2vw, 24px);
+  margin-top: clamp(18px, 3vw, 36px);
+}
+@media (max-width: 900px) {
+  .mrx-fe-ruta__pasos { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 520px) {
+  .mrx-fe-ruta__pasos { grid-template-columns: minmax(0, 1fr); }
+}
+.mrx-fe-paso {
+  position: relative;
+  display: grid;
+  gap: 6px;
+  height: 100%;
+  padding: 22px 22px 20px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background:
+    linear-gradient(160deg, color-mix(in srgb, var(--tinte) 9%, transparent), transparent 55%),
+    var(--superficie);
+  color: var(--texto);
+  overflow: hidden;
+  transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+}
+a.mrx-fe-paso:hover {
+  border-color: color-mix(in srgb, var(--tinte) 70%, transparent);
+  transform: translateY(-4px);
+  box-shadow: 0 24px 60px -28px var(--tinte);
+}
+/* la celda hexagonal del icono */
+.mrx-fe-paso__celda {
+  display: grid;
+  place-items: center;
+  width: 54px;
+  height: 60px;
+  margin-bottom: 10px;
+  clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
+  background: color-mix(in srgb, var(--tinte) 16%, transparent);
+  font-size: 26px;
+  color: var(--tinte);
+}
+.mrx-fe-paso__indice {
+  position: absolute;
+  top: 18px;
+  right: 20px;
+  font-size: 30px;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  color: transparent;
+  -webkit-text-stroke: 1px color-mix(in srgb, var(--tinte) 55%, transparent);
+}
+.mrx-fe-paso h3 { font-size: 21px; font-weight: 700; letter-spacing: -0.02em; }
+.mrx-fe-paso p { font-size: 14.5px; line-height: 1.55; color: var(--mute); }
+.mrx-fe-paso__pie {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 12px;
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--tinte);
+}
+.mrx-fe-paso__pie i { display: block; width: 22px; height: 1px; background: currentColor; transition: width 0.3s ease; }
+a.mrx-fe-paso:hover .mrx-fe-paso__pie i { width: 44px; }
+.mrx-fe-paso--pronto { border-style: dashed; }
+.mrx-fe-paso--pronto .mrx-fe-paso__celda { filter: grayscale(0.6); opacity: 0.7; }
+.mrx-fe-paso--pronto .mrx-fe-paso__pie { color: var(--mute); }
+
+
+/* la variante de terminal: la respuesta de la API en vez de una página */
+.mrx-fe-vista--terminal .mrx-fe-vista__pagina { gap: 4px; font-family: var(--mono); font-size: 12px; }
+.mrx-fe-vista--terminal .mrx-fe-vista__pagina b { font-size: 15px; letter-spacing: 0; }
+.mrx-fe-vista--terminal .mrx-fe-vista__pagina span {
+  padding: 0;
+  border-radius: 0;
+  background: none;
+  font-weight: 400;
+  color: var(--mute);
+}
+.mrx-fe-vista--terminal .mrx-fe-vista__pagina .t-verde { color: var(--verde); }
+
+@media (prefers-reduced-motion: reduce) {
+  .mrx-fe-editor__codigo p { animation: none; opacity: 1; }
+}

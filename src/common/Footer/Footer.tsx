@@ -1,149 +1,108 @@
-import { motion } from "framer-motion";
-import {
-  FaDumbbell,
-  FaGithub,
-  FaGlobe,
-  FaWhatsapp
-} from "react-icons/fa";
+import { FaGithub, FaGlobe, FaWhatsapp } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import "./footer.css";
+
+interface EnlacePie {
+  texto: string;
+  /** Sin enlace: la sección todavía no existe. */
+  link?: string;
+}
+
+const COLUMNAS: { titulo: string; enlaces: EnlacePie[] }[] = [
+  {
+    titulo: "Enlaces",
+    enlaces: [
+      { texto: "Inicio", link: "/" },
+      { texto: "Front-end", link: "/frontend" },
+      { texto: "Módulos Estáticos", link: "/modulosestaticos" },
+    ],
+  },
+  {
+    titulo: "Módulos",
+    enlaces: [
+      { texto: "Módulos Estáticos", link: "/modulosestaticos" },
+      { texto: "Módulos Dinámicos", link: "/modulosdinamicos" },
+      { texto: "Módulos Animados" },
+    ],
+  },
+  {
+    titulo: "Programación",
+    enlaces: [
+      { texto: "Front-end", link: "/frontend" },
+      { texto: "Spring Boot", link: "/springbootinfo" },
+      { texto: "Prompt Libre · IA", link: "/promptlibre" },
+    ],
+  },
+];
+
+const REDES = [
+  { nombre: "GitHub", url: "https://github.com/MarxAlonso", Icon: FaGithub },
+  { nombre: "Portafolio", url: "https://developer-marx.netlify.app/", Icon: FaGlobe },
+  { nombre: "WhatsApp", url: "https://wa.me/922061911", Icon: FaWhatsapp },
+];
 
 export const Footer = () => {
-  const fadeInUp = {
-    initial: { y: 50, opacity: 0 },
-    animate: { y: 0, opacity: 1 },
-    transition: { duration: 0.5 }
-  };
-
   return (
-    <motion.div 
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.5 }}
-      className="bg-gradient-to-br from-gray-900 via-purple-900 to-black rounded-t-3xl shadow-lg shadow-purple-500/20"
-    >
-      <div className="container mx-auto px-4">
-        <div className="grid md:grid-cols-4 gap-8 py-12 border-t-2 border-purple-500/20 text-white">
+    <footer className="mrx-pie mrx-oscura">
+      <span className="mrx-pie__trama" aria-hidden="true" />
+      {/* el haz que cierra la página, como el que suelda el rail */}
+      <span className="mrx-pie__haz" aria-hidden="true" />
+
+      <div className="mrx-pie__marco">
+        <div className="mrx-pie__rejilla">
           {/* Logo y descripción */}
-          <motion.div 
-            {...fadeInUp}
-            className="py-8 px-4 space-y-6"
-          >
-            <motion.div 
-              whileHover={{ scale: 1.05 }}
-              className="text-2xl flex items-center gap-2 font-bold uppercase"
-            >
-              <FaDumbbell className="text-purple-400" />
-              <p>CODERS</p>
-              <p className="bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent">MRX</p>
-            </motion.div>
-            <p className="text-gray-300">
+          <div className="mrx-pie__marca">
+            <Link to="/" className="mrx-pie__logo">
+              <img src="/hacker.png" alt="" width="44" height="44" />
+              <span>Coders <em>MRX</em></span>
+            </Link>
+            <p>
               Explora nuestra colección de diseños HTML y CSS listos para usar.
               Encuentra inspiración y mejora tus proyectos web.
             </p>
-            <div className="flex items-center gap-6 !mt-8">
-              <motion.a
-                href="https://github.com/MarxAlonso"
-                target="_blank"
-                rel="noopener noreferrer"
-                whileHover={{ scale: 1.2, color: "#8B5CF6" }}
-                whileTap={{ scale: 0.9 }}
-                className="text-3xl text-gray-300 hover:text-purple-500 transition-colors"
-              >
-                <FaGithub />
-              </motion.a>
-              <motion.a
-                href="https://developer-marx.netlify.app/"
-                target="_blank"
-                rel="noopener noreferrer"
-                whileHover={{ scale: 1.2, color: "#8B5CF6" }}
-                whileTap={{ scale: 0.9 }}
-                className="text-3xl text-gray-300 hover:text-purple-500 transition-colors"
-              >
-                <FaGlobe />
-              </motion.a>
-              <motion.a
-                href="https://wa.me/922061911"
-                target="_blank"
-                rel="noopener noreferrer"
-                whileHover={{ scale: 1.2, color: "#8B5CF6" }}
-                whileTap={{ scale: 0.9 }}
-                className="text-3xl text-gray-300 hover:text-purple-500 transition-colors"
-              >
-                <FaWhatsapp />
-              </motion.a>
+            <div className="mrx-pie__redes">
+              {REDES.map(({ nombre, url, Icon }) => (
+                <a key={nombre} href={url} target="_blank" rel="noopener noreferrer" aria-label={nombre} title={nombre}>
+                  <Icon />
+                </a>
+              ))}
             </div>
-          </motion.div>
-
-          {/* Links Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-3 md:col-span-3 gap-8">
-            {/* Enlaces Importantes */}
-            <motion.div {...fadeInUp} className="py-8 px-4">
-              <h2 className="text-xl font-bold mb-6 bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent">
-                Enlaces Importantes
-              </h2>
-              <ul className="flex flex-col gap-4">
-                <motion.li whileHover={{ x: 5 }} className="transition-colors">
-                  <Link to="/" className="text-gray-300 hover:text-purple-400">Inicio</Link>
-                </motion.li>
-                <motion.li whileHover={{ x: 5 }} className="transition-colors">
-                  <Link to="/frontend" className="text-gray-300 hover:text-purple-400">Front-end</Link>
-                </motion.li>
-                <motion.li whileHover={{ x: 5 }} className="transition-colors">
-                  <Link to="/modulosestaticos" className="text-gray-300 hover:text-purple-400">Módulos Estáticos</Link>
-                </motion.li>
-              </ul>
-            </motion.div>
-
-            {/* Módulos */}
-            <motion.div {...fadeInUp} className="py-8 px-4">
-              <h2 className="text-xl font-bold mb-6 bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent">
-                Módulos
-              </h2>
-              <ul className="flex flex-col gap-4">
-                <motion.li whileHover={{ x: 5 }} className="transition-colors">
-                  <Link to="/modulosestaticos" className="text-gray-300 hover:text-purple-400">Módulos Estáticos</Link>
-                </motion.li>
-                <motion.li whileHover={{ x: 5 }} className="transition-colors">
-                  <Link to="/modulosdinamicos" className="text-gray-300 hover:text-purple-400">Módulos Dinámicos</Link>
-                </motion.li>
-                <motion.li whileHover={{ x: 5 }} className="transition-colors">
-                  <Link to="#" className="text-gray-300 hover:text-purple-400">Módulos Animados</Link>
-                </motion.li>
-              </ul>
-            </motion.div>
-
-            {/* Programación */}
-            <motion.div {...fadeInUp} className="py-8 px-4">
-              <h2 className="text-xl font-bold mb-6 bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent">
-                Programación
-              </h2>
-              <ul className="flex flex-col gap-4">
-                <motion.li whileHover={{ x: 5 }} className="transition-colors">
-                  <Link to="/frontend" className="text-gray-300 hover:text-purple-400">Front-end</Link>
-                </motion.li>
-                <motion.li whileHover={{ x: 5 }} className="transition-colors">
-                  <Link to="/springbootinfo" className="text-gray-300 hover:text-purple-400">Spring Boot</Link>
-                </motion.li>
-                <motion.li whileHover={{ x: 5 }} className="transition-colors">
-                  <Link to="#" className="text-gray-300 hover:text-purple-400">Frameworks</Link>
-                </motion.li>
-              </ul>
-            </motion.div>
           </div>
+
+          {COLUMNAS.map((columna, i) => (
+            <nav key={columna.titulo} aria-label={columna.titulo}>
+              <h2 className="mrx-hud">
+                <span className="mrx-num">0{i + 1}</span> {columna.titulo}
+              </h2>
+              <ul>
+                {columna.enlaces.map((enlace) => (
+                  <li key={enlace.texto}>
+                    {enlace.link ? (
+                      <Link to={enlace.link}>{enlace.texto}</Link>
+                    ) : (
+                      <span className="mrx-pie__pronto">
+                        {enlace.texto} <small>Pronto</small>
+                      </span>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          ))}
         </div>
 
+        <p className="mrx-display mrx-pie__letrero" aria-hidden="true">
+          Coders MRX
+        </p>
+
         {/* Copyright Section */}
-        <motion.div 
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.5 }}
-          className="text-center py-6 border-t border-purple-500/20"
-        >
-          <span className="text-sm text-gray-400">
-            © {new Date().getFullYear()} Marx Chipana. Todos los derechos reservados.
+        <div className="mrx-pie__base">
+          <span>© {new Date().getFullYear()} Marx Chipana. Todos los derechos reservados.</span>
+          <span className="mrx-pie__prompt" aria-hidden="true">
+            <b>marx@coders</b>:<i>~</i>$ exit<span className="mrx-term__cursor" />
           </span>
-        </motion.div>
+        </div>
       </div>
-    </motion.div>
+    </footer>
   );
 };

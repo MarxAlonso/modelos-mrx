@@ -1,0 +1,30 @@
+.mrx-panal {
+  position: absolute;
+  z-index: 2;
+  width: clamp(170px, 20vw, 290px);
+  pointer-events: none;
+  overflow: visible;
+}
+.mrx-panal path {
+  fill: none;
+  stroke: var(--acento);
+  stroke-width: 1.2;
+  /* el trazo recorre la celda, como si se estuviera imprimiendo */
+  stroke-dasharray: 46 134;
+  opacity: 0.5;
+  animation: mrx-panal-trazo 6.5s linear infinite;
+}
+.mrx-panal circle {
+  fill: var(--lila);
+  animation: mrx-panal-nodo 3.4s ease-in-out infinite;
+}
+@keyframes mrx-panal-trazo { to { stroke-dashoffset: -180; } }
+@keyframes mrx-panal-nodo {
+  0%, 100% { opacity: 0.25; r: 2; }
+  50% { opacity: 1; r: 3.4; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mrx-panal path,
+  .mrx-panal circle { animation: none; }
+}

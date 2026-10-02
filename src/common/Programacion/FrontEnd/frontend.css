@@ -1,0 +1,100 @@
+/* Página Front-End: la sección «tu viaje». La portada y la ruta viven en
+   Ruta/ruta.css, que comparte con la página de Spring Boot. */
+/* ---------- tu viaje ---------- */
+.mrx-fe-viaje {
+  position: relative;
+  padding: clamp(56px, 8vw, 110px) var(--pad);
+  border-top: 1px solid var(--line);
+  background:
+    radial-gradient(40% 50% at 100% 0%, rgba(76, 29, 149, 0.4), transparent 70%),
+    var(--fondo);
+  overflow: hidden;
+}
+.mrx-fe-viaje__trama {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: var(--hex) 0 0 / 28px auto;
+  opacity: 0.12;
+  -webkit-mask-image: radial-gradient(45% 60% at 100% 0%, #000, transparent 72%);
+  mask-image: radial-gradient(45% 60% at 100% 0%, #000, transparent 72%);
+}
+.mrx-fe-viaje__bajada { max-width: 52ch; font-size: 15px; line-height: 1.6; color: var(--mute); }
+
+.mrx-fe-viaje__ventana { margin-top: clamp(14px, 2.4vw, 28px); }
+.mrx-fe-viaje__ventana .mrx-term__cuerpo { padding: 0; }
+.mrx-fe-viaje__pestanas {
+  display: flex;
+  border-bottom: 1px solid var(--line);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.mrx-fe-viaje__pestanas button {
+  flex: 0 0 auto;
+  padding: 11px 18px;
+  border-right: 1px solid var(--line);
+  font-size: 11.5px;
+  color: var(--mute);
+  cursor: pointer;
+  transition: color 0.25s, background-color 0.25s, box-shadow 0.25s;
+}
+.mrx-fe-viaje__pestanas button .mrx-num { color: var(--acento); }
+.mrx-fe-viaje__pestanas button:hover { color: var(--texto); }
+.mrx-fe-viaje__pestanas button[aria-pressed='true'] {
+  background: rgba(167, 139, 250, 0.1);
+  box-shadow: inset 0 -2px var(--acento);
+  color: var(--texto);
+}
+.mrx-fe-viaje__comando { padding: 16px clamp(16px, 3vw, 32px) 0; }
+.mrx-fe-viaje__lamina {
+  /* alto mínimo: la ventana no salta entre láminas de distinto largo */
+  min-height: 250px;
+  padding: 18px clamp(16px, 3vw, 32px) 30px;
+  overflow: hidden;
+}
+@media (max-width: 600px) {
+  .mrx-fe-viaje__lamina { min-height: 330px; }
+}
+.mrx-fe-viaje__icono { font-size: 40px; }
+.mrx-fe-viaje__lamina h3 {
+  margin-top: 14px;
+  font-family: var(--sans);
+  font-size: clamp(22px, 2.6vw, 32px);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+}
+.mrx-fe-viaje__lamina p {
+  margin-top: 10px;
+  max-width: 70ch;
+  font-family: var(--sans);
+  font-size: clamp(14.5px, 1.2vw, 16.5px);
+  line-height: 1.7;
+  white-space: normal;
+  color: var(--mute);
+}
+
+.mrx-fe-consejos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+  gap: clamp(16px, 2.4vw, 28px);
+  margin-top: clamp(16px, 2.4vw, 28px);
+}
+.mrx-fe-consejo { height: 100%; transition: border-color 0.3s, transform 0.3s; }
+.mrx-fe-consejo:hover { border-color: var(--line-fuerte); transform: translateY(-4px); }
+.mrx-fe-consejo .mrx-term__cuerpo { padding: 14px 18px 22px; }
+.mrx-fe-consejo__icono { margin-top: 18px; font-size: 32px; }
+.mrx-fe-consejo h4 {
+  margin-top: 14px;
+  font-family: var(--sans);
+  font-size: 19px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+.mrx-fe-consejo .mrx-fe-consejo__texto {
+  margin-top: 8px;
+  font-family: var(--sans);
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: var(--mute);
+}

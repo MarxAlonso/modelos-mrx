@@ -297,33 +297,6 @@ export const disenos: Diseno[] = [
     },
   },
   {
-    id: 2,
-    titulo: "Formulario de Contacto Moderno",
-    categoria: "Formularios",
-    descripcion: "Formulario elegante con efectos de hover y validación visual",
-    imagen: "url_to_navbar_preview",
-    dificultad: "Básico",
-    codigo: {
-      html: `<!-- Código del formulario -->`,
-      css: `/* Estilos del formulario */`,
-      js: ``,
-    },
-  },
-  {
-    id: 3,
-    titulo: "Navbar Responsiva",
-    categoria: "Navegación",
-    descripcion:
-      "Barra de navegación con menú hamburguesa y animaciones suaves",
-    imagen: "url_to_navbar_preview",
-    dificultad: "Intermedio",
-    codigo: {
-      html: `<!-- Código de la navbar -->`,
-      css: `/* Estilos de la navbar */`,
-      js: ``,
-    },
-  },
-  {
     id: 4,
     titulo: "Banner 1 Responsiva",
     categoria: "Heroes",

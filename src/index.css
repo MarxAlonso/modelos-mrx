@@ -3,6 +3,45 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ============================================================
+   Sistema visual: HUD técnico sobre morado oscuro.
+   Tokens y primitivas que comparten el menú, el hero, las
+   terminales y el loader. Todo lleva el prefijo `mrx-` para no
+   chocar con el HTML de los ejemplos que se inyecta en la página.
+   ============================================================ */
+:root {
+  --morado: #4c1d95;
+  --morado-claro: #7c3aed;
+  --lila: #c4b5fd;
+  --verde: #4ade80;
+
+  --mono: 'JetBrains Mono Variable', ui-monospace, 'Cascadia Mono', Consolas, Menlo, monospace;
+  --sans: 'Onest Variable', ui-sans-serif, system-ui, sans-serif;
+
+  --pad: clamp(20px, 4vw, 64px);
+  /* ancho del rail; en móvil desaparece y manda la barra superior */
+  --rail: 88px;
+  --topbar: 0px;
+
+  --fondo: #07040f;
+  --superficie: #0e0919;
+  --superficie-2: #150d26;
+  --texto: #ece8f7;
+  --mute: #9189a8;
+  --line: rgba(255, 255, 255, 0.11);
+  --line-fuerte: rgba(167, 139, 250, 0.38);
+  --acento: #a78bfa;
+  --cta-alt-bg: #a78bfa;
+  --cta-alt-fg: #0d0620;
+
+  /* celda hexagonal del efecto de ensamblaje y de las tramas */
+  --hex: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='49' viewBox='0 0 28 49'%3E%3Cpath fill='%23a78bfa' d='M13.99 9.25l13 7.5v15l-13 7.5L1 31.75v-15l12.99-7.5zM3 17.9v12.7l10.99 6.34 11-6.35V17.9l-11-6.34L3 17.9zM0 15l12.98-7.5V0h-2v6.35L0 12.69v2.3zm0 18.5L12.98 41v8h-2v-6.85L0 35.81v-2.3zM15 0v7.5L27.99 15H28v-2.31h-.01L17 6.35V0h-2zm0 49v-8l12.99-7.5H28v2.31h-.01L17 42.15V49h-2z'/%3E%3C/svg%3E");
+}
+
+@media (max-width: 759px) {
+  :root { --rail: 0px; --topbar: 60px; }
+}
+
 @layer components{
     .primary-btn{
         @apply bg-primary text-white font-semibold py-3 px-6 rounded-md hover:!scale-110 duration-300;
@@ -16,6 +55,14 @@
 }
 
 @layer base {
+    body {
+        /* el contenido deja libre el rail (escritorio) o la barra superior (móvil) */
+        padding-left: var(--rail);
+        padding-top: var(--topbar);
+        background: var(--fondo);
+        font-family: var(--sans);
+    }
+
     ::selection {
         @apply bg-purple-900 text-white;
     }
@@ -36,4 +83,223 @@
     ::-webkit-scrollbar-thumb:hover {
         @apply bg-purple-900;
     }
-}
+}
+
+.mrx-oscura {
+  color-scheme: dark;
+  color: var(--texto);
+  font-family: var(--sans);
+}
+
+/* ---------- Primitivas ---------- */
+
+/* micro tipografía técnica del HUD */
+.mrx-hud {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  font-weight: 500;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--acento);
+}
+.mrx-hud--mute { color: var(--mute); }
+
+.mrx-display {
+  font-weight: 700;
+  letter-spacing: -0.045em;
+  line-height: 0.9;
+  text-transform: uppercase;
+}
+
+.mrx-titulo-seccion {
+  font-size: clamp(28px, 4vw, 48px);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  text-transform: uppercase;
+  color: var(--texto);
+}
+.mrx-titulo-seccion em { font-style: normal; color: var(--acento); }
+
+.mrx-num {
+  font-family: var(--mono);
+  font-variant-numeric: tabular-nums;
+}
+
+/* titular que sube desde una máscara */
+.mrx-mask {
+  display: block;
+  overflow: hidden;
+  /* el padding evita que el recorte coma las tildes de las mayúsculas */
+  padding-top: 0.14em;
+  margin-top: -0.14em;
+}
+.mrx-mask > span {
+  display: block;
+  transform: translate3d(0, 105%, 0);
+  transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* palabra en contorno que se rellena, como un trazo que se ilumina */
+.mrx-fill {
+  position: relative;
+  display: inline-block;
+  color: transparent;
+  -webkit-text-stroke: 1.4px rgba(167, 139, 250, 0.85);
+}
+.mrx-fill::after {
+  content: attr(data-word);
+  position: absolute;
+  left: 0;
+  top: 0;
+  -webkit-text-stroke: 0;
+  color: transparent;
+  background-image: linear-gradient(115deg, var(--morado-claro) 0%, var(--acento) 55%, #ede9fe 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  clip-path: inset(-0.2em 100% -0.2em 0);
+  animation: mrx-fill-x 1.8s cubic-bezier(0.7, 0, 0.2, 1) 1.1s forwards;
+}
+@media (max-width: 759px) {
+  .mrx-fill { -webkit-text-stroke-width: 0.8px; }
+}
+
+/* ---------- Animaciones ---------- */
+
+/* `--nano` es el frente del ensamblaje «nanotecnológico»: por debajo del 0 %
+   la pieza está desmontada y al 150 % está completa. Se registra como
+   porcentaje para que se pueda animar con una transición. */
+@property --nano {
+  syntax: '<percentage>';
+  inherits: true;
+  initial-value: 150%;
+}
+@keyframes mrx-nano-chispa { 50% { opacity: 0.55; } }
+@keyframes mrx-rise { to { transform: none; } }
+@keyframes mrx-fill-x { to { clip-path: inset(-0.2em 0 -0.2em 0); } }
+@keyframes mrx-fade-in { to { opacity: 1; } }
+@keyframes mrx-parpadeo { 50% { opacity: 0; } }
+
+.mrx-rise { animation: mrx-rise 1.1s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+.mrx-fade { opacity: 0; animation: mrx-fade-in 1s forwards; }
+
+/* botón de acción: mono, versalitas y el tracking que se abre al hover */
+.mrx-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  padding: 19px 30px;
+  font-family: var(--mono);
+  font-size: 11.5px;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  transition:
+    background-color 0.25s ease,
+    color 0.25s ease,
+    border-color 0.25s ease,
+    letter-spacing 0.25s ease;
+}
+.mrx-cta:hover { letter-spacing: 0.28em; }
+.mrx-cta i {
+  display: block;
+  width: 26px;
+  height: 1px;
+  background: currentColor;
+  transition: width 0.3s ease;
+}
+.mrx-cta:hover i { width: 44px; }
+
+.mrx-cta--lleno { background: var(--morado); color: #fff; }
+.mrx-cta--lleno:hover { background: var(--cta-alt-bg); color: var(--cta-alt-fg); }
+.mrx-cta--linea { border: 1px solid var(--line); color: var(--texto); }
+.mrx-cta--linea:hover { border-color: var(--acento); color: var(--acento); }
+
+/* ---------- Ventana de terminal (PowerShell / Linux) ---------- */
+.mrx-term {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: rgba(10, 6, 20, 0.92);
+  box-shadow:
+    0 30px 80px -30px rgba(76, 29, 149, 0.7),
+    0 0 0 1px rgba(167, 139, 250, 0.05);
+  overflow: hidden;
+  font-family: var(--mono);
+  font-size: 12px;
+  line-height: 1.65;
+  color: var(--texto);
+}
+.mrx-term__barra {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.035);
+}
+.mrx-term__titulo {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  font-size: 11px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--mute);
+}
+/* Linux: los tres semáforos a la izquierda y el título centrado */
+.mrx-term__luces { display: flex; gap: 6px; }
+.mrx-term__luces i { width: 10px; height: 10px; border-radius: 50%; background: #ff5f57; }
+.mrx-term__luces i:nth-child(2) { background: #febc2e; }
+.mrx-term__luces i:nth-child(3) { background: #28c840; }
+.mrx-term--linux .mrx-term__titulo { text-align: center; }
+/* PowerShell: icono a la izquierda y controles de ventana a la derecha */
+.mrx-term__ps {
+  flex: 0 0 auto;
+  padding: 0 5px;
+  border-radius: 3px;
+  background: var(--morado);
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1.6;
+  color: #fff;
+}
+.mrx-term__controles { display: flex; gap: 12px; color: var(--mute); }
+.mrx-term__controles svg { width: 10px; height: 10px; fill: none; stroke: currentColor; stroke-width: 1.2; }
+.mrx-term__cuerpo { padding: 10px 14px 12px; }
+.mrx-term__cuerpo p { margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; }
+.mrx-term .t-mute { color: var(--mute); }
+.mrx-term .t-acento { color: var(--acento); }
+.mrx-term .t-verde { color: var(--verde); }
+.mrx-term .t-lila { color: var(--lila); }
+.mrx-term__cursor {
+  display: inline-block;
+  width: 7px;
+  height: 1.1em;
+  margin-left: 2px;
+  vertical-align: text-bottom;
+  background: var(--acento);
+  animation: mrx-parpadeo 1.1s steps(1) infinite;
+}
+
+/* ---------- Loader a pantalla completa ---------- */
+.mrx-loader {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: 18px;
+  background:
+    radial-gradient(40% 40% at 50% 46%, rgba(76, 29, 149, 0.45), transparent 70%),
+    var(--fondo);
+}
+.mrx-loader--bloque { position: static; height: 100%; min-height: 160px; background: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .mrx-rise { animation: none; transform: none; }
+  .mrx-fade { animation: none; opacity: 1; }
+  .mrx-mask > span { transform: none; transition: none; }
+  .mrx-fill::after { clip-path: none; animation: none; }
+  .mrx-term__cursor { animation: none; }
+}

@@ -1,5 +1,7 @@
 import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
+import "@fontsource-variable/onest";
+import "@fontsource-variable/jetbrains-mono";
 import "./index.css";
 import { BrowserRouter } from "react-router-dom";
 

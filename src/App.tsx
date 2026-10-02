@@ -1,5 +1,6 @@
 import { lazy, Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
+import { Loader } from "./common/Loader/Loader";
 
 const HomePage = lazy(() => import("./pages/HomePage/HomePage").then(m => ({ default: m.HomePage })));
 const ModelosEstaticosPage = lazy(() => import("./pages/ModulosPage/ModelosEstaticosPage").then(m => ({ default: m.ModelosEstaticosPage })));
@@ -14,14 +15,15 @@ const AprendiendoJavaPage = lazy(() => import("./pages/Programacion/SpringBootPa
 const AprendiendoPOOPage = lazy(() => import("./pages/Programacion/SpringBootPage/AprendiendoPOOPage").then(m => ({ default: m.AprendiendoPOOPage })));
 const AprendiendoSpringCorePage = lazy(() => import("./pages/Programacion/SpringBootPage/AprendiendoSpringCorePage").then(m => ({ default: m.AprendiendoSpringCorePage })));
 const SpringBootPage = lazy(() => import("./pages/Programacion/SpringBootPage/SpringBootPage").then(m => ({ default: m.SpringBootPage })));
+const PromptLibreInfoPage = lazy(() => import("./pages/Programacion/IAPage/PromptLibreInfoPage").then(m => ({ default: m.PromptLibreInfoPage })));
+const AprendiendoOpenCodePage = lazy(() => import("./pages/Programacion/IAPage/AprendiendoOpenCodePage").then(m => ({ default: m.AprendiendoOpenCodePage })));
+const AprendiendoPromptsPage = lazy(() => import("./pages/Programacion/IAPage/AprendiendoPromptsPage").then(m => ({ default: m.AprendiendoPromptsPage })));
+const AprendiendoSkillsPage = lazy(() => import("./pages/Programacion/IAPage/AprendiendoSkillsPage").then(m => ({ default: m.AprendiendoSkillsPage })));
+const ProyectosIAPage = lazy(() => import("./pages/Programacion/IAPage/ProyectosIAPage").then(m => ({ default: m.ProyectosIAPage })));
 
 function App() {
   return (
-    <Suspense fallback={
-      <div className="min-h-screen bg-black flex items-center justify-center">
-        <div className="w-8 h-8 border-4 border-purple-500 border-t-transparent rounded-full animate-spin" />
-      </div>
-    }>
+    <Suspense fallback={<Loader />}>
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/modulosestaticos" element={<ModelosEstaticosPage />} />
@@ -36,6 +38,11 @@ function App() {
         <Route path="/aprendiendopoo" element={<AprendiendoPOOPage />} />
         <Route path="/aprendiendospringcore" element={<AprendiendoSpringCorePage />} />
         <Route path="/springboot" element={<SpringBootPage />} />
+        <Route path="/promptlibre" element={<PromptLibreInfoPage />} />
+        <Route path="/aprendiendoopencode" element={<AprendiendoOpenCodePage />} />
+        <Route path="/aprendiendoprompts" element={<AprendiendoPromptsPage />} />
+        <Route path="/aprendiendoskills" element={<AprendiendoSkillsPage />} />
+        <Route path="/proyectosia" element={<ProyectosIAPage />} />
       </Routes>
     </Suspense>
   );

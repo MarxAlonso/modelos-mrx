@@ -1,0 +1,666 @@
+/*
+  La pila full-stack: tres capas isométricas con una ficha por tecnología.
+  Todo es HTML y CSS 3D; `Home.tsx` la mueve y rota la portada.
+*/
+.mrx-hero {
+  --cinta: 46px;
+  /* margen lateral del contenido: en pantallas anchas lo centra en un marco
+     de 1280px en vez de dejarlo pegado al borde */
+  --margen: max(var(--pad), calc(50vw - 640px));
+  position: relative;
+  isolation: isolate;
+  /* a sangre: pasa por debajo del rail */
+  margin-left: calc(var(--rail) * -1);
+  height: 100svh;
+  min-height: 600px;
+  overflow: hidden;
+}
+@media (min-width: 768px) {
+  .mrx-hero { min-height: 660px; }
+}
+@media (max-width: 759px) {
+  /* en móvil descuenta la barra superior */
+  .mrx-hero { height: calc(100svh - var(--topbar)); min-height: 600px; }
+}
+
+/* ---------- fondo ---------- */
+.mrx-hero__fondo {
+  position: absolute;
+  inset: -4%;
+  z-index: 0;
+  transition: opacity 1.2s ease;
+}
+.mrx-hero__fondo--0 {
+  background:
+    radial-gradient(46% 50% at 72% 48%, rgba(76, 29, 149, 0.62), transparent 70%),
+    radial-gradient(40% 40% at 18% 14%, rgba(167, 139, 250, 0.1), transparent 70%),
+    var(--fondo);
+}
+.mrx-hero__fondo--1 {
+  background:
+    radial-gradient(46% 50% at 72% 48%, rgba(112, 26, 117, 0.6), transparent 70%),
+    radial-gradient(40% 40% at 18% 14%, rgba(167, 139, 250, 0.1), transparent 70%),
+    var(--fondo);
+}
+.mrx-hero__fondo--2 {
+  background:
+    radial-gradient(46% 50% at 72% 48%, rgba(49, 46, 129, 0.72), transparent 70%),
+    radial-gradient(40% 40% at 18% 14%, rgba(232, 121, 249, 0.08), transparent 70%),
+    var(--fondo);
+}
+.mrx-hero__fondo--3 {
+  background:
+    radial-gradient(46% 50% at 72% 48%, rgba(131, 24, 67, 0.6), transparent 70%),
+    radial-gradient(40% 40% at 18% 14%, rgba(167, 139, 250, 0.12), transparent 70%),
+    var(--fondo);
+}
+.mrx-hero__fondo--1,
+.mrx-hero__fondo--2,
+.mrx-hero__fondo--3 { opacity: 0; }
+.mrx-hero[data-tono='1'] .mrx-hero__fondo--1,
+.mrx-hero[data-tono='2'] .mrx-hero__fondo--2,
+.mrx-hero[data-tono='3'] .mrx-hero__fondo--3 { opacity: 1; }
+
+.mrx-hero__velo {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    linear-gradient(90deg, var(--fondo) 0%, rgba(7, 4, 15, 0.8) 28%, transparent 60%),
+    linear-gradient(180deg, rgba(7, 4, 15, 0.5), transparent 26%, transparent 74%, var(--fondo));
+}
+/* trama de celdas hexagonales: el material del que está hecha la pila */
+.mrx-hero__trama {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background: var(--hex) 0 0 / 28px auto;
+  opacity: 0.2;
+  -webkit-mask-image: radial-gradient(60% 70% at 70% 48%, #000, transparent 75%);
+  mask-image: radial-gradient(60% 70% at 70% 48%, #000, transparent 75%);
+}
+
+/* ---------- panales dibujados ---------- */
+.mrx-panal--a { top: 7%; left: 38%; opacity: 0.5; }
+.mrx-panal--b { right: -3%; bottom: 13%; rotate: 180deg; opacity: 0.6; }
+@media (max-width: 900px) {
+  .mrx-panal--a { top: 2%; left: -8%; }
+  .mrx-panal--b { right: -12%; bottom: auto; top: 26%; }
+}
+
+/* ---------- la pila ---------- */
+.mrx-pila {
+  --lado: 318px;
+  --salto: 178px;
+  position: absolute;
+  /* la pila se ancla al centro, no a un porcentaje del ancho */
+  left: calc(50% + min(18%, 262px));
+  top: 46%;
+  z-index: 3;
+  width: 0;
+  height: 0;
+}
+.mrx-pila__escena {
+  position: absolute;
+  transform-style: preserve-3d;
+  transform:
+    translateY(var(--flote, 0px))
+    rotateX(calc(58deg + var(--inclinacion, 0deg)))
+    rotateZ(calc(-42deg + var(--giro, 0deg)));
+}
+
+.mrx-capa {
+  position: absolute;
+  left: calc(var(--lado) / -2);
+  top: calc(var(--lado) / -2);
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  width: var(--lado);
+  height: var(--lado);
+  padding: 14px;
+  border: 1px solid color-mix(in srgb, var(--tinte) 55%, transparent);
+  border-radius: 20px;
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--tinte) 16%, rgba(10, 6, 20, 0.55)),
+    color-mix(in srgb, var(--tinte) 4%, rgba(10, 6, 20, 0.35))
+  );
+  box-shadow:
+    0 0 70px color-mix(in srgb, var(--tinte) 22%, transparent),
+    inset 0 0 30px color-mix(in srgb, var(--tinte) 10%, transparent);
+  transform-style: preserve-3d;
+  transform: translateZ(calc(var(--nivel) * var(--salto) + var(--extra, 0px)));
+  transition:
+    transform 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 0.7s ease;
+}
+/* El nombre cuelga de la esquina derecha de su capa. Deshace el giro de la
+   escena para quedar de frente, como un cartel, y no pisar la capa de abajo. */
+.mrx-capa__nombre {
+  position: absolute;
+  left: 100%;
+  top: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 150px;
+  transform-origin: 0 0;
+  transform:
+    rotateZ(calc(42deg - var(--giro, 0deg)))
+    rotateX(calc(-58deg - var(--inclinacion, 0deg)))
+    translate(10px, -50%);
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  line-height: 1.5;
+  text-transform: uppercase;
+  color: var(--tinte);
+}
+.mrx-capa__nombre::before {
+  content: '';
+  flex: 0 0 22px;
+  height: 1px;
+  background: currentColor;
+}
+
+.mrx-ficha {
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: 7px;
+  min-width: 0;
+  border: 1px solid color-mix(in srgb, var(--tinte) 30%, transparent);
+  border-radius: 13px;
+  background: rgba(9, 5, 18, 0.9);
+  transition:
+    transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.3s,
+    box-shadow 0.3s;
+}
+.mrx-ficha svg { width: 34px; height: 34px; }
+.mrx-ficha span {
+  font-family: var(--mono);
+  font-size: 9.5px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+  color: var(--texto);
+  opacity: 0.8;
+}
+.mrx-ficha[data-on] {
+  transform: translateZ(30px);
+  border-color: var(--tinte);
+  box-shadow: 0 0 26px color-mix(in srgb, var(--tinte) 70%, transparent);
+}
+.mrx-ficha[data-on] span { opacity: 1; }
+
+/* una lámina resalta su capa: se separa y las demás se apagan */
+.mrx-hero[data-capa='frontend'] .mrx-capa:not([data-capa='frontend']),
+.mrx-hero[data-capa='backend'] .mrx-capa:not([data-capa='backend']),
+.mrx-hero[data-capa='datos'] .mrx-capa:not([data-capa='datos']) { opacity: 0.16; pointer-events: none; }
+.mrx-hero[data-capa='frontend'] .mrx-capa[data-capa='frontend'],
+.mrx-hero[data-capa='backend'] .mrx-capa[data-capa='backend'],
+.mrx-hero[data-capa='datos'] .mrx-capa[data-capa='datos'] { --extra: 26px; }
+
+/* pilares en las esquinas: una línea vertical con un paquete que la recorre */
+.mrx-pilar {
+  --alto: calc(var(--salto) * 2);
+  position: absolute;
+  width: 2px;
+  height: var(--alto);
+  transform-origin: top center;
+  transform: translateZ(calc(var(--salto) * -1)) rotateX(90deg);
+  background: linear-gradient(rgba(167, 139, 250, 0.5), rgba(129, 140, 248, 0.5) 50%, rgba(232, 121, 249, 0.5));
+  overflow: hidden;
+}
+.mrx-pilar::after {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto;
+  height: 46px;
+  background: linear-gradient(transparent, #fff);
+  animation: mrx-subir 2.6s linear infinite;
+}
+.mrx-pilar--0 { left: calc(var(--lado) / -2); top: calc(var(--lado) / -2); }
+.mrx-pilar--1 { left: calc(var(--lado) / 2); top: calc(var(--lado) / -2); }
+.mrx-pilar--2 { left: calc(var(--lado) / 2); top: calc(var(--lado) / 2); }
+.mrx-pilar--3 { left: calc(var(--lado) / -2); top: calc(var(--lado) / 2); }
+.mrx-pilar--1::after { animation-delay: -0.9s; animation-direction: reverse; }
+.mrx-pilar--2::after { animation-delay: -1.6s; }
+.mrx-pilar--3::after { animation-delay: -0.4s; animation-direction: reverse; }
+@keyframes mrx-subir {
+  from { transform: translateY(-46px); }
+  to { transform: translateY(var(--alto)); }
+}
+
+/* ---------- terminales ---------- */
+.mrx-hero__ps {
+  position: absolute;
+  top: clamp(20px, 7%, 72px);
+  right: var(--margen);
+  z-index: 6;
+  width: 318px;
+}
+.mrx-hero__ps .mrx-term { border-color: color-mix(in srgb, var(--tinte) 45%, transparent); transition: border-color 0.4s; }
+.mrx-hero__ps b { font-weight: 700; color: #fff; }
+.mrx-hero__ps-capa { color: var(--tinte); transition: color 0.4s; }
+
+.mrx-hero__linux {
+  position: absolute;
+  right: var(--margen);
+  bottom: calc(var(--cinta) + 22px);
+  z-index: 6;
+  width: 318px;
+}
+/* alto fijo: la ventana no salta mientras el guion se va escribiendo */
+.mrx-hero__linux .mrx-term__cuerpo { height: 124px; }
+
+/* pantallas bajas: las ventanas caerían sobre la pila */
+@media (max-height: 800px) {
+  .mrx-hero__linux { display: none; }
+}
+@media (max-height: 700px) {
+  .mrx-hero__ps { display: none; }
+}
+/* portátiles: la pila se encoge y cede el margen derecho */
+@media (max-width: 1280px) {
+  .mrx-pila { --lado: 276px; --salto: 156px; left: 74%; }
+  .mrx-ficha svg { width: 28px; height: 28px; }
+  .mrx-ficha span { font-size: 8.5px; }
+  .mrx-capa__nombre,
+  .mrx-hero__linux { display: none; }
+  .mrx-hero__ps { width: 280px; font-size: 11px; }
+}
+@media (max-width: 900px) {
+  .mrx-pila { --lado: 250px; --salto: 112px; left: 50%; top: 23%; }
+  .mrx-pila__escena { scale: 0.68; }
+  .mrx-capa { gap: 8px; padding: 11px; }
+  .mrx-hero__ps { display: none; }
+  .mrx-hero__velo {
+    background: linear-gradient(180deg, rgba(7, 4, 15, 0.35), transparent 22%, rgba(7, 4, 15, 0.82) 50%, var(--fondo) 72%);
+  }
+  .mrx-hero__trama {
+    -webkit-mask-image: radial-gradient(80% 45% at 50% 28%, #000, transparent 75%);
+    mask-image: radial-gradient(80% 45% at 50% 28%, #000, transparent 75%);
+  }
+}
+
+/* tabletas: hay sitio para una pila más grande sobre el texto */
+@media (min-width: 600px) and (max-width: 900px) and (min-height: 900px) {
+  .mrx-pila { top: 27%; }
+  .mrx-pila__escena { scale: 1; }
+}
+
+/* ---------- lecturas ---------- */
+.mrx-hero__lecturas {
+  position: absolute;
+  bottom: calc(var(--cinta) + 26px);
+  left: var(--margen);
+  z-index: 6;
+  display: flex;
+  flex-wrap: wrap;
+  gap: clamp(18px, 2.6vw, 40px);
+}
+.mrx-lectura {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--mute);
+}
+.mrx-lectura b { font-weight: 400; color: var(--texto); }
+@media (max-width: 900px) {
+  .mrx-hero__lecturas { display: none; }
+}
+/* pantallas bajas: las lecturas chocarían con la portada */
+@media (max-height: 760px) {
+  .mrx-hero__lecturas { display: none; }
+}
+
+/* ---------- texto ---------- */
+.mrx-hero__texto {
+  position: absolute;
+  left: var(--margen);
+  top: 50%;
+  z-index: 6;
+  max-width: min(680px, 48vw);
+  transform: translateY(-54%);
+}
+/* con el rail ensamblado encima, el texto se aparta para no quedar debajo */
+.mrx-hero__texto,
+.mrx-hero__lecturas { transition: translate 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+@media (min-width: 760px) and (max-width: 900px) {
+  html[data-rail='visible'] .mrx-hero__texto { left: calc(var(--rail) + 16px); }
+}
+@media (min-width: 901px) {
+  html[data-rail='visible'] .mrx-hero__texto,
+  html[data-rail='visible'] .mrx-hero__lecturas {
+    /* solo lo justo para salir de debajo del rail; en pantallas anchas, nada */
+    translate: max(0px, calc(var(--rail) + 28px - var(--margen))) 0;
+  }
+}
+@media (max-width: 900px) {
+  .mrx-hero__texto {
+    top: auto;
+    bottom: calc(var(--cinta) + 30px);
+    right: 20px;
+    max-width: none;
+    transform: none;
+  }
+}
+
+/* ---------- tonos por lámina ----------
+   Se declaran en la sección (para lo que queda fuera de las láminas), en
+   cada lámina —que así conserva sus colores mientras sale— y en cada raya. */
+.mrx-hero[data-tono='0'],
+.mrx-hero .mrx-hero__lamina[data-tono='0'],
+.mrx-hero .mrx-hero__paso[data-tono='0'] {
+  --morado: #4c1d95;
+  --acento: #a78bfa;
+  --cta-alt-bg: #a78bfa;
+  --cta-alt-fg: #0d0620;
+  --trazo: rgba(167, 139, 250, 0.85);
+  --relleno: linear-gradient(115deg, #6d28d9 0%, #a78bfa 55%, #ede9fe 100%);
+  --raya: linear-gradient(90deg, #6d28d9, #a78bfa);
+}
+.mrx-hero[data-tono='1'],
+.mrx-hero .mrx-hero__lamina[data-tono='1'],
+.mrx-hero .mrx-hero__paso[data-tono='1'] {
+  --morado: #701a75;
+  --acento: #e879f9;
+  --cta-alt-bg: #e879f9;
+  --cta-alt-fg: #1d0420;
+  --trazo: rgba(232, 121, 249, 0.85);
+  --relleno: linear-gradient(115deg, #a21caf 0%, #e879f9 55%, #c4b5fd 100%);
+  --raya: linear-gradient(90deg, #a21caf, #e879f9);
+}
+.mrx-hero[data-tono='2'],
+.mrx-hero .mrx-hero__lamina[data-tono='2'],
+.mrx-hero .mrx-hero__paso[data-tono='2'] {
+  --morado: #312e81;
+  --acento: #818cf8;
+  --cta-alt-bg: #818cf8;
+  --cta-alt-fg: #080720;
+  --trazo: rgba(129, 140, 248, 0.85);
+  --relleno: linear-gradient(115deg, #4f46e5 0%, #818cf8 55%, #c4b5fd 100%);
+  --raya: linear-gradient(90deg, #4f46e5, #818cf8);
+}
+.mrx-hero[data-tono='3'],
+.mrx-hero .mrx-hero__lamina[data-tono='3'],
+.mrx-hero .mrx-hero__paso[data-tono='3'] {
+  --morado: #831843;
+  --acento: #f472b6;
+  --cta-alt-bg: #f472b6;
+  --cta-alt-fg: #200412;
+  --trazo: rgba(244, 114, 182, 0.85);
+  --relleno: linear-gradient(115deg, #7c3aed 0%, #f472b6 55%, #fbcfe8 100%);
+  --raya: linear-gradient(90deg, #7c3aed, #f472b6);
+}
+.mrx-hero__lamina .mrx-fill { -webkit-text-stroke-color: var(--trazo); }
+.mrx-hero__lamina .mrx-fill::after { background-image: var(--relleno); }
+
+/* ---------- portada rotativa ---------- */
+.mrx-hero__laminas { display: grid; align-items: center; }
+@media (max-width: 900px) {
+  .mrx-hero__laminas { align-items: end; }
+}
+.mrx-hero__lamina {
+  grid-area: 1 / 1;
+  transition: opacity 0.6s ease, visibility 0.6s;
+}
+.mrx-hero__lamina:not([data-activa]) {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+/* la palabra en contorno se vuelve a rellenar cada vez que entra su lámina */
+.mrx-hero__lamina:not([data-activa]) .mrx-fill::after { animation: none; }
+.mrx-hero__laminas[data-rotando] .mrx-fill::after { animation-delay: 0.45s; }
+
+/* Una vez que rota, las líneas del titular suben por transición (la primera
+   lámina deja sus clases de entrada al primer cambio). */
+.mrx-hero__laminas[data-rotando] .mrx-hero__lamina[data-activa] .mrx-mask > span { transform: none; }
+.mrx-hero__laminas[data-rotando] .mrx-hero__lamina[data-activa] .mrx-mask:nth-child(2) > span { transition-delay: 0.08s; }
+.mrx-hero__laminas[data-rotando] .mrx-hero__lamina[data-activa] .mrx-mask:nth-child(3) > span { transition-delay: 0.16s; }
+.mrx-hero__laminas[data-rotando] .mrx-hero__bajada,
+.mrx-hero__laminas[data-rotando] .mrx-hero__acciones {
+  transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.mrx-hero__laminas[data-rotando] .mrx-hero__lamina:not([data-activa]) :is(.mrx-hero__bajada, .mrx-hero__acciones) {
+  opacity: 0;
+  transform: translate3d(0, 14px, 0);
+}
+.mrx-hero__laminas[data-rotando] .mrx-hero__lamina[data-activa] .mrx-hero__bajada { transition-delay: 0.25s; }
+.mrx-hero__laminas[data-rotando] .mrx-hero__lamina[data-activa] .mrx-hero__acciones { transition-delay: 0.35s; }
+
+.mrx-hero__pasos {
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+  margin-top: 34px;
+}
+.mrx-hero__paso {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 6px 0;
+  border: 0;
+  background: none;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-align: left;
+  color: var(--mute);
+  cursor: pointer;
+  transition: color 0.3s;
+}
+.mrx-hero__paso:hover,
+.mrx-hero__paso[aria-current] { color: var(--texto); }
+.mrx-hero__paso .mrx-num { color: var(--acento); }
+.mrx-hero__paso-nombre { white-space: nowrap; }
+
+/* la raya: lleva el color de la portada que abre; la activa se llena
+   mientras su lámina está en pantalla */
+.mrx-hero__paso i {
+  position: relative;
+  display: block;
+  width: clamp(64px, 7vw, 110px);
+  height: 4px;
+  border-radius: 2px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.12);
+  transition: height 0.3s ease;
+}
+.mrx-hero__paso i::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--raya);
+  opacity: 0.35;
+  transition: opacity 0.3s;
+}
+.mrx-hero__paso:hover i::before { opacity: 0.6; }
+.mrx-hero__paso i::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--raya);
+  transform: scaleX(0);
+  transform-origin: left;
+}
+.mrx-hero__paso[aria-current] i { height: 6px; }
+.mrx-hero__paso[aria-current] i::after { transform: scaleX(1); }
+[data-auto] .mrx-hero__paso[aria-current] i::after {
+  transform: scaleX(0);
+  animation: mrx-avance var(--duracion, 7s) linear forwards;
+}
+[data-pausa] .mrx-hero__paso i::after { animation-play-state: paused !important; }
+@keyframes mrx-avance { to { transform: scaleX(1); } }
+@media (max-width: 760px) {
+  .mrx-hero__pasos { margin-top: 22px; }
+  .mrx-hero__paso-nombre { display: none; }
+  .mrx-hero__paso { padding: 12px 0; }
+  .mrx-hero__paso i { width: 56px; }
+}
+
+.mrx-hero__claim {
+  display: block;
+  margin-bottom: 22px;
+  line-height: 1.7;
+}
+@media (max-width: 760px) {
+  .mrx-hero__claim { display: none; }
+}
+
+.mrx-hero__titulo {
+  font-size: clamp(38px, 5.3vw, 82px);
+  line-height: 0.88;
+  white-space: nowrap;
+}
+/* La máscara recorta en los dos ejes; dejándola crecer hasta el ancho de su
+   texto sigue tapando en vertical y ya no corta la última letra. */
+.mrx-hero__titulo .mrx-mask { width: max-content; }
+.mrx-hero__titulo em { font-style: normal; color: var(--acento); }
+
+.mrx-hero__bajada {
+  margin-top: 24px;
+  max-width: 44ch;
+  font-size: clamp(14px, 1.25vw, 17px);
+  line-height: 1.55;
+  color: var(--mute);
+}
+
+.mrx-hero__acciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 28px;
+}
+@media (max-width: 1200px) {
+  .mrx-hero__acciones .mrx-cta { padding: 17px 22px; letter-spacing: 0.18em; }
+}
+@media (max-width: 760px) {
+  .mrx-hero__bajada {
+    display: -webkit-box;
+    margin-top: 16px;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+  }
+  .mrx-hero__acciones { margin-top: 20px; gap: 8px; }
+  .mrx-hero__acciones .mrx-cta { padding: 14px 16px; font-size: 10.5px; letter-spacing: 0.14em; }
+  /* el tercer botón no cabe en una fila: esas rutas siguen en el menú */
+  .mrx-hero__acciones .mrx-cta:nth-child(n + 3) { display: none; }
+}
+
+/* móviles bajos: sin la bajada, el titular no pisa la pila */
+@media (max-width: 760px) and (max-height: 700px) {
+  .mrx-hero__bajada { display: none; }
+}
+
+/* ---------- cinta del stack ---------- */
+.mrx-cinta {
+  position: absolute;
+  inset: auto 0 0;
+  z-index: 6;
+  display: flex;
+  height: var(--cinta);
+  border-top: 1px solid var(--line);
+  background: rgba(7, 4, 15, 0.7);
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+.mrx-cinta__lista {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  animation: mrx-cinta 60s linear infinite;
+}
+.mrx-cinta:hover .mrx-cinta__lista { animation-play-state: paused; }
+.mrx-cinta__lista li {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding-inline: 20px;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--mute);
+}
+.mrx-cinta__lista svg { width: 15px; height: 15px; flex: 0 0 auto; }
+@keyframes mrx-cinta { to { transform: translateX(-100%); } }
+
+/* ============================================================
+   Qué ofrece la plataforma: tres ventanas de terminal
+   ============================================================ */
+.mrx-oferta {
+  position: relative;
+  padding: clamp(56px, 8vw, 110px) var(--pad);
+  background: var(--fondo);
+  overflow: hidden;
+}
+.mrx-oferta__trama {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: var(--hex) 0 0 / 28px auto;
+  opacity: 0.12;
+  -webkit-mask-image: radial-gradient(50% 70% at 8% 0%, #000, transparent 72%);
+  mask-image: radial-gradient(50% 70% at 8% 0%, #000, transparent 72%);
+}
+.mrx-oferta__marco {
+  position: relative;
+  display: grid;
+  gap: 14px;
+  max-width: 1280px;
+  margin-inline: auto;
+}
+.mrx-oferta__rejilla {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+  gap: clamp(16px, 2.4vw, 28px);
+  margin-top: clamp(18px, 3vw, 36px);
+}
+.mrx-oferta__ventana {
+  height: 100%;
+  transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+}
+.mrx-oferta__ventana:hover {
+  border-color: var(--line-fuerte);
+  transform: translateY(-4px);
+  box-shadow: 0 30px 80px -30px rgba(124, 58, 237, 0.75);
+}
+.mrx-oferta__ventana .mrx-term__cuerpo { padding: 14px 18px 22px; }
+.mrx-oferta__icono { margin-top: 18px; font-size: 34px; }
+.mrx-oferta__ventana h3 {
+  margin-top: 14px;
+  font-family: var(--sans);
+  font-size: 19px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+  color: var(--texto);
+}
+.mrx-oferta__ventana .mrx-oferta__texto {
+  margin-top: 8px;
+  font-family: var(--sans);
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: var(--mute);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mrx-pilar::after,
+  .mrx-cinta__lista { animation: none; }
+}

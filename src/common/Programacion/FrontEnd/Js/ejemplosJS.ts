@@ -16,7 +16,17 @@ export const ejemplosJS = [
   let objeto = {             // Object
     nombre: "Juan",
     edad: 25
-  };`,
+  };
+
+  // Mostrando los valores en consola
+  console.log("nombre =", nombre);
+  console.log("edad =", edad);
+  console.log("esEstudiante =", esEstudiante);
+  console.log("numero =", numero);
+  console.log("texto =", texto);
+  console.log("booleano =", booleano);
+  console.log("arreglo =", arreglo);
+  console.log("objeto =", objeto);`,
       resultado: `// Resultado en consola:
   nombre = "Juan"
   edad = 25
@@ -43,7 +53,17 @@ export const ejemplosJS = [
   let mayorQue = 5 > 3;     // true
   let menorQue = 2 < 1;     // false
   let igualdad = 4 === "4"; // false
-  let desigualdad = 4 !== "4"; // true`,
+  let desigualdad = 4 !== "4"; // true
+
+  // Mostrando los resultados en consola
+  console.log("suma =", suma);
+  console.log("resta =", resta);
+  console.log("multiplicacion =", multiplicacion);
+  console.log("division =", division);
+  console.log("mayorQue =", mayorQue);
+  console.log("menorQue =", menorQue);
+  console.log("igualdad =", igualdad);
+  console.log("desigualdad =", desigualdad);`,
       resultado: `// Resultados:
   suma = 8
   resta = 6

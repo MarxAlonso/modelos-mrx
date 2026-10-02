@@ -19,7 +19,14 @@ export const ejemplosJSIntermedio = [
   // Función de orden superior
   const operarNumeros = (a, b, operacion) => {
     return operacion(a, b);
-  };`,
+  };
+
+  // Probando las funciones
+  console.log(sumar(5, 3));
+  console.log(multiplicar(4, 2));
+  console.log(saludar());
+  console.log(saludar("María"));
+  console.log(operarNumeros(5, 3, sumar));`,
       resultado: `// Resultados:
   sumar(5, 3)               // 8
   multiplicar(4, 2)         // 8
@@ -47,7 +54,14 @@ export const ejemplosJSIntermedio = [
   const mayor3 = numeros.find(n => n > 3);
   
   // some: verificar si alguno cumple
-  const hayMayor4 = numeros.some(n => n > 4);`,
+  const hayMayor4 = numeros.some(n => n > 4);
+
+  // Mostrando los resultados en consola
+  console.log("duplicados:", duplicados);
+  console.log("pares:", pares);
+  console.log("suma:", suma);
+  console.log("mayor3:", mayor3);
+  console.log("hayMayor4:", hayMayor4);`,
       resultado: `// Resultados:
   duplicados  // [2, 4, 6, 8, 10]
   pares       // [2, 4]
@@ -82,7 +96,13 @@ export const ejemplosJSIntermedio = [
   const producto = {
     ...datosBase,
     precio: 100
-  };`,
+  };
+
+  // Mostrando los resultados en consola
+  console.log("nombre:", nombre, "| edad:", edad);
+  console.log("primario:", primario, "| secundario:", secundario);
+  console.log("todosNumeros:", todosNumeros);
+  console.log("producto:", producto);`,
       resultado: `// Resultados:
   nombre     // "Ana"
   edad       // 28

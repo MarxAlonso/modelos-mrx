@@ -1,0 +1,44 @@
+/* ============================================================
+   Aviso motivacional
+   ============================================================ */
+.mrx-aviso {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  display: grid;
+  place-items: center;
+  padding: 16px;
+}
+.mrx-aviso__velo { position: absolute; inset: 0; background: rgba(7, 4, 15, 0.72); backdrop-filter: blur(4px); }
+.mrx-aviso__caja { position: relative; width: min(440px, 100%); }
+.mrx-aviso__caja .mrx-term { border-color: var(--line-fuerte); }
+.mrx-aviso__caja .mrx-term__cuerpo { padding: 14px 22px 24px; }
+.mrx-aviso__celda {
+  display: grid;
+  place-items: center;
+  width: 62px;
+  height: 70px;
+  margin: 20px auto 0;
+  clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
+  background: linear-gradient(160deg, var(--morado-claro), var(--morado));
+  font-size: 26px;
+  color: #fff;
+}
+.mrx-aviso__caja h3 {
+  margin-top: 18px;
+  font-family: var(--sans);
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  text-align: center;
+}
+.mrx-aviso__caja .mrx-aviso__texto {
+  margin-top: 10px;
+  font-family: var(--sans);
+  font-size: 15px;
+  line-height: 1.65;
+  text-align: center;
+  color: var(--mute);
+}
+.mrx-aviso__boton { justify-content: center; width: 100%; margin-top: 22px; padding-block: 16px; cursor: pointer; }

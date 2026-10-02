@@ -1,104 +1,43 @@
-import { motion } from "framer-motion";
-import { FaCss3Alt, FaCode, FaEye, FaArrowLeft, FaArrowRight } from "react-icons/fa";
-import { useState } from "react";
+import { FaBootstrap } from "react-icons/fa";
+import type { PasoGuion } from "../../../Terminal/Terminal";
+import { Leccion } from "../../Leccion/Leccion";
+import { PortadaLeccion } from "../../Leccion/PortadaLeccion";
 import { ejemplosBootstrap } from './data/ejemplosBootstrap';
+import { ejemplosBootstrapIntermedio } from './data/ejemplosBootstrapIntermedio';
 
-export const AprendiendoBootstrap = () => {
-  const [ejemploActual, setEjemploActual] = useState(0);
+const NIVELES = [
+  { ancla: "#basico", nombre: "Básico", detalle: `${ejemplosBootstrap.length} ejemplos` },
+  { ancla: "#intermedio", nombre: "Intermedio", detalle: `${ejemplosBootstrapIntermedio.length} ejemplos` },
+  { ancla: "#editor", nombre: "Editor en vivo", detalle: "Con Bootstrap 5" },
+];
 
-  return (
-    <div className="relative min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-gray-900 p-8 overflow-hidden">
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1 }}
-        className="relative z-10 max-w-7xl mx-auto"
-      >
-        {/* Encabezado */}
-        <motion.div
-          initial={{ y: -50, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ delay: 0.2 }}
-          className="text-center mb-12"
-        >
-          <div className="flex items-center justify-center space-x-4 mb-4">
-            <FaCss3Alt className="text-6xl text-purple-500" />
-            <h1 className="text-5xl font-bold text-white">Aprendiendo Bootstrap</h1>
-          </div>
-          <p className="text-gray-300 text-xl">Dominando el framework más popular de CSS</p>
-        </motion.div>
+const GUION: PasoGuion[] = [
+  { tipo: "cmd", texto: "npm install bootstrap" },
+  { tipo: "out", texto: "added 2 packages", clase: "t-mute" },
+  { tipo: "cmd", texto: 'echo \'<button class="btn btn-primary">\' >> index.html' },
+  { tipo: "out", texto: "➜ Un botón con estilo, sin escribir CSS", clase: "t-verde" },
+];
 
-        {/* Contenido Principal */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
-          {/* Panel Izquierdo - Código */}
-          <motion.div
-            initial={{ x: -100, opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
-            transition={{ delay: 0.4 }}
-            className="bg-gray-800 rounded-xl p-6 shadow-xl"
-          >
-            <div className="flex items-center justify-between mb-4">
-              <h2 className="text-2xl font-bold text-white flex items-center">
-                <FaCode className="mr-2" />
-                {ejemplosBootstrap[ejemploActual].titulo}
-              </h2>
-            </div>
-            <p className="text-gray-400 mb-4">{ejemplosBootstrap[ejemploActual].descripcion}</p>
-            <div className="bg-gray-900 rounded-lg p-4 mb-4">
-              <pre className="text-green-400 overflow-x-auto">
-                <code>{ejemplosBootstrap[ejemploActual].codigo}</code>
-              </pre>
-            </div>
-            <div className="bg-gray-900 rounded-lg p-4">
-              <h3 className="text-white mb-2">HTML Relacionado:</h3>
-              <pre className="text-orange-400 overflow-x-auto">
-                <code>{ejemplosBootstrap[ejemploActual].html}</code>
-              </pre>
-            </div>
-          </motion.div>
+export const BootstrapPortada = () => (
+  <PortadaLeccion
+    nombre="Bootstrap"
+    Icon={FaBootstrap}
+    color="#a78bfa"
+    bajada="Dominando el framework más popular de CSS: cada ejemplo carga Bootstrap de verdad, así que modales, pestañas y alertas funcionan en la vista previa."
+    niveles={NIVELES}
+    carpeta="bootstrap"
+    guion={GUION}
+  />
+);
 
-          {/* Panel Derecho - Explicación */}
-          <motion.div
-            initial={{ x: 100, opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
-            transition={{ delay: 0.6 }}
-            className="bg-gray-800 rounded-xl p-6 shadow-xl"
-          >
-            <div className="flex items-center justify-between mb-4">
-              <h2 className="text-2xl font-bold text-white flex items-center">
-                <FaEye className="mr-2" />
-                Explicación
-              </h2>
-            </div>
-            <div className="prose prose-invert">
-              {ejemplosBootstrap[ejemploActual].explicacion.split('\n').map((line, index) => (
-                <p key={index} className="text-gray-300">{line}</p>
-              ))}
-            </div>
-          </motion.div>
-        </div>
-
-        {/* Controles de Navegación */}
-        <motion.div
-          initial={{ y: 50, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ delay: 0.8 }}
-          className="flex justify-center space-x-4"
-        >
-          <button
-            onClick={() => setEjemploActual(prev => (prev > 0 ? prev - 1 : ejemplosBootstrap.length - 1))}
-            className="bg-purple-600 hover:bg-purple-700 text-white px-6 py-2 rounded-full flex items-center transition-colors"
-          >
-            <FaArrowLeft className="mr-2" /> Anterior
-          </button>
-          <button
-            onClick={() => setEjemploActual(prev => (prev < ejemplosBootstrap.length - 1 ? prev + 1 : 0))}
-            className="bg-purple-600 hover:bg-purple-700 text-white px-6 py-2 rounded-full flex items-center transition-colors"
-          >
-            Siguiente <FaArrowRight className="ml-2" />
-          </button>
-        </motion.div>
-      </motion.div>
-    </div>
-  );
-};
+export const AprendiendoBootstrap = () => (
+  <Leccion
+    id="basico"
+    nivel={1}
+    etiqueta="básico"
+    tipo="bootstrap"
+    titulo={<>Aprendiendo <em>Bootstrap</em></>}
+    bajada="Dominando el framework más popular de CSS"
+    ejemplos={ejemplosBootstrap}
+  />
+);
